@@ -1,0 +1,11 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build less",
+      "type": "shell",
+      "command": "lessc --clean-css octoprint_printercalibration/static/less/printercalibration.less assets/css/style.css",
+      "problemMatcher": ["$lessc"]
+    }
+  ]
+}

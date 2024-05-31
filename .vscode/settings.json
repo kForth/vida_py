@@ -1,0 +1,13 @@
+{
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": false,
+  "python.defaultInterpreterPath": "venv\\Scripts\\python.exe",
+  "isort.args": ["--profile=black"],
+  "[python]": {
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    },
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  },
+  "black-formatter.args": ["--config", "black.toml"]
+}
