@@ -4,8 +4,9 @@ from model_info import ENGINES_BY_NAME, MODELS_BY_NAME, MODELS_SHORT_BY_ID
 from parse_vida_tables import extract_identifiers
 
 year = 2005
-model = "V70 XC (01-) / XC70 (-07)"
-engine = "B5254T2"
+# model = "V70 XC (01-) / XC70 (-07)"
+model = "V70 (00-08)"
+engine = "B5254T4"
 
 _model = MODELS_BY_NAME[model]
 _engine = ENGINES_BY_NAME[engine]

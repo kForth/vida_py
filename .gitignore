@@ -55,4 +55,7 @@ env/
 db/
 tables/
 scripts/
+
+# Misc. Data
 cache/
+ref/

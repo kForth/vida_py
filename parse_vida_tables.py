@@ -160,7 +160,7 @@ def extract_identifiers(scripts):
                     e: _re.group(1) if (_re := re.search(f'{e}="([^\\"]+)"', match)) else None
                     for e in ('ecu', 'read', 'write', 'value', 'name', 'textid')
                 }
-                ident['ecudesc'] = ecus[ident['ecu']]
+                ident['ecudesc'] = ecus.get(ident['ecu'], '')
                 ident['ecucode'] = ECU_CODE_RE.search(ident['ecudesc']).group(1)
                 ident['script'] = script['id']
                 if ident not in identifiers:
