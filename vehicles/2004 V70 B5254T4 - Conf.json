@@ -1137,40 +1137,12 @@
     "ecu": "284101",
     "read": "4",
     "write": null,
-    "value": "1018",
+    "value": "101A",
     "names": [
       "Engine coolant temperature"
     ],
     "textids": [
       "4864"
-    ],
-    "ecudesc": "Engine control module (ECM)",
-    "ecucode": "ECM"
-  },
-  {
-    "ecu": "284101",
-    "read": "4",
-    "write": null,
-    "value": "1019",
-    "names": [
-      "Cooling fan, step 1"
-    ],
-    "textids": [
-      "63761"
-    ],
-    "ecudesc": "Engine control module (ECM)",
-    "ecucode": "ECM"
-  },
-  {
-    "ecu": "284101",
-    "read": "4",
-    "write": null,
-    "value": "101A",
-    "names": [
-      "Cooling fan, step 2"
-    ],
-    "textids": [
-      "63762"
     ],
     "ecudesc": "Engine control module (ECM)",
     "ecucode": "ECM"
@@ -1451,11 +1423,9 @@
     "write": null,
     "value": "105B",
     "names": [
-      "Lambda integrator, bank 1",
-      "Short-term fuel trim, bank 1"
+      "Lambda integrator, bank 1"
     ],
     "textids": [
-      "63744",
       "63744"
     ],
     "ecudesc": "Engine control module (ECM)",
@@ -1467,11 +1437,9 @@
     "write": null,
     "value": "105D",
     "names": [
-      "Lambda integrator, bank 2",
-      "Short-term fuel trim, bank 2"
+      "Lambda integrator, bank 2"
     ],
     "textids": [
-      "63745",
       "63745"
     ],
     "ecudesc": "Engine control module (ECM)",
@@ -1515,6 +1483,34 @@
     ],
     "textids": [
       "64191"
+    ],
+    "ecudesc": "Engine control module (ECM)",
+    "ecucode": "ECM"
+  },
+  {
+    "ecu": "284101",
+    "read": "4",
+    "write": null,
+    "value": "1079",
+    "names": [
+      "Divergence between front and rear oxygen sensor"
+    ],
+    "textids": [
+      "17345"
+    ],
+    "ecudesc": "Engine control module (ECM)",
+    "ecucode": "ECM"
+  },
+  {
+    "ecu": "284101",
+    "read": "4",
+    "write": null,
+    "value": "107A",
+    "names": [
+      "Divergence between front and rear oxygen sensor 2"
+    ],
+    "textids": [
+      "17346"
     ],
     "ecudesc": "Engine control module (ECM)",
     "ecucode": "ECM"
@@ -1679,10 +1675,26 @@
     "write": null,
     "value": "112D",
     "names": [
+      "Front oxygen sensor, dynamics 2",
       "Rear oxygen sensor heating"
     ],
     "textids": [
+      "17698",
       "17549"
+    ],
+    "ecudesc": "Engine control module (ECM)",
+    "ecucode": "ECM"
+  },
+  {
+    "ecu": "284101",
+    "read": "4",
+    "write": null,
+    "value": "1130",
+    "names": [
+      "Front oxygen sensor, dynamics"
+    ],
+    "textids": [
+      "17701"
     ],
     "ecudesc": "Engine control module (ECM)",
     "ecucode": "ECM"
@@ -1791,11 +1803,9 @@
     "write": null,
     "value": "11D7",
     "names": [
-      "Lambda adaption bank 1, idle",
-      "Long-term fuel trim idle, bank 1"
+      "Lambda adaption bank 1, idle"
     ],
     "textids": [
-      "63746",
       "63746"
     ],
     "ecudesc": "Engine control module (ECM)",
@@ -1808,11 +1818,9 @@
     "value": "11D8",
     "names": [
       "Lambdaadaption bank 2, tomg&#229;ng",
-      "Lambda adaption bank 2, idle",
-      "Long-term fuel trim idle, bank 2"
+      "Lambda adaption bank 2, idle"
     ],
     "textids": [
-      "63747",
       "63747",
       "63747"
     ],
@@ -1825,11 +1833,9 @@
     "write": null,
     "value": "11D9",
     "names": [
-      "Lambda adaption bank 1, lower part load",
-      "Long-term fuel trim lower part load, bank 1"
+      "Lambda adaption bank 1, lower part load"
     ],
     "textids": [
-      "63748",
       "63748"
     ],
     "ecudesc": "Engine control module (ECM)",
@@ -1841,11 +1847,9 @@
     "write": null,
     "value": "11DA",
     "names": [
-      "Lambda adaption bank 2, lower part load",
-      "Long-term fuel trim lower part load, bank 2"
+      "Lambda adaption bank 2, lower part load"
     ],
     "textids": [
-      "63749",
       "63749"
     ],
     "ecudesc": "Engine control module (ECM)",
@@ -1857,11 +1861,9 @@
     "write": null,
     "value": "11DB",
     "names": [
-      "Lambda adaption bank 1, upper part load",
-      "Long-term fuel trim upper part load, bank 1"
+      "Lambda adaption bank 1, upper part load"
     ],
     "textids": [
-      "63750",
       "63750"
     ],
     "ecudesc": "Engine control module (ECM)",
@@ -1873,11 +1875,9 @@
     "write": null,
     "value": "11DC",
     "names": [
-      "Lambda adaption bank 2, upper part load",
-      "Long-term fuel trim upper part load, bank 2"
+      "Lambda adaption bank 2, upper part load"
     ],
     "textids": [
-      "63751",
       "63751"
     ],
     "ecudesc": "Engine control module (ECM)",
@@ -2387,20 +2387,6 @@
     ],
     "textids": [
       "52810"
-    ],
-    "ecudesc": "Engine control module (ECM)",
-    "ecucode": "ECM"
-  },
-  {
-    "ecu": "284101",
-    "read": "4",
-    "write": null,
-    "value": "129B",
-    "names": [
-      "Cooling fan, step 3"
-    ],
-    "textids": [
-      "63763"
     ],
     "ecudesc": "Engine control module (ECM)",
     "ecucode": "ECM"
@@ -3163,9 +3149,11 @@
     "write": null,
     "value": "172C",
     "names": [
-      "Oil level"
+      "Oil level",
+      "Oljeniv&#229;"
     ],
     "textids": [
+      "70318",
       "70318"
     ],
     "ecudesc": "Engine control module (ECM)",
@@ -7435,6 +7423,38 @@
     "ecu": "764101",
     "read": "4",
     "write": null,
+    "value": "0001",
+    "names": [
+      "SUM System voltage"
+    ],
+    "textids": [
+      "70301"
+    ],
+    "ecudesc": "Suspension Module (SUM)",
+    "ecucode": "SUM"
+  },
+  {
+    "ecu": "764101",
+    "read": null,
+    "write": "15",
+    "value": "0003",
+    "names": [
+      "Relay control",
+      "Sensor supply 1",
+      "Sensor supply 2"
+    ],
+    "textids": [
+      "70004",
+      "70001",
+      "70002"
+    ],
+    "ecudesc": "Suspension Module (SUM)",
+    "ecucode": "SUM"
+  },
+  {
+    "ecu": "764101",
+    "read": "4",
+    "write": null,
     "value": "0030",
     "names": [
       "Matning solenoid v&#228;nster fram, str&#246;m",
@@ -7458,15 +7478,29 @@
     "value": "0032",
     "names": [
       "St&#246;td&#228;mpare, v&#228;nster fram",
-      "St&#246;td&#228;mpare, h&#246;ger fram",
       "St&#246;td&#228;mpare, v&#228;nster bak",
-      "St&#246;td&#228;mpare, h&#246;ger bak"
+      "St&#246;td&#228;mpare, h&#246;ger bak",
+      "St&#246;td&#228;mpare, h&#246;ger fram"
     ],
     "textids": [
       "70057",
-      "70058",
       "70055",
-      "70056"
+      "70056",
+      "70058"
+    ],
+    "ecudesc": "Suspension Module (SUM)",
+    "ecucode": "SUM"
+  },
+  {
+    "ecu": "764101",
+    "read": "4",
+    "write": null,
+    "value": "0040",
+    "names": [
+      "Switch input signal"
+    ],
+    "textids": [
+      "71659"
     ],
     "ecudesc": "Suspension Module (SUM)",
     "ecucode": "SUM"

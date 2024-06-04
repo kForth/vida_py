@@ -1590,6 +1590,62 @@
   },
   {
     "type": "NA",
+    "id": "0900c8af8195e591",
+    "name": "Read front accelerations sensors",
+    "profiles": null,
+    "fn": "scripts/0900c8af8195e591 - Read front accelerations sensors (NA)"
+  },
+  {
+    "type": "NA",
+    "id": "0900c8af8195e59f",
+    "name": "Read rear position sensors",
+    "profiles": null,
+    "fn": "scripts/0900c8af8195e59f - Read rear position sensors (NA)"
+  },
+  {
+    "type": "NA",
+    "id": "0900c8af8195e5ac",
+    "name": "Read body acceleration sensors",
+    "profiles": null,
+    "fn": "scripts/0900c8af8195e5ac - Read body acceleration sensors (NA)"
+  },
+  {
+    "type": "NA",
+    "id": "0900c8af8195e5b9",
+    "name": "Read sensor supply 1 and 2",
+    "profiles": null,
+    "fn": "scripts/0900c8af8195e5b9 - Read sensor supply 1 and 2 (NA)"
+  },
+  {
+    "type": "NA",
+    "id": "0900c8af8195e5c6",
+    "name": "Read system voltage",
+    "profiles": null,
+    "fn": "scripts/0900c8af8195e5c6 - Read system voltage (NA)"
+  },
+  {
+    "type": "NA",
+    "id": "0900c8af8195e5d3",
+    "name": "Read SUM and CEM supply",
+    "profiles": null,
+    "fn": "scripts/0900c8af8195e5d3 - Read SUM and CEM supply (NA)"
+  },
+  {
+    "type": "NA",
+    "id": "0900c8af8195e5e0",
+    "name": "Activate actuators",
+    "profiles": null,
+    "fn": "scripts/0900c8af8195e5e0 - Activate actuators (NA)"
+  },
+  {
+    "type": "NA",
+    "id": "0900c8af8195e5f1",
+    "name": "Activate sensor supply",
+    "profiles": null,
+    "fn": "scripts/0900c8af8195e5f1 - Activate sensor supply (NA)"
+  },
+  {
+    "type": "NA",
     "id": "0900c8af8196471d",
     "name": "Read DTCs with status",
     "profiles": null,
@@ -2098,6 +2154,13 @@
     "name": "Read DTCs with status",
     "profiles": null,
     "fn": "scripts/0900c8af8198f481 - Read DTCs with status (NA)"
+  },
+  {
+    "type": "NA",
+    "id": "0900c8af8198f54e",
+    "name": "Read DTCs with status",
+    "profiles": null,
+    "fn": "scripts/0900c8af8198f54e - Read DTCs with status (NA)"
   },
   {
     "type": "NA",
@@ -2808,10 +2871,10 @@
   },
   {
     "type": "VehCommSpecification",
-    "id": "0900c8af81b98a9f",
-    "name": "VehCom, P2 ECM Bosch ME7 03w20 (+XC90 02w50)",
+    "id": "0900c8af81b98b7c",
+    "name": "VehCom, P2 ECM Bosch ME7 03w10 (R-line)",
     "profiles": null,
-    "fn": "scripts/0900c8af81b98a9f - VehCom, P2 ECM Bosch ME7 03w20 (+XC90 02w50) (VehCommSpecification)"
+    "fn": "scripts/0900c8af81b98b7c - VehCom, P2 ECM Bosch ME7 03w10 (R-line) (VehCommSpecification)"
   },
   {
     "type": "NA",
@@ -3403,6 +3466,20 @@
   },
   {
     "type": "NA",
+    "id": "0900c8af81cbf8ee",
+    "name": "Erase DTCs, SUM",
+    "profiles": null,
+    "fn": "scripts/0900c8af81cbf8ee - Erase DTCs, SUM (NA)"
+  },
+  {
+    "type": "NA",
+    "id": "0900c8af81cbf8fb",
+    "name": "Read ECU id, SUM",
+    "profiles": null,
+    "fn": "scripts/0900c8af81cbf8fb - Read ECU id, SUM (NA)"
+  },
+  {
+    "type": "NA",
     "id": "0900c8af81cbf922",
     "name": "Read PAM status",
     "profiles": null,
@@ -3682,6 +3759,41 @@
     "fn": "scripts/0900c8af81d6a45a - Read DTCs with status, DIM and PHM (NA)"
   },
   {
+    "type": "NA",
+    "id": "0900c8af81d6a6a4",
+    "name": "Read switch input signal",
+    "profiles": null,
+    "fn": "scripts/0900c8af81d6a6a4 - Read switch input signal (NA)"
+  },
+  {
+    "type": "NA",
+    "id": "0900c8af81d92464",
+    "name": "Read divergence between front and rear oxygen sensors",
+    "profiles": null,
+    "fn": "scripts/0900c8af81d92464 - Read divergence between front and rear oxygen sensors (NA)"
+  },
+  {
+    "type": "NA",
+    "id": "0900c8af81d9316d",
+    "name": "Read front oxygen sensor, dynamics 2",
+    "profiles": null,
+    "fn": "scripts/0900c8af81d9316d - Read front oxygen sensor, dynamics 2 (NA)"
+  },
+  {
+    "type": "NA",
+    "id": "0900c8af81d93fd4",
+    "name": "Read divergence between rear and front oxygen sensor",
+    "profiles": null,
+    "fn": "scripts/0900c8af81d93fd4 - Read divergence between rear and front oxygen sensor (NA)"
+  },
+  {
+    "type": "NA",
+    "id": "0900c8af81d94c7e",
+    "name": "Read front oxygen sensor, dynamics",
+    "profiles": null,
+    "fn": "scripts/0900c8af81d94c7e - Read front oxygen sensor, dynamics (NA)"
+  },
+  {
     "type": "VehCommSpecification",
     "id": "0900c8af81dacce1",
     "name": "ecuspec_rti",
@@ -3928,6 +4040,20 @@
   },
   {
     "type": "NA",
+    "id": "0900c8af81e58112",
+    "name": "Read purge valve duty cycle",
+    "profiles": null,
+    "fn": "scripts/0900c8af81e58112 - Read purge valve duty cycle (NA)"
+  },
+  {
+    "type": "NA",
+    "id": "0900c8af81e927b6",
+    "name": "Calibrate SUM",
+    "profiles": null,
+    "fn": "scripts/0900c8af81e927b6 - Calibrate SUM (NA)"
+  },
+  {
+    "type": "NA",
     "id": "0900c8af81e98286",
     "name": "Read Car config P2X",
     "profiles": null,
@@ -4030,6 +4156,13 @@
     "name": "Read all DTCs, P2",
     "profiles": null,
     "fn": "scripts/0900c8af81ecdc73 - Read all DTCs, P2 (NA)"
+  },
+  {
+    "type": "NA",
+    "id": "0900c8af81ecde99",
+    "name": "Read coolant temperature",
+    "profiles": null,
+    "fn": "scripts/0900c8af81ecde99 - Read coolant temperature (NA)"
   },
   {
     "type": "NA",
@@ -4499,13 +4632,6 @@
     "name": "Quick test, fuel tank system (RLS)",
     "profiles": null,
     "fn": "scripts/0900c8af843e1a7d - Quick test, fuel tank system (RLS) (NA)"
-  },
-  {
-    "type": "VehCommSpecification",
-    "id": "0900c8af843efaea",
-    "name": "VehCom, P2 ECM Bosch ME7 01w35-03w20",
-    "profiles": null,
-    "fn": "scripts/0900c8af843efaea - VehCom, P2 ECM Bosch ME7 01w35-03w20 (VehCommSpecification)"
   },
   {
     "type": "NA",
