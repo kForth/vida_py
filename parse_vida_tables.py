@@ -2,26 +2,30 @@ import csv
 import glob
 import io
 import json
+import os
 import re
 import xml.dom.minidom as minidom
 import zipfile as zipfile
-from dataclasses import dataclass
 
 from model_info import ECU_CODE_RE, IDENTIFIER_RE, PROFILE_RE
 
 
-@dataclass
-class ScriptData:
+class Script:
     type: str
     id: str
     name: str
     data: str
-
-class Script(ScriptData):
-    data_bytes: bytearray
     profiles: list[str]
+    data_bytes: bytearray
     models: list[str]
     years: list[str]
+
+    def __init__(self, type, id, name, data=[], profiles=[]):
+        self.type = type
+        self.id = id
+        self.name = name
+        self.data = data
+        self.profiles = profiles
 
     @property
     def data_bytes(self):
@@ -56,6 +60,15 @@ class Script(ScriptData):
             profiles=self.profiles,
             fn=self.fn(),
             # data=self.data,
+        )
+
+    @staticmethod
+    def from_dict(d):
+        return Script(
+            type=d.get('type', ''),
+            id=d.get('id', ''),
+            name=d.get('name', ''),
+            profiles=d.get('profiles', ''),
         )
 
 
@@ -133,39 +146,73 @@ def extract_script_xml_files(scripts):
 
     return scripts
 
+def _parse_ecu_code(desc):
+    if _re := ECU_CODE_RE.search(desc):
+        return _re.group(1)
+    else:
+        return None
+
 def load_ecu_list():
     print("Loading ECU List")
     with open('tables/EcuDescription.csv', encoding='utf-8') as src_file:
-        ecus = {k: v for v, _, k in csv.reader(
-            src_file.readlines()[1:],
-            quotechar='"',
-            delimiter=',',
-            quoting=csv.QUOTE_ALL,
-            skipinitialspace=True
-        )}
+        ecus = {
+            id: {
+                'desc': desc,
+                'code': _parse_ecu_code(desc),
+            }
+            for desc, _, id in csv.reader(
+                src_file.readlines()[1:],
+                quotechar='"',
+                delimiter=',',
+                quoting=csv.QUOTE_ALL,
+                skipinitialspace=True
+            )
+        }
     return ecus
 
-def extract_identifiers(scripts):
+def _extract_identifier_property(match, name):
+    if _re := re.search(f'{name}="([^\\"]+)"', match):
+        return _re.group(1)
+    else:
+        return None
+
+def extract_identifiers(scripts: list[Script]):
     # Find all unique identifiers within the scripts
     ecus = load_ecu_list()
 
     print("Collecting identifiers")
     identifiers = []
     for script in scripts:
-        fp = f"{script['fn']}.xml"
+        fp = script.fn(".xml")
+        if not os.path.isfile(fp):
+            continue
         with open(fp, encoding='utf-8') as src_file:
             text = src_file.read()
             for match in IDENTIFIER_RE.findall(text):
                 ident = {
-                    e: _re.group(1) if (_re := re.search(f'{e}="([^\\"]+)"', match)) else None
-                    for e in ('ecu', 'read', 'write', 'value', 'name', 'textid')
+                    e: _extract_identifier_property(match, e)
+                    for e in ('ecu', 'read', 'write', 'value')
                 }
-                ident['ecudesc'] = ecus.get(ident['ecu'], '')
-                ident['ecucode'] = ECU_CODE_RE.search(ident['ecudesc']).group(1)
-                ident['script'] = script['id']
-                if ident not in identifiers:
+                name = _extract_identifier_property(match, 'name')
+                textid = _extract_identifier_property(match, 'textid')
+                existing = [
+                    e for e in identifiers
+                    if all(e[k] == ident[k] for k in ('ecu', 'value', 'read', 'write'))
+                ]
+                if len(existing):  # Add name and textid to existing identifier
+                    e = existing[0]
+                    if name not in e['names'] or textid not in e['textids']:
+                        e['names'].append(name)
+                        e['textids'].append(textid)
+                else:  # Create new identifier
+                    ecu = ecus.get(ident['ecu'], None)
+                    ident['names'] = [name]
+                    ident['textids'] = [textid]
+                    ident['ecudesc'] = ecu['desc'] if ecu else None
+                    ident['ecucode'] = ecu['code'] if ecu else None
                     identifiers.append(ident)
-    identifiers.sort(key=lambda e: (e['ecu'], e['textid']))
+
+    identifiers.sort(key=lambda e: (e['ecu'], e['value']))
 
     with open('cache/identifiers.json', 'w+', encoding='utf-8') as out_file:
         json.dump(identifiers, out_file, indent=2)
@@ -177,7 +224,8 @@ def extract_textids(identifiers):
     print("Extracting ECU Text IDs")
     textids = set()
     for ident in identifiers:
-        textids.add((ident['ecu'], ident['textid'], ident['name']))
+        for textid, name in zip(ident['textids'], ident['names']):
+            textids.add((ident['ecu'], textid, name))
     textids = sorted(list(textids), key=lambda e: (e[0], e[1]))
     with open('cache/textids.json', 'w+', encoding='utf-8') as out_file:
         json.dump(textids, out_file, indent=2)
