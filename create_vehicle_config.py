@@ -22,7 +22,7 @@ with open('cache/scripts.json') as src_file:
 print("Filtering Vehicle Scripts")
 scripts = list(filter(lambda s: any([e in profile for e in s.profiles]), scripts))
 with open(f'vehicles/{filename} - Scripts.json', 'w+') as out_file:
-    _scripts = [e.to_dict() for e in scripts]
+    _scripts = [e.to_dict(False) for e in scripts]
     json.dump(_scripts, out_file, indent=2)
 
 identifiers = extract_identifiers(scripts)
