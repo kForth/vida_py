@@ -52,12 +52,12 @@ class Script:
                         profiles.add(profile.strip())
         self.profiles = sorted(list(profiles))
 
-    def to_dict(self):
+    def to_dict(self, include_profiles=True):
         return dict(
             type=self.type,
             id=self.id,
             name=self.name,
-            profiles=self.profiles,
+            profiles=self.profiles if include_profiles else None,
             fn=self.fn(),
             # data=self.data,
         )
