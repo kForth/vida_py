@@ -25,6 +25,7 @@ with open(f'vehicles/{filename} - Scripts.json', 'w+') as out_file:
     _scripts = [e.to_dict(False) for e in scripts]
     json.dump(_scripts, out_file, indent=2)
 
+print("Loading Script List")
 identifiers = extract_identifiers(scripts)
 with open(f'vehicles/{filename} - Conf.json', 'w+', encoding='utf-8') as out_file:
     json.dump(identifiers, out_file, indent=2)
