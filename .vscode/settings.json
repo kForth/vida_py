@@ -8,6 +8,5 @@
       "source.organizeImports": "explicit"
     },
     "editor.defaultFormatter": "ms-python.black-formatter"
-  },
-  "black-formatter.args": ["--config", "black.toml"]
+  }
 }
