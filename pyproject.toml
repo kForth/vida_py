@@ -1,8 +1,12 @@
-[tool.isort]
-profile = "black"
-skip_glob = ["migrations/*"]
-
 [tool.black]
 line-length = 90
-include = "((mapsearch|tests|.github).*\\.pyi?$)|(setup\\.py)"
-exclude = "(assets/vendor)"
+include = '''
+(
+    (
+        PyVIDA
+      | .github
+    ).*\.pyi?$
+)|(
+    setup\.py
+)
+'''
