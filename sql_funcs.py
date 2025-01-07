@@ -1,6 +1,59 @@
 from pyodbc import Cursor, Row
 
 
+def get_profile(
+    cursor: Cursor,
+    year: int,
+    market: int,
+    steering: int,
+    transmission: int,
+    engine: int,
+    model: int,
+):
+    e = cursor.execute(f"""
+            SELECT [id]
+                ,[identifier]
+                ,[folderLevel]
+                ,[description]
+                ,[title]
+                ,[fkT162_ProfileValue_Model]
+                ,[fkT162_ProfileValue_Year]
+                ,[fkT162_ProfileValue_Engine]
+                ,[fkT162_ProfileValue_Transmission]
+                ,[fkT162_ProfileValue_Body]
+                ,[fkT162_ProfileValue_Steering]
+                ,[fkT162_ProfileValue_Market]
+                ,[fkT162_ProfileValue_ControlUnit]
+                ,[fkT162_ProfileValue_ChassisFrom]
+                ,[fkT162_ProfileValue_ChassisTo]
+            FROM [carcom].[dbo].[T161_Profile]
+            WHERE fkT162_ProfileValue_Year = {year}
+            AND fkT162_ProfileValue_Market = {market}
+            AND fkT162_ProfileValue_Steering = {steering}
+            AND fkT162_ProfileValue_Transmission = {transmission}
+            AND fkT162_ProfileValue_Engine = {engine}
+            AND fkT162_ProfileValue_Model = {model}
+            ORDER BY id ASC
+            """
+        ).fetchone()
+    return {
+            "id": e.id,
+            "identifier": e.identifier,
+            "folderLevel": e.folderLevel,
+            "description": e.description,
+            "title": e.title,
+            "model": e.fkT162_ProfileValue_Model,
+            "year": e.fkT162_ProfileValue_Year,
+            "engine": e.fkT162_ProfileValue_Engine,
+            "transmission": e.fkT162_ProfileValue_Transmission,
+            "body": e.fkT162_ProfileValue_Body,
+            "steering": e.fkT162_ProfileValue_Steering,
+            "market": e.fkT162_ProfileValue_Market,
+            "control_init": e.fkT162_ProfileValue_ControlUnit,
+            "chassis_from": e.fkT162_ProfileValue_ChassisFrom,
+            "chassis_to": e.fkT162_ProfileValue_ChassisTo,
+        }
+
 def get_profiles_fuzzy(
     cursor: Cursor,
     year: int,
