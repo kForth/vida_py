@@ -4,9 +4,10 @@ import os
 import pyodbc
 
 SERVER = "(local)"
-DATABASE = "carcom"
 USERNAME = "Asuser"
 PASSWORD = "GunnarS3g3"
+
+DATABASE = "carcom"
 
 connectionString = f"DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={SERVER};DATABASE={DATABASE};UID={USERNAME};PWD={PASSWORD}"
 conn = pyodbc.connect(connectionString)
@@ -23,7 +24,7 @@ for _table in cursor.fetchall():
     os.makedirs(os.path.split(outpath)[0], exist_ok=True)
     with open(outpath, "w+", newline="") as csvfile:
         writer = csv.writer(csvfile)
-        writer.writerow([x[0] for x in cursor.description])  # column headers
+        writer.writerow([x[0] for x in cursor.description])
         for row in rows:
             writer.writerow(row)
 
