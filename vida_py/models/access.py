@@ -1,9 +1,9 @@
 from datetime import datetime
 
-from sqlalchemy import BINARY, Boolean, DateTime, ForeignKey, Integer, Numeric, String
+from sqlalchemy import BINARY, Boolean, DateTime, Integer, Numeric, String
 from sqlalchemy.orm import Mapped, mapped_column
 
-from py_vida.models import Model
+from vida_py.models import Model
 
 
 class ASConfig(Model):

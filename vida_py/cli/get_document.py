@@ -5,8 +5,8 @@ import zipfile
 import click
 from sqlalchemy.orm import sessionmaker
 
-from py_vida.db import service
-from py_vida.models.service import Document
+from vida_py.db import service
+from vida_py.models.service import Document
 
 
 @click.command()

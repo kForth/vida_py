@@ -1,18 +1,9 @@
 from datetime import datetime
 
-from sqlalchemy import (
-    BINARY,
-    Boolean,
-    DateTime,
-    ForeignKey,
-    Integer,
-    Numeric,
-    SmallInteger,
-    String,
-)
+from sqlalchemy import Boolean, DateTime, Integer, Numeric, SmallInteger, String
 from sqlalchemy.orm import Mapped, mapped_column
 
-from py_vida.models import Model
+from vida_py.models import Model
 
 
 class AttachmentData(Model):

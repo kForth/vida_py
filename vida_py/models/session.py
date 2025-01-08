@@ -1,18 +1,9 @@
 from datetime import datetime
 
-from sqlalchemy import (
-    BINARY,
-    VARBINARY,
-    BigInteger,
-    Boolean,
-    DateTime,
-    ForeignKey,
-    Integer,
-    String,
-)
+from sqlalchemy import BINARY, VARBINARY, BigInteger, Boolean, DateTime, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column
 
-from py_vida.models import Model
+from vida_py.models import Model
 
 
 class ActionItem(Model):

@@ -3,7 +3,7 @@ from datetime import datetime
 from sqlalchemy import DateTime, ForeignKey, Integer, SmallInteger, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from py_vida.models import Model
+from vida_py.models import Model
 
 
 class AMYProfileMap(Model):

@@ -1,18 +1,18 @@
-# py_vida
+# vida_py
 
 Python interface Volvo's VIDA databases.
 
 ## Installation
 
-You can install `py_vida` using pip.
+You can install `vida_py` using pip.
 
 ```
-  pip install py_vida
+  pip install vida_py
 ```
 
 ## License
 
-py_vida
+vida_py
 Copyright (C) 2025 K.Goforth
 
 This program is free software: you can redistribute it and/or modify

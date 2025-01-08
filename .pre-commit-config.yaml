@@ -1,4 +1,4 @@
-# exclude: ^(docs/|venv/|legacy/|ref/|samples|)
+exclude: ^(scripts/|venv/)
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.1.0
@@ -12,10 +12,6 @@ repos:
       - id: fix-encoding-pragma
         args: ["--remove"]
         exclude: "setup.py"
-  - repo: https://github.com/pre-commit/mirrors-isort
-    rev: v5.10.1
-    hooks:
-      - id: isort
   - repo: https://github.com/psf/black
     rev: 22.3.0
     hooks:

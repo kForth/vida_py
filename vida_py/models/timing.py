@@ -1,9 +1,7 @@
-from datetime import datetime
-
-from sqlalchemy import DateTime, ForeignKey, Integer, SmallInteger, String
+from sqlalchemy import Integer, SmallInteger, String
 from sqlalchemy.orm import Mapped, mapped_column
 
-from py_vida.models import Model
+from vida_py.models import Model
 
 
 class MessageTiming(Model):

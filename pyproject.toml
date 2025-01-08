@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "py_vida"
+name = "vida_py"
 version = "0.1"
 description = "Python interface for Volvo's VIDA databases."
 keywords = ["VIDA", "volvo"]
@@ -22,24 +22,24 @@ dependencies = []
 requires-python = '>=3.10'
 
 [project.urls]
-bugs = "https://github.com/kForth/py_vida/issues"
-homepage = "https://github.com/kForth/py_vida"
+bugs = "https://github.com/kForth/vida_py/issues"
+homepage = "https://github.com/kForth/vida_py"
 
 [tool.setuptools]
-package-dir = {"" = "py_vida"}
+package-dir = {"" = "vida_py"}
 
 [tool.setuptools.package-data]
-"*" = ["py_vida.*"]
+"*" = ["vida_py.*"]
 
 [project.scripts]
-py_vida = "py_vida.cli:app"
+vida_py = "vida_py.cli:app"
 
 [tool.black]
 line-length = 90
 include = '''
 (
     (
-        py_vida
+        vida_py
       | .github
     ).*\.pyi?$
 )|(

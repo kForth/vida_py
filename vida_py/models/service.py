@@ -1,7 +1,7 @@
 from sqlalchemy import BINARY, NVARCHAR, Boolean, ForeignKey, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from py_vida.models import Model
+from vida_py.models import Model
 
 
 class Document(Model):

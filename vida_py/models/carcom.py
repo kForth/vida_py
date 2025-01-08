@@ -13,7 +13,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from py_vida.models import Model
+from vida_py.models import Model
 
 
 class T100_EcuVariant(Model):
@@ -665,13 +665,6 @@ class T190_Text(Model):
 
     data: Mapped[List["T191_TextData"]] = relationship()
     category: Mapped["T192_TextCategory"] = relationship()
-
-    def get_data(self, language: int) -> "T191_TextData":
-        return [e for e in self.data if e.fkT193_Language == language][0]
-
-    #     return select(T191_TextData).where(
-    #         (T191_TextData.fkT190_Text == self.id and T191_TextData.fkT193_Language == language)
-    #     )
 
 
 class T191_TextData(Model):

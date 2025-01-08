@@ -1,4 +1,4 @@
-- py_vida version:
+- vida_py version:
 - Python version:
 - Operating System:
 

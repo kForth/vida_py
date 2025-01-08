@@ -4,7 +4,7 @@ from typing import List
 from sqlalchemy import Row
 from sqlalchemy.orm import Session
 
-from py_vida.scripts import runScript
+from vida_py.scripts import runScript
 
 
 def clean_up(session: Session) -> List[Row]:

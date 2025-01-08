@@ -1,5 +1,4 @@
 import csv
-import json
 
 import click
 
@@ -23,7 +22,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from py_vida.models import Model
+from vida_py.models import Model
 
 """
 
@@ -131,8 +130,10 @@ def main(schemafile, db, outfile):
                         else ""
                     )
                     py_type = db_to_py_type(_type)
-                    sql_type = db_to_sql_type(_type, _size)
-                    class_str += f"    {_name}: Mapped[{py_type}] = mapped_column({sql_type}{_def})\n"
+                    sql_type = db_to_sql_type(_type, _size) + _def
+                    class_str += (
+                        f"    {_name}: Mapped[{py_type}] = mapped_column({sql_type})\n"
+                    )
                 last_class = _class
 
             for _, class_str in sorted(classes, key=lambda x: x[0]):

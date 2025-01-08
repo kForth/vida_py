@@ -1,8 +1,8 @@
 import click
 from sqlalchemy.orm import sessionmaker
 
-from py_vida.db import diag
-from py_vida.scripts.diag import get_vin_components
+from vida_py.db import diag
+from vida_py.scripts.diag import get_vin_components
 
 
 @click.command()

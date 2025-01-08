@@ -1,7 +1,7 @@
 from sqlalchemy import BINARY, NVARCHAR, BigInteger, Boolean, ForeignKey, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column
 
-from py_vida.models import Model
+from vida_py.models import Model
 
 
 class ECU(Model):

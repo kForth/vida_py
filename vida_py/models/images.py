@@ -1,9 +1,7 @@
-from datetime import datetime
-
-from sqlalchemy import BINARY, Boolean, DateTime, ForeignKey, Integer, String
+from sqlalchemy import BINARY, Boolean, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column
 
-from py_vida.models import Model
+from vida_py.models import Model
 
 
 class GraphicCarConfigs(Model):
