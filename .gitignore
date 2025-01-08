@@ -51,11 +51,6 @@ env/
 # Configuration
 .env
 
-# VIDA Data
-db/
-tables/
-scripts/
-
 # Misc. Data
 cache/
 ref/
