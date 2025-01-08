@@ -1,12 +1,13 @@
 import io
 import os
 import zipfile
-import click
 
+import click
 from sqlalchemy.orm import sessionmaker
 
 from PyVIDA.database import service
-from PyVIDA.models.service import *
+from PyVIDA.models.service import Document
+
 
 @click.command()
 @click.argument("doc", type=click.INT)
@@ -25,6 +26,7 @@ def main(doc, outdir):
     else:
         for _file in _zip.filelist:
             click.echo(_file.filename)
+
 
 if __name__ == "__main__":
     main()

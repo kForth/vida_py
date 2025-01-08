@@ -1,7 +1,16 @@
 from datetime import datetime
 
+from sqlalchemy import (
+    BINARY,
+    NVARCHAR,
+    BigInteger,
+    Boolean,
+    DateTime,
+    ForeignKey,
+    Integer,
+    String,
+)
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import Integer, String, NVARCHAR, BINARY, ForeignKey, DateTime, BigInteger, Boolean
 
 from PyVIDA.models import Model
 
@@ -37,7 +46,7 @@ class IE(Model):
     __bind_key__ = "diag"
     __tablename__ = "IE"
 
-    Id: Mapped[str] = mapped_column(String(16))
+    Id: Mapped[str] = mapped_column(String(16), primary_key=True)
     VCCId: Mapped[str] = mapped_column(String(16))
     fkIEType: Mapped[int] = mapped_column(ForeignKey("IEType.id"))
     FirstTestgrpId: Mapped[str] = mapped_column(String(50), default="")
@@ -75,14 +84,6 @@ class IEParentChildMap(Model):
     fkIEparent: Mapped[str] = mapped_column(ForeignKey("IEparent.id"))
     fkIEchild: Mapped[str] = mapped_column(ForeignKey("IEchild.id"))
 
-
-class IEProfileMap(Model):
-    __bind_key__ = "diag"
-    __tablename__ = "IEProfileMap"
-
-    id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    fkIE: Mapped[str] = mapped_column(ForeignKey("IE.Id"))
-    fkProfile: Mapped[str] = mapped_column(ForeignKey("Profile.id"))
 
 class IEProfileMap(Model):
     __bind_key__ = "diag"
@@ -142,9 +143,9 @@ class InformationQualifierDescription(Model):
     __tablename__ = "InformationQualifierDescription"
 
     fkInformationQualifier: Mapped[int] = mapped_column(
-        ForeignKey("InformationQualifier.Id")
+        ForeignKey("InformationQualifier.Id"), primary_key=True
     )
-    fkLanguage: Mapped[int] = mapped_column(ForeignKey("Language.Id"))
+    fkLanguage: Mapped[int] = mapped_column(ForeignKey("Language.Id"), primary_key=True)
     DisplayText: Mapped[str] = mapped_column(NVARCHAR(256))
 
 
@@ -224,7 +225,7 @@ class SoftwareProduct(Model):
     __bind_key__ = "diag"
     __tablename__ = "SoftwareProduct"
 
-    Id: Mapped[int] = mapped_column(BigInteger)
+    Id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
     Name: Mapped[str] = mapped_column(String(64))
     PieId: Mapped[str] = mapped_column(String(30))
     EmissionRelated: Mapped[bool] = mapped_column(Boolean)
