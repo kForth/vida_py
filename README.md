@@ -1,11 +1,9 @@
 # vida_py
 
-![PyPI - Version](https://img.shields.io/pypi/v/vida_py)
-![PyPI - Version](https://img.shields.io/pypi/l/vida_py)
-[![GitHub Repo](https://img.shields.io/badge/GitHub-vida__py-ffffff.svg?style=flat&logo=github)](https://github.com/kForth/vida_py)
-![GitHub Repo Watchers](https://img.shields.io/github/watchers/kForth/vida_py)
-![GitHub Repo Forks](https://img.shields.io/github/forks/kForth/vida_py)
-![GitHub Repo Stars](https://img.shields.io/github/stars/kForth/vida_py)
+![PyPI Version](https://img.shields.io/pypi/v/vida_py?logo=python&logoColor=white)
+![GitHub Release](https://img.shields.io/github/v/release/kForth/vida_py?logo=github&logoColor=white)
+![License](https://img.shields.io/github/license/kForth/vida_py)
+![GitHub deployments](https://img.shields.io/github/deployments/kForth/vida_py/pypi)
 
 Python interface Volvo's VIDA databases.
 
@@ -17,10 +15,11 @@ You can install `vida_py` using pip.
   pip install vida-py
 ```
 
-## Requirements
+## Dependencies
 
-- Python >= 3.6
-- VIDA Database Files
+`vida_py` depends on a few python modules, these modules will be installed automatically when installing with `pip`.
+
+`vida_py` is compatible with python 3.6 and up.
 
 ## Database Files
 
