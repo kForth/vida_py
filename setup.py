@@ -21,7 +21,7 @@ setup(
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.10",
     ],
-    description="Automatically perform MTF analysis on photos",
+    description="Python interface for Volvo's VIDA databases.",
     entry_points={
         "console_scripts": [
             "py_vida=py_vida:main",
@@ -33,7 +33,7 @@ setup(
     keywords="VIDA, volvo",
     name="py_vida",
     packages=find_packages(include=["py_vida", "py_vida.*"]),
-    url="https://github.com/kForth/Volvo-ME7-BINs.git",
+    url="https://github.com/kForth/py_vida.git",
     version="0.1.0",
     zip_safe=False,
 )
