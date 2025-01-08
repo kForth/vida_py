@@ -1,6 +1,6 @@
 # py_vida
 
-Python interface for working with data from Volvo's VIDA software.
+Python interface Volvo's VIDA databases.
 
 ## Installation
 
