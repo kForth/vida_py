@@ -12,12 +12,6 @@ repos:
       - id: fix-encoding-pragma
         args: ["--remove"]
         exclude: "setup.py"
-  # - repo: https://github.com/asottile/pyupgrade
-  #   rev: v2.31.0
-  #   hooks:
-  #     - id: pyupgrade
-  #       args: ["--py37-plus"]
-  #       exclude: "setup.py"
   - repo: https://github.com/pre-commit/mirrors-isort
     rev: v5.10.1
     hooks:
