@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "py_vida"
-version = "1.0"
+version = "0.1"
 description = "Python interface for Volvo's VIDA databases."
 keywords = ["VIDA", "volvo"]
 readme = "README.md"
