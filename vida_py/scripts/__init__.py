@@ -2,7 +2,7 @@ from sqlalchemy import Result, text
 from sqlalchemy.orm import Session
 
 
-def runScript(session: Session, script: str, **kwargs) -> Result:
+def run_script(session: Session, script: str, **kwargs) -> Result:
     return session.execute(
         text(
             "\n".join(
