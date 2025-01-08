@@ -3,16 +3,28 @@ import re
 import click
 
 
-def _d(d):
-    if d in ("nvarchar", "varchar", "char", "nchar", "ntext", "text"):
+def _db_to_py_type(d):
+    if (d := d.lower()) in (
+        "nvarchar",
+        "varchar",
+        "char",
+        "nchar",
+        "ntext",
+        "text",
+        "uniqueidentifier",
+    ):
         return "str"
     if d == "bit":
         return "bool"
-    if d in ("tinyint", "bigint"):
+    if d in ("tinyint", "smallint", "bigint"):
         return "int"
-    if d in ("decimal", "double", "float"):
+    if d in ("decimal", "double", "float", "numeric", "money"):
         return "float"
     if d == "image":
+        return "bytes"
+    if d == "smalldatetime":
+        return "datetime"
+    if d in ("images", "binary", "varbinary"):
         return "bytes"
     return d
 
@@ -70,7 +82,7 @@ def main(srcfiles, outfile):
 
     _write = _file.write if outfile else click.echo
     for name, params in funcs:
-        args1 = "".join(f", {_s(p)}: {_d(d)}" for p, d in params)
+        args1 = "".join(f", {_s(p)}: {_db_to_py_type(d)}" for p, d in params)
         args2 = "".join(f", {p}={_s(p)}" for p, _ in params)
         _write(
             "\n".join(
