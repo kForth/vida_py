@@ -1,5 +1,12 @@
 # vida_py
 
+![PyPI - Version](https://img.shields.io/pypi/v/vida_py)
+![PyPI - Version](https://img.shields.io/pypi/l/vida_py)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-vida__py-ffffff.svg?style=flat&logo=github)](https://github.com/kForth/vida_py)
+![GitHub Repo Watchers](https://img.shields.io/github/watchers/kForth/vida_py)
+![GitHub Repo Forks](https://img.shields.io/github/forks/kForth/vida_py)
+![GitHub Repo Stars](https://img.shields.io/github/stars/kForth/vida_py)
+
 Python interface Volvo's VIDA databases.
 
 ## Installation
@@ -10,20 +17,19 @@ You can install `vida_py` using pip.
   pip install vida-py
 ```
 
+## Requirements
+
+- Python >= 3.6
+- VIDA Database Files
+
+## Database Files
+
+Please note that VIDA database files are not supplied with this package. Users must obtain these files separately, typically from an existing VIDA installation.
+
+## Contributing
+
+Contributions are welcome! Please submit a pull request or open and issue to discuss changes or report bugs.
+
 ## License
 
-vida_py
-Copyright (C) 2025 K.Goforth
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU Affero General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU Affero General Public License for more details.
-
-You should have received a copy of the GNU Affero General Public License
-along with this program. If not, see <http://www.gnu.org/licenses/>.
+This project is licensed under the AGPL v3.0 License - see the [LICENSE](LICENSE) file for details.
