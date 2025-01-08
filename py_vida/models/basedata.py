@@ -24,14 +24,6 @@ class BodyStyle(Model):
     Description: Mapped[str] = mapped_column(String(255))
     ObjVersion: Mapped[datetime] = mapped_column(DateTime)
 
-    def to_dict(self) -> dict:
-        return {
-            "Id": self.Id,
-            "Cid": self.Cid,
-            "Description": self.Description,
-            "ObjVersion": self.ObjVersion,
-        }
-
 
 class BrakeSystem(Model):
     __bind_key__ = "basedata"
@@ -41,14 +33,6 @@ class BrakeSystem(Model):
     Cid: Mapped[int] = mapped_column(Integer)
     Description: Mapped[str] = mapped_column(String(255))
     ObjVersion: Mapped[datetime] = mapped_column(DateTime)
-
-    def to_dict(self) -> dict:
-        return {
-            "Id": self.Id,
-            "Cid": self.Cid,
-            "Description": self.Description,
-            "ObjVersion": self.ObjVersion,
-        }
 
 
 class Engine(Model):
@@ -60,14 +44,6 @@ class Engine(Model):
     Description: Mapped[str] = mapped_column(String(255))
     ObjVersion: Mapped[datetime] = mapped_column(DateTime)
 
-    def to_dict(self) -> dict:
-        return {
-            "Id": self.Id,
-            "Cid": self.Cid,
-            "Description": self.Description,
-            "ObjVersion": self.ObjVersion,
-        }
-
 
 class ModelYear(Model):
     __bind_key__ = "basedata"
@@ -77,14 +53,6 @@ class ModelYear(Model):
     Cid: Mapped[int] = mapped_column(Integer)
     Description: Mapped[str] = mapped_column(String(255))
     ObjVersion: Mapped[datetime] = mapped_column(DateTime)
-
-    def to_dict(self) -> dict:
-        return {
-            "Id": self.Id,
-            "Cid": self.Cid,
-            "Description": self.Description,
-            "ObjVersion": self.ObjVersion,
-        }
 
 
 class NodeECU(Model):
@@ -96,14 +64,6 @@ class NodeECU(Model):
     Description: Mapped[str] = mapped_column(String(255))
     ObjVersion: Mapped[datetime] = mapped_column(DateTime)
 
-    def to_dict(self) -> dict:
-        return {
-            "Id": self.Id,
-            "Cid": self.Cid,
-            "Description": self.Description,
-            "ObjVersion": self.ObjVersion,
-        }
-
 
 class PartnerGroup(Model):
     __bind_key__ = "basedata"
@@ -113,14 +73,6 @@ class PartnerGroup(Model):
     Cid: Mapped[str] = mapped_column(String(10))
     Description: Mapped[str] = mapped_column(String(255))
     ObjVersion: Mapped[datetime] = mapped_column(DateTime)
-
-    def to_dict(self) -> dict:
-        return {
-            "Id": self.Id,
-            "Cid": self.Cid,
-            "Description": self.Description,
-            "ObjVersion": self.ObjVersion,
-        }
 
 
 class SelectedProfiles(Model):
@@ -140,14 +92,6 @@ class SpecialVehicle(Model):
     Description: Mapped[str] = mapped_column(String(255))
     ObjVersion: Mapped[datetime] = mapped_column(DateTime)
 
-    def to_dict(self) -> dict:
-        return {
-            "Id": self.Id,
-            "Cid": self.Cid,
-            "Description": self.Description,
-            "ObjVersion": self.ObjVersion,
-        }
-
 
 class Steering(Model):
     __bind_key__ = "basedata"
@@ -157,14 +101,6 @@ class Steering(Model):
     Cid: Mapped[int] = mapped_column(Integer)
     Description: Mapped[str] = mapped_column(String(255))
     ObjVersion: Mapped[datetime] = mapped_column(DateTime)
-
-    def to_dict(self) -> dict:
-        return {
-            "Id": self.Id,
-            "Cid": self.Cid,
-            "Description": self.Description,
-            "ObjVersion": self.ObjVersion,
-        }
 
 
 class StructureWeek(Model):
@@ -176,14 +112,6 @@ class StructureWeek(Model):
     Description: Mapped[str] = mapped_column(String(255))
     ObjVersion: Mapped[datetime] = mapped_column(DateTime)
 
-    def to_dict(self) -> dict:
-        return {
-            "Id": self.Id,
-            "Cid": self.Cid,
-            "Description": self.Description,
-            "ObjVersion": self.ObjVersion,
-        }
-
 
 class Suspension(Model):
     __bind_key__ = "basedata"
@@ -194,14 +122,6 @@ class Suspension(Model):
     Description: Mapped[str] = mapped_column(String(255))
     ObjVersion: Mapped[datetime] = mapped_column(DateTime)
 
-    def to_dict(self) -> dict:
-        return {
-            "Id": self.Id,
-            "Cid": self.Cid,
-            "Description": self.Description,
-            "ObjVersion": self.ObjVersion,
-        }
-
 
 class Transmission(Model):
     __bind_key__ = "basedata"
@@ -211,14 +131,6 @@ class Transmission(Model):
     Cid: Mapped[int] = mapped_column(Integer)
     Description: Mapped[str] = mapped_column(String(255))
     ObjVersion: Mapped[datetime] = mapped_column(DateTime)
-
-    def to_dict(self) -> dict:
-        return {
-            "Id": self.Id,
-            "Cid": self.Cid,
-            "Description": self.Description,
-            "ObjVersion": self.ObjVersion,
-        }
 
 
 class ValidProfiles(Model):
@@ -238,15 +150,6 @@ class VehicleModel(Model):
     Description: Mapped[str] = mapped_column(String(255))
     ImagePath: Mapped[str] = mapped_column(String(255))
     ObjVersion: Mapped[datetime] = mapped_column(DateTime)
-
-    def to_dict(self) -> dict:
-        return {
-            "Id": self.Id,
-            "Cid": self.Cid,
-            "Description": self.Description,
-            "ImagePath": self.ImagePath,
-            "ObjVersion": self.ObjVersion,
-        }
 
 
 class VehicleProfile(Model):
@@ -285,29 +188,6 @@ class VehicleProfile(Model):
     PartnerGroup: Mapped["PartnerGroup"] = relationship()
     ModelYear: Mapped["ModelYear"] = relationship()
     SpecialVehicle: Mapped["SpecialVehicle"] = relationship()
-
-    def to_dict(self) -> dict:
-        return {
-            "id": self.Id,
-            "FolderLevel": self.FolderLevel,
-            "Description": self.Description,
-            "Title": self.Title,
-            "ChassisNoFrom": self.ChassisNoFrom,
-            "ChassisNoTo": self.ChassisNoTo,
-            "fkNodeECU": self.fkNodeECU,
-            "fkVehicleModel": self.fkVehicleModel,
-            "fkBodyStyle": self.fkBodyStyle,
-            "fkSteering": self.fkSteering,
-            "fkTransmission": self.fkTransmission,
-            "fkSuspension": self.fkSuspension,
-            "fkEngine": self.fkEngine,
-            "fkStructureWeek": self.fkStructureWeek,
-            "fkBrakeSystem": self.fkBrakeSystem,
-            "fkPartnerGroup": self.fkPartnerGroup,
-            "fkModelYear": self.fkModelYear,
-            "fkSpecialVehicle": self.fkSpecialVehicle,
-            "ObjVersion": self.ObjVersion,
-        }
 
 
 class VehicleProfilePartnerGroup(Model):
