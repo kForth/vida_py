@@ -1,9 +1,9 @@
 # vida_py
 
-![PyPI Version](https://img.shields.io/pypi/v/vida_py?logo=python&logoColor=white)
-![GitHub Release](https://img.shields.io/github/v/release/kForth/vida_py?logo=github&logoColor=white)
-![License](https://img.shields.io/github/license/kForth/vida_py)
-![GitHub deployments](https://img.shields.io/github/deployments/kForth/vida_py/pypi)
+[![PyPI Version](https://img.shields.io/pypi/v/vida_py?logo=python&logoColor=white)](https://pypi.org/p/vida_py)
+[![GitHub Release](https://img.shields.io/github/v/release/kForth/vida_py?logo=github&logoColor=white)](https://github.com/kForth/vida_py/releases)
+[![License](https://img.shields.io/github/license/kForth/vida_py)](https://github.com/kForth/vida_py/blob/main/LICENSE)
+[![GitHub deployments](https://img.shields.io/github/deployments/kForth/vida_py/pypi)](https://github.com/kForth/vida_py/releases)
 
 Python interface Volvo's VIDA databases.
 
