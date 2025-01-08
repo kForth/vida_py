@@ -1,15 +1,4 @@
-from datetime import datetime
-
-from sqlalchemy import (
-    BINARY,
-    NVARCHAR,
-    BigInteger,
-    Boolean,
-    DateTime,
-    ForeignKey,
-    Integer,
-    String,
-)
+from sqlalchemy import BINARY, NVARCHAR, BigInteger, Boolean, ForeignKey, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column
 
 from py_vida.models import Model
