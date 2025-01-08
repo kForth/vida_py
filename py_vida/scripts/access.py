@@ -3,7 +3,7 @@ from typing import List
 from sqlalchemy import Row
 from sqlalchemy.orm import Session
 
-from PyVIDA.scripts import runScript
+from py_vida.scripts import runScript
 
 
 def delete_work_list(session: Session) -> List[Row]:

@@ -1,9 +1,9 @@
 from datetime import datetime
 
+from sqlalchemy import DateTime, ForeignKey, Integer, SmallInteger, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from sqlalchemy import Integer, String, ForeignKey, DateTime, SmallInteger
 
-from PyVIDA.models import Model
+from py_vida.models import Model
 
 
 class AMYProfileMap(Model):
@@ -129,7 +129,6 @@ class SelectedProfiles(Model):
 
     ID: Mapped[int] = mapped_column(Integer, primary_key=True)
     SelectedProfiles: Mapped[str] = mapped_column(String(255))
-
 
 
 class SpecialVehicle(Model):

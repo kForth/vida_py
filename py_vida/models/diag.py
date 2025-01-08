@@ -12,7 +12,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import Mapped, mapped_column
 
-from PyVIDA.models import Model
+from py_vida.models import Model
 
 
 class ECU(Model):

@@ -24,15 +24,15 @@ setup(
     description="Automatically perform MTF analysis on photos",
     entry_points={
         "console_scripts": [
-            "PyVIDA=PyVIDA:main",
+            "py_vida=py_vida:main",
         ],
     },
     install_requires=requirements,
     long_description=readme,
     include_package_data=True,
     keywords="VIDA, volvo",
-    name="PyVIDA",
-    packages=find_packages(include=["PyVIDA", "PyVIDA.*"]),
+    name="py_vida",
+    packages=find_packages(include=["py_vida", "py_vida.*"]),
     url="https://github.com/kForth/Volvo-ME7-BINs.git",
     version="0.1.0",
     zip_safe=False,

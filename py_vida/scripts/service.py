@@ -3,7 +3,7 @@ from typing import List
 from sqlalchemy import Row
 from sqlalchemy.orm import Session
 
-from PyVIDA.scripts import runScript
+from py_vida.scripts import runScript
 
 
 def calculate_siblings(session: Session) -> List[Row]:

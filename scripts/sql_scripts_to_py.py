@@ -62,7 +62,7 @@ def main(srcfiles, outfile):
                     "from sqlalchemy import Row",
                     "from sqlalchemy.orm import Session",
                     "",
-                    "from PyVIDA.scripts import runScript",
+                    "from py_vida.scripts import runScript",
                     "",
                 ]
             )

@@ -1,7 +1,7 @@
+from sqlalchemy import BINARY, NVARCHAR, Boolean, ForeignKey, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from sqlalchemy import Integer, String, NVARCHAR, BINARY, ForeignKey, Boolean
 
-from PyVIDA.models import Model
+from py_vida.models import Model
 
 
 class Document(Model):
@@ -32,7 +32,9 @@ class DocumentIndexedWord(Model):
     __tablename__ = "DocumentIndexedWord"
 
     fkDocument: Mapped[int] = mapped_column(ForeignKey("Document.id"), primary_key=True)
-    fkIndexedWord: Mapped[int] = mapped_column(ForeignKey("IndexedWord.id"), primary_key=True)
+    fkIndexedWord: Mapped[int] = mapped_column(
+        ForeignKey("IndexedWord.id"), primary_key=True
+    )
 
     document: Mapped["Document"] = relationship()
     indexed_word: Mapped["IndexedWord"] = relationship()
@@ -132,7 +134,9 @@ class QualifierAttachment(Model):
 
     fkQualifier: Mapped[int] = mapped_column(ForeignKey("Qualifier.id"), primary_key=True)
     url: Mapped[str] = mapped_column(NVARCHAR(255))
-    InstallationType: Mapped[str] = mapped_column(NVARCHAR(50), default="ALL", primary_key=True)
+    InstallationType: Mapped[str] = mapped_column(
+        NVARCHAR(50), default="ALL", primary_key=True
+    )
 
     qualifier: Mapped["Qualifier"] = relationship()
 

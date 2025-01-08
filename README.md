@@ -1,18 +1,18 @@
-# PyVIDA
+# py_vida
 
 Python interface for working with data from Volvo's VIDA software.
 
 ## Installation
 
-You can install `PyVIDA` using pip.
+You can install `py_vida` using pip.
 
 ```
-  pip install PyVIDA
+  pip install py_vida
 ```
 
 ## License
 
-PyVIDA
+py_vida
 Copyright (C) 2025 K.Goforth
 
 This program is free software: you can redistribute it and/or modify

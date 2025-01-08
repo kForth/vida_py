@@ -3,7 +3,7 @@ line-length = 90
 include = '''
 (
     (
-        PyVIDA
+        py_vida
       | .github
     ).*\.pyi?$
 )|(
