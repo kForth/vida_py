@@ -1,8 +1,8 @@
 import click
 from sqlalchemy.orm import sessionmaker
 
-from PyVIDA.diag import GetVINcomponents
 from PyVIDA.db import diag
+from PyVIDA.scripts.diag import get_vin_components
 
 
 @click.command()
@@ -10,13 +10,14 @@ from PyVIDA.db import diag
 def main(vin):
     session = sessionmaker(bind=diag)()
 
-    profile = GetVINcomponents(session, vin)
+    profile = get_vin_components(session, vin)[0]
 
     click.echo(f"VIN: {vin}")
-    click.echo(f"Model: {profile.model} [{profile.model_id}]")
-    click.echo(f"Year: {profile.year}")
-    click.echo(f"Engine: {profile.engine} [{profile.engine_id}]")
-    click.echo(f"Transmission: {profile.transmission} [{profile.transmission_id}]")
+    click.echo(f"Model: {profile[1]} [{profile[0]}]")
+    click.echo(f"Year: {profile[2]}")
+    click.echo(f"Engine: {profile[4]} [{profile[3]}]")
+    click.echo(f"Transmission: {profile[6]} [{profile[5]}]")
+    click.echo(f"Chassis: {vin[-6:]}")
 
     session.close()
 
