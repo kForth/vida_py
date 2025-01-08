@@ -6,6 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "py_vida"
 version = "1.0"
 description = "Python interface for Volvo's VIDA databases."
+keywords = ["VIDA", "volvo"]
 readme = "README.md"
 authors = [
   {name = "Kestin Goforth", email = "kgoforth1503@gmail.com"}
@@ -18,28 +19,20 @@ classifiers = [
 ]
 license = {text = "AGPL-3.0"}
 dependencies = []
-
-[project.optional-dependencies]
-dev = [
-    "coverage",  # testing
-    "mypy",  # linting
-    "pytest",  # testing
-    "ruff"  # linting
-]
+requires-python = '>=3.10'
 
 [project.urls]
-
 bugs = "https://github.com/kForth/py_vida/issues"
 homepage = "https://github.com/kForth/py_vida"
 
 [tool.setuptools]
-package-dir = {"" = "src"}
+package-dir = {"" = "py_vida"}
 
 [tool.setuptools.package-data]
-"*" = ["*.*"]
+"*" = ["py_vida.*"]
 
 [project.scripts]
-{{cookiecutter.slug}} = "{{cookiecutter.slug}}.cli:app"
+py_vida = "py_vida.cli:app"
 
 [tool.black]
 line-length = 90
