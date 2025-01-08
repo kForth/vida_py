@@ -7,7 +7,7 @@ Python interface Volvo's VIDA databases.
 You can install `vida_py` using pip.
 
 ```
-  pip install vida_py
+  pip install vida-py
 ```
 
 ## License
