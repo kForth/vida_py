@@ -9,7 +9,7 @@ def runScript(session: Session, script: str, **kwargs) -> Result:
                 [
                     "DECLARE @RC int",
                     f"EXECUTE @RC = [dbo].[{script}]",
-                    "\n,".join(f"@{k} = :{k}" for k in kwargs.keys()),
+                    "\n,".join(f"@{k} = :{k}" for k in kwargs),
                     "SELECT @RC",
                 ]
             )
