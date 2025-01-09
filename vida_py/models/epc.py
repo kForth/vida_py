@@ -10,33 +10,18 @@ class AttachmentData(Model):
     __bind_key__ = "epc"
     __tablename__ = "AttachmentData"
 
+    Id: Mapped[int] = mapped_column(Integer, primary_key=True)
     Code: Mapped[str] = mapped_column(String(16))
     URL: Mapped[str] = mapped_column(String(100))
     MIME: Mapped[str] = mapped_column(String(64))
     VersionUpdate: Mapped[str] = mapped_column(String(10))
 
 
-class CCLexicon(Model):
-    __bind_key__ = "epc"
-    __tablename__ = "CCLexicon"
-
-    DescriptionId: Mapped[int] = mapped_column(Integer)
-    Note: Mapped[int] = mapped_column(SmallInteger)
-    ParentComponentId: Mapped[int] = mapped_column(Integer)
-
-
-class CCPartnerGroup(Model):
-    __bind_key__ = "epc"
-    __tablename__ = "CCPartnerGroup"
-
-    PartnerGroup: Mapped[str] = mapped_column(String(50))
-    ID: Mapped[str] = mapped_column(String(50))
-
-
 class CatalogueComponents(Model):
     __bind_key__ = "epc"
     __tablename__ = "CatalogueComponents"
 
+    Id: Mapped[int] = mapped_column(Integer, primary_key=True)
     TypeId: Mapped[int] = mapped_column(Integer)
     PSCode: Mapped[str] = mapped_column(String(6))
     Code: Mapped[str] = mapped_column(String(16))
@@ -62,11 +47,31 @@ class CatalogueComponents(Model):
     NEVISVersion: Mapped[str] = mapped_column(String(32))
 
 
+class CCLexicon(Model):
+    __bind_key__ = "epc"
+    __tablename__ = "CCLexicon"
+
+    CCid: Mapped[int] = mapped_column(Integer, primary_key=True)
+    DescriptionId: Mapped[int] = mapped_column(Integer, primary_key=True)
+    Note: Mapped[int] = mapped_column(SmallInteger, primary_key=True)
+    ParentComponentId: Mapped[int] = mapped_column(Integer)
+
+
+class CCPartnerGroup(Model):
+    __bind_key__ = "epc"
+    __tablename__ = "CCPartnerGroup"
+
+    fkCatalogueComponent: Mapped[int] = mapped_column(Integer)
+    PartnerGroup: Mapped[str] = mapped_column(String(50))
+    ID: Mapped[str] = mapped_column(String(50), primary_key=True)
+
+
 class CodeDictionary(Model):
     __bind_key__ = "epc"
     __tablename__ = "CodeDictionary"
 
-    CodeId: Mapped[int] = mapped_column(Integer)
+    fkTableCode: Mapped[int] = mapped_column(Integer, primary_key=True)
+    CodeId: Mapped[int] = mapped_column(Integer, primary_key=True)
     ValueText: Mapped[str] = mapped_column(String(50))
 
 
@@ -74,9 +79,23 @@ class ComponentAttachments(Model):
     __bind_key__ = "epc"
     __tablename__ = "ComponentAttachments"
 
-    fkAttachmentData: Mapped[int] = mapped_column(Integer)
-    AttachmentTypeId: Mapped[int] = mapped_column(Integer)
+    fkCatalogueComponent: Mapped[int] = mapped_column(Integer, primary_key=True)
+    fkAttachmentData: Mapped[int] = mapped_column(Integer, primary_key=True)
+    AttachmentTypeId: Mapped[int] = mapped_column(Integer, primary_key=True)
     SequenceId: Mapped[int] = mapped_column(Integer)
+    VersionUpdate: Mapped[str] = mapped_column(String(10))
+
+
+class ComponentConditions(Model):
+    __bind_key__ = "epc"
+    __tablename__ = "ComponentConditions"
+
+    Id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    fkCatalogueComponent: Mapped[int] = mapped_column(Integer)
+    ModuleTypeId: Mapped[int] = mapped_column(Integer, default=1)
+    fkProfile: Mapped[str] = mapped_column(String(16))
+    PartnerGroup: Mapped[str] = mapped_column(String(10))
+    ModelCid: Mapped[int] = mapped_column(Integer)
     VersionUpdate: Mapped[str] = mapped_column(String(10))
 
 
@@ -84,8 +103,9 @@ class ComponentDescriptions(Model):
     __bind_key__ = "epc"
     __tablename__ = "ComponentDescriptions"
 
-    DescriptionId: Mapped[int] = mapped_column(Integer)
-    DescriptionTypeId: Mapped[int] = mapped_column(Integer)
+    fkCatalogueComponent: Mapped[int] = mapped_column(Integer, primary_key=True)
+    DescriptionId: Mapped[int] = mapped_column(Integer, primary_key=True)
+    DescriptionTypeId: Mapped[int] = mapped_column(Integer, primary_key=True)
     SequenceId: Mapped[int] = mapped_column(Integer)
     VersionUpdate: Mapped[str] = mapped_column(String(10))
 
@@ -94,6 +114,7 @@ class Languages(Model):
     __bind_key__ = "epc"
     __tablename__ = "Languages"
 
+    Id: Mapped[int] = mapped_column(Integer, primary_key=True)
     Code: Mapped[str] = mapped_column(String(10))
     VersionUpdate: Mapped[str] = mapped_column(String(10), default=1.0)
 
@@ -102,7 +123,8 @@ class Lexicon(Model):
     __bind_key__ = "epc"
     __tablename__ = "Lexicon"
 
-    fkLanguage: Mapped[int] = mapped_column(Integer)
+    DescriptionId: Mapped[int] = mapped_column(Integer, primary_key=True)
+    fkLanguage: Mapped[int] = mapped_column(Integer, primary_key=True)
     Code: Mapped[str] = mapped_column(String(21))
     Description: Mapped[str] = mapped_column(String(2000))
     VersionUpdate: Mapped[str] = mapped_column(String(10), default=0.4)
@@ -113,21 +135,24 @@ class LexiconNoteWords(Model):
     __bind_key__ = "epc"
     __tablename__ = "LexiconNoteWords"
 
-    DescriptionId: Mapped[int] = mapped_column(Integer)
-    fkWord: Mapped[int] = mapped_column(Integer)
+    fkLanguage: Mapped[int] = mapped_column(Integer, primary_key=True)
+    DescriptionId: Mapped[int] = mapped_column(Integer, primary_key=True)
+    fkWord: Mapped[int] = mapped_column(Integer, primary_key=True)
 
 
 class LexiconPartWords(Model):
     __bind_key__ = "epc"
     __tablename__ = "LexiconPartWords"
 
-    fkWord: Mapped[int] = mapped_column(Integer)
+    DescriptionId: Mapped[int] = mapped_column(Integer, primary_key=True)
+    fkWord: Mapped[int] = mapped_column(Integer, primary_key=True)
 
 
 class NoteWords(Model):
     __bind_key__ = "epc"
     __tablename__ = "NoteWords"
 
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
     word: Mapped[str] = mapped_column(String(100))
     revword: Mapped[str] = mapped_column(String(100))
 
@@ -136,6 +161,7 @@ class PartItems(Model):
     __bind_key__ = "epc"
     __tablename__ = "PartItems"
 
+    Id: Mapped[int] = mapped_column(Integer, primary_key=True)
     Code: Mapped[str] = mapped_column(String(16))
     ItemNumber: Mapped[str] = mapped_column(String(50))
     SupersessionIndicator: Mapped[bool] = mapped_column(Boolean, default=0)
@@ -150,6 +176,7 @@ class PartWords(Model):
     __bind_key__ = "epc"
     __tablename__ = "PartWords"
 
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
     fkLanguage: Mapped[int] = mapped_column(Integer)
     word: Mapped[str] = mapped_column(String(100))
     revword: Mapped[str] = mapped_column(String(100))
@@ -159,6 +186,7 @@ class StructuredNoteTypes(Model):
     __bind_key__ = "epc"
     __tablename__ = "StructuredNoteTypes"
 
+    Id: Mapped[int] = mapped_column(Integer, primary_key=True)
     Param: Mapped[str] = mapped_column(String(20))
     VersionUpdate: Mapped[str] = mapped_column(String(10))
 
@@ -167,6 +195,7 @@ class StructuredNoteValues(Model):
     __bind_key__ = "epc"
     __tablename__ = "StructuredNoteValues"
 
+    Id: Mapped[int] = mapped_column(Integer, primary_key=True)
     fkStructuredNoteType: Mapped[int] = mapped_column(Integer)
     ValueCode: Mapped[str] = mapped_column(String(16))
     NoteValue: Mapped[str] = mapped_column(String(255))
@@ -177,7 +206,8 @@ class StructuredNotes(Model):
     __bind_key__ = "epc"
     __tablename__ = "StructuredNotes"
 
-    fkStructuredNoteValues: Mapped[int] = mapped_column(Integer)
+    fkCatalogueComponent: Mapped[int] = mapped_column(Integer, primary_key=True)
+    fkStructuredNoteValues: Mapped[int] = mapped_column(Integer, primary_key=True)
     VersionUpdate: Mapped[str] = mapped_column(String(10))
 
 
@@ -185,6 +215,7 @@ class TableCodes(Model):
     __bind_key__ = "epc"
     __tablename__ = "TableCodes"
 
+    Id: Mapped[int] = mapped_column(Integer, primary_key=True)
     Name: Mapped[str] = mapped_column(String(50))
 
 
@@ -192,5 +223,6 @@ class VirtualToShared(Model):
     __bind_key__ = "epc"
     __tablename__ = "VirtualToShared"
 
-    fkCatalogueComponent_Parent: Mapped[int] = mapped_column(Integer)
+    fkCatalogueComponent: Mapped[int] = mapped_column(Integer, primary_key=True)
+    fkCatalogueComponent_Parent: Mapped[int] = mapped_column(Integer, primary_key=True)
     AlternateComponentPath: Mapped[str] = mapped_column(String(100))
