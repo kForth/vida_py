@@ -19,9 +19,15 @@ def main(vin):
     basedata_session = sessionmaker(bind=basedata)()
     diag_session = sessionmaker(bind=diag)()
 
-    (model_id, model_str, model_year, engine_id, engine_str, transm_id, transm_str) = (
-        get_vin_components(diag_session, vin)[0]
-    )
+    (
+        model_id,
+        model_str,
+        model_year,
+        engine_id,
+        engine_str,
+        transm_id,
+        transm_str,
+    ) = get_vin_components(diag_session, vin)[0]
     print(model_id, engine_id, transm_id)
     query = (
         basedata_session.query(VehicleProfile)

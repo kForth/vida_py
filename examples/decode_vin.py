@@ -10,9 +10,15 @@ from vida_py.scripts.diag import get_vin_components
 def main(vin):
     session = sessionmaker(bind=diag)()
 
-    (model_id, model_str, model_year, engine_id, engine_str, transm_id, transm_str) = (
-        get_vin_components(session, vin)[0]
-    )
+    (
+        model_id,
+        model_str,
+        model_year,
+        engine_id,
+        engine_str,
+        transm_id,
+        transm_str,
+    ) = get_vin_components(session, vin)[0]
 
     click.echo(f"VIN: {vin}")
     click.echo(f"Model: {model_str} [{model_id}]")

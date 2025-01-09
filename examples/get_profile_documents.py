@@ -1,11 +1,10 @@
 import json
-from pydoc import Doc
 
 import click
 from sqlalchemy.orm import sessionmaker
 
 from vida_py.db import basedata, service
-from vida_py.funcs import run_func
+from vida_py.funcs.basedata import get_valid_profile_manager
 from vida_py.models.basedata import VehicleProfile
 from vida_py.models.service import Document, DocumentProfile
 
@@ -17,13 +16,10 @@ def main(profile_id, outfile):
     basedata_session = sessionmaker(bind=basedata)()
     service_session = sessionmaker(bind=service)()
 
-    profiles_ids = [
-        e[0]
-        for e in run_func(basedata_session, "GetValidProfileManager", profile_id).all()
-    ]
+    profile_ids = [e[0] for e in get_valid_profile_manager(basedata_session, profile_id)]
     profiles = (
         basedata_session.query(VehicleProfile)
-        .where(VehicleProfile.Id.in_(profiles_ids))
+        .where(VehicleProfile.Id.in_(profile_ids))
         .all()
     )
 
