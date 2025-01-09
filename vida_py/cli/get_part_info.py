@@ -27,50 +27,51 @@ def main(partnumber, language):
         )
         .one()
     )
-    component = (
-        session.query(CatalogueComponents)
-        .filter(CatalogueComponents.fkPartItem == part.Id)
-        .one()
-    )
-    descriptions = (
-        session.query(Lexicon)
-        .outerjoin(
-            ComponentDescriptions,
-            ComponentDescriptions.DescriptionId == Lexicon.DescriptionId,
+    components = [
+        (
+            component,
+            session.query(Lexicon)
+            .outerjoin(
+                ComponentDescriptions,
+                ComponentDescriptions.DescriptionId == Lexicon.DescriptionId,
+            )
+            .filter(
+                Lexicon.fkLanguage == language,
+                ComponentDescriptions.fkCatalogueComponent == component.Id,
+            )
+            .all(),
+            (
+                [
+                    _basedata.query(VehicleProfile)
+                    .filter(VehicleProfile.Id == e.fkProfile)
+                    .one()
+                    for e in session.query(ComponentConditions)
+                    .filter(
+                        ComponentConditions.fkCatalogueComponent
+                        == component.ParentComponentId
+                    )
+                    .all()
+                ]
+            ),
         )
-        .filter(
-            Lexicon.fkLanguage == language,
-            ComponentDescriptions.fkCatalogueComponent == component.Id,
+        for component in (
+            session.query(CatalogueComponents)
+            .filter(CatalogueComponents.fkPartItem == part.Id)
+            .all()
         )
-        .all()
-    )
-    print(component.Id)
-    parent_component = (
-        session.query(CatalogueComponents)
-        .filter(CatalogueComponents.Id == component.ParentComponentId)
-        .one()
-    )
-    conditions = (
-        session.query(ComponentConditions)
-        .filter(ComponentConditions.fkCatalogueComponent == component.Id)
-        .all()
-    )
-    profiles = [
-        _basedata.query(VehicleProfile).filter(VehicleProfile.Id == e.fkProfile).one()
-        for e in conditions
     ]
-    # print(run_func(session, "GetPartText", part.Id, language).all())
-
     print(f"PartNumber: {part.ItemNumber}")
     print(f"Title: {title.Description}")
-    if descriptions:
-        print("Description:")
-        for d in descriptions:
-            print(f"  {d.Description}")
-    if profiles:
-        print("Profiles:")
-        for p in profiles:
-            print(f"  {p.Description}")
+    print("Components:")
+    for component, descriptions, profiles in components:
+        if descriptions:
+            print("  Description:")
+            for e in descriptions:
+                print(f"    {e.Description}")
+            print("  Profiles:")
+            for e in profiles:
+                print(f"    {e.Description}")
+            print()
 
     session.close()
     _basedata.close()
