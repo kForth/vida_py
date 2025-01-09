@@ -1,15 +1,15 @@
 import click
-from models.basedata import (
+from sqlalchemy import or_
+from sqlalchemy.orm import sessionmaker
+
+from vida_py.db import basedata, diag
+from vida_py.models.basedata import (
     Engine,
     ModelYear,
     Transmission,
     VehicleModel,
     VehicleProfile,
 )
-from sqlalchemy import or_
-from sqlalchemy.orm import sessionmaker
-
-from vida_py.db import basedata, diag
 from vida_py.scripts.diag import get_vin_components
 
 
