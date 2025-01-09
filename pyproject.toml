@@ -1,14 +1,16 @@
 [build-system]
-requires = ["setuptools>=61.0"]
+requires = ["setuptools >= 61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
 dynamic = ["dependencies", "optional-dependencies"]
+requires-python = '>= 3.6'
 name = "vida_py"
 version = "0.1.2"
 description = "Python interface for Volvo's VIDA databases."
 keywords = ["VIDA", "volvo"]
 readme = "README.md"
+license = {text = "AGPL-3.0"}
 authors = [
   {name = "Kestin Goforth", email = "kgoforth1503@gmail.com"}
 ]
@@ -16,27 +18,34 @@ maintainers = [
   {name = "Kestin Goforth", email = "kgoforth1503@gmail.com"}
 ]
 classifiers = [
-
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Topic :: Software Development :: Build Tools",
+  "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.6",
+  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
 ]
-license = {text = "AGPL-3.0"}
-requires-python = '>=3.10'
 
 [tool.setuptools.dynamic]
 dependencies = {file = ["requirements.txt"]}
 optional-dependencies = {dev = { file = ["requirements-dev.txt"] }}
 
 [project.urls]
-bugs = "https://github.com/kForth/vida_py/issues"
 homepage = "https://github.com/kForth/vida_py"
+repository = "https://github.com/kForth/vida_py.git"
+bugs = "https://github.com/kForth/vida_py/issues"
 
 [tool.setuptools]
-package-dir = {"" = "vida_py"}
+package-dir = {"vida_py" = "vida_py"}
 
 [tool.setuptools.package-data]
-"*" = ["vida_py.*"]
-
-[project.scripts]
-vida_py = "vida_py.cli:app"
+"vida_py" = ["vida_py.*"]
 
 [tool.black]
 line-length = 90
