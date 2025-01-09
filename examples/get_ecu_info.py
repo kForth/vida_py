@@ -73,12 +73,19 @@ def get_child_blocks(session: Session, language: int, ecu_var: int, parent: int)
                     .data,
                     "scaling": {
                         "def": v.scaling.definition,
-                        "type_id": (
-                            t := session.query(T143_BlockDataType)
-                            .filter(T143_BlockDataType.id == v.scaling.type)
-                            .one()
-                        ).id,
-                        "type": t.name,
+                        "type": (
+                            {
+                                "id": t.id,
+                                "name": t.name,
+                            }
+                            if (
+                                t := session.query(T143_BlockDataType)
+                                .filter(T143_BlockDataType.id == v.scaling.type)
+                                .one_or_none()
+                            )
+                            is not None
+                            else None
+                        ),
                     },
                     "ppe": {
                         "text": session.query(T191_TextData)
