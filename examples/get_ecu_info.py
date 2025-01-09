@@ -15,6 +15,8 @@ from vida_py.models.carcom import (
     T144_BlockChild,
     T148_BlockMetaPARA,
     T150_BlockValue,
+    T170_SecurityCode_EcuVariant,
+    T171_SecurityCode,
     T191_TextData,
     T193_Language,
 )
@@ -133,9 +135,16 @@ def main(identifier, language, outfile):
         .one()
     )
     ecu = {
-        "variant": identifier,
-        "ecu_name": variant.ecu.name,
-        "ecu_id": variant.ecu.identifier,
+        "variant": {
+            "id": variant.id,
+            "identifier": variant.identifier,
+            "status": variant.status,
+        },
+        "ecu": {
+            "identifier": variant.ecu.identifier,
+            "name": variant.ecu.name,
+            "type": variant.ecu.type.description,
+        },
         "configs": [
             {
                 "bus": conf.bus.name,
@@ -172,6 +181,24 @@ def main(identifier, language, outfile):
             .outerjoin(
                 T110_Service_EcuVariant,
                 T110_Service_EcuVariant.fkT100_EcuVariant == variant.id,
+            )
+            .all()
+        ],
+        "security_codes": [
+            {
+                "id": s.id,
+                "code": s.code,
+                "description": s.description,
+                "type": {
+                    "id": s.type.id,
+                    "identifier": s.type.identifier,
+                    "description": s.type.description,
+                },
+            }
+            for s in session.query(T171_SecurityCode)
+            .outerjoin(
+                T170_SecurityCode_EcuVariant,
+                T170_SecurityCode_EcuVariant.fkT100_EcuVariant == variant.id,
             )
             .all()
         ],
