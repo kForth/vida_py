@@ -337,9 +337,12 @@ class T148_BlockMetaPARA(Model):
     __bind_key__ = "carcom"
     __tablename__ = "T148_BlockMetaPARA"
 
-    id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    fkT141_Block: Mapped[int] = mapped_column(ForeignKey("T141_Block.id"))
-    fkT100_EcuVariant: Mapped[int] = mapped_column(ForeignKey("T100_EcuVariant.id"))
+    fkT141_Block: Mapped[int] = mapped_column(
+        ForeignKey("T141_Block.id"), primary_key=True
+    )
+    fkT100_EcuVariant: Mapped[int] = mapped_column(
+        ForeignKey("T100_EcuVariant.id"), primary_key=True
+    )
     asMinRange: Mapped[float] = mapped_column(DECIMAL, default=30)
     asMaxRange: Mapped[float] = mapped_column(DECIMAL, default=30)
     showAsFreezeFrame: Mapped[bool] = mapped_column(Boolean)
