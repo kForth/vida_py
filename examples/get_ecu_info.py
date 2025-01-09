@@ -36,8 +36,8 @@ def get_child_blocks(session: Session, language: int, ecu_var: int, parent: int)
             "composite": b.composite,
             "range": [
                 {
-                    "min": float(r.asMinRange),
-                    "max": float(r.asMaxRange),
+                    "min": float(m) if (m := r.asMinRange) is not None else m,
+                    "max": float(m) if (m := r.asMaxRange) is not None else m,
                     "freezeframe": r.showAsFreezeFrame,
                 }
                 for r in session.query(T148_BlockMetaPARA)
