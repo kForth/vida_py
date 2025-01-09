@@ -120,21 +120,21 @@ def main(schemafile, db, outfile):
                     class_str += f'    __bind_key__ = "{db}"\n'
                     class_str += f'    __tablename__ = "{_class}"\n'
                     class_str += "\n"
-                else:
-                    _name = line[3]
-                    _type = line[7]
-                    _size = line[8]
-                    _def = (
-                        f", default={line[5][1:-1]}"
-                        if "null" not in line[5].lower()
-                        else ""
-                    )
-                    py_type = db_to_py_type(_type)
-                    sql_type = db_to_sql_type(_type, _size) + _def
-                    class_str += (
-                        f"    {_name}: Mapped[{py_type}] = mapped_column({sql_type})\n"
-                    )
+
+                _name = line[3]
+                _type = line[7]
+                _size = line[8]
+                _def = (
+                    f", default={line[5][1:-1]}" if "null" not in line[5].lower() else ""
+                )
+                py_type = db_to_py_type(_type)
+                sql_type = db_to_sql_type(_type, _size) + _def
+                class_str += (
+                    f"    {_name}: Mapped[{py_type}] = mapped_column({sql_type})\n"
+                )
+
                 last_class = _class
+            classes.append((last_class, class_str))
 
             for _, class_str in sorted(classes, key=lambda x: x[0]):
                 _write(class_str)
