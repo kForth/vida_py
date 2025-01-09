@@ -198,8 +198,9 @@ def main(identifier, language, outfile):
             for s in session.query(T171_SecurityCode)
             .outerjoin(
                 T170_SecurityCode_EcuVariant,
-                T170_SecurityCode_EcuVariant.fkT100_EcuVariant == variant.id,
+                T170_SecurityCode_EcuVariant.fkT171_SecurityCode == T171_SecurityCode.id,
             )
+            .filter(T170_SecurityCode_EcuVariant.fkT100_EcuVariant == variant.id)
             .all()
         ],
     }
