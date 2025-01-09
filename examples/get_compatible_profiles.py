@@ -1,9 +1,9 @@
 import click
-from models.basedata import VehicleProfile
 from sqlalchemy.orm import sessionmaker
 
 from vida_py.db import basedata
 from vida_py.funcs import run_func
+from vida_py.models.basedata import VehicleProfile
 
 
 @click.command()
