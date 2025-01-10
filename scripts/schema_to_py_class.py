@@ -57,7 +57,9 @@ def db_to_sql_type(d, s=None):
     if d == "int":
         return "Integer"
     if d == "nvarchar":
-        return "NVARCHAR"
+        return "NVARCHAR" + (
+            f"({s})" if s is not None and "null" not in s.lower() else ""
+        )
     if (d := d.lower()) in (
         "varchar",
         "char",
