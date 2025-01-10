@@ -1,7 +1,7 @@
 import click
 
-from vida_py.db import DiagRepo
-from vida_py.scripts.diag import get_vin_components
+from vida_py import DiagRepo
+from vida_py.diag import get_vin_components
 
 
 @click.command()

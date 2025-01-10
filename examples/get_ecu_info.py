@@ -1,10 +1,10 @@
 import json
 
 import click
-from sqlalchemy.orm import Session, sessionmaker
+from sqlalchemy.orm import Session
 
-from vida_py.db import CarCom
-from vida_py.models.carcom import (
+from vida_py import CarCom
+from vida_py.carcom import (
     T100_EcuVariant,
     T110_Service_EcuVariant,
     T111_Service,

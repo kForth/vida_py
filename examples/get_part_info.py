@@ -1,8 +1,8 @@
 import click
 
-from vida_py.db import BaseData, Epc
-from vida_py.models.basedata import VehicleProfile
-from vida_py.models.epc import (
+from vida_py import BaseData, Epc
+from vida_py.basedata import VehicleProfile
+from vida_py.epc import (
     CatalogueComponents,
     ComponentConditions,
     ComponentDescriptions,

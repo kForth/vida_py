@@ -1,8 +1,7 @@
 import click
 
-from vida_py.db import BaseData
-from vida_py.funcs import run_func
-from vida_py.models.basedata import VehicleProfile
+from vida_py import BaseData
+from vida_py.basedata import VehicleProfile, get_valid_profile_manager
 
 
 @click.command()
@@ -11,7 +10,10 @@ def main(profile_id):
     with BaseData() as session:
 
         profiles_ids = [
-            e[0] for e in run_func(session, "GetValidProfileManager", profile_id).all()
+            e[0]
+            for e in get_valid_profile_manager(
+                session, "GetValidProfileManager", profile_id
+            )
         ]
         profiles = (
             session.query(VehicleProfile).where(VehicleProfile.Id.in_(profiles_ids)).all()

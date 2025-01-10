@@ -1,15 +1,9 @@
 import click
 from sqlalchemy import or_
 
-from vida_py.db import BaseData, DiagRepo
-from vida_py.models.basedata import (
-    Engine,
-    ModelYear,
-    Transmission,
-    VehicleModel,
-    VehicleProfile,
-)
-from vida_py.scripts.diag import get_vin_components
+from vida_py import BaseData, DiagRepo
+from vida_py.basedata import Engine, ModelYear, Transmission, VehicleModel, VehicleProfile
+from vida_py.diag import get_vin_components
 
 
 @click.command()

@@ -2,10 +2,9 @@ import json
 
 import click
 
-from vida_py.db import BaseData, ServiceRepo
-from vida_py.funcs.basedata import get_valid_profile_manager
-from vida_py.models.basedata import VehicleProfile
-from vida_py.models.service import Document, DocumentProfile
+from vida_py import BaseData, ServiceRepo
+from vida_py.basedata import VehicleProfile, get_valid_profile_manager
+from vida_py.service import Document, DocumentProfile
 
 
 @click.command()

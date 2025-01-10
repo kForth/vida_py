@@ -4,8 +4,8 @@ import zipfile
 
 import click
 
-from vida_py.db import ServiceRepo
-from vida_py.models.service import Document
+from vida_py import ServiceRepo
+from vida_py.service import Document
 
 
 @click.command()
