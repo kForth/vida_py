@@ -1,10 +1,10 @@
 import json
 
 import click
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session as sa_orm_Session
 
-from vida_py import CarCom
 from vida_py.carcom import (
+    Session,
     T100_EcuVariant,
     T110_Service_EcuVariant,
     T111_Service,
@@ -22,7 +22,7 @@ from vida_py.carcom import (
 )
 
 
-def get_child_blocks(session: Session, language: int, ecu_var: int, parent: int):
+def get_child_blocks(session: sa_orm_Session, language: int, ecu_var: int, parent: int):
     return [
         {
             "id": b.id,
@@ -134,7 +134,7 @@ def get_child_blocks(session: Session, language: int, ecu_var: int, parent: int)
 @click.option("--language", "-l", type=click.STRING, default="en-US")
 @click.option("--outfile", "-o", type=click.Path(dir_okay=False))
 def main(identifier, language, outfile):
-    with CarCom() as session:
+    with Session() as session:
         variant = (
             session.query(T100_EcuVariant)
             .filter(T100_EcuVariant.identifier == identifier)

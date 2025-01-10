@@ -1,11 +1,9 @@
-from vida_py.db import (
-    BaseData,
-    CarCom,
-    DiagRepo,
-    DiagSession,
-    Epc,
-    ImageRepo,
-    ServerAccess,
-    ServiceRepo,
-    Timing,
-)
+from access import Session as AccessServerSession
+from basedata import Session as BaeDataSession
+from carcom import Session as CarComSession
+from diag import Session as DiagRepoSession
+from epc import Session as EpcSession
+from images import Session as ImageRepoSession
+from service import Session as ServiceRepoSession
+from session import Session as DiagSessionSession
+from timing import Session as DiceTimingSession

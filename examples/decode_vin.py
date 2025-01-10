@@ -1,13 +1,12 @@
 import click
 
-from vida_py import DiagRepo
-from vida_py.diag import get_vin_components
+from vida_py.diag import Session, get_vin_components
 
 
 @click.command()
 @click.argument("vin", type=click.STRING)
 def main(vin):
-    with DiagRepo() as session:
+    with Session() as session:
         (
             model_id,
             model_str,

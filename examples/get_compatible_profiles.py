@@ -1,13 +1,12 @@
 import click
 
-from vida_py import BaseData
-from vida_py.basedata import VehicleProfile, get_valid_profile_manager
+from vida_py.basedata import Session, VehicleProfile, get_valid_profile_manager
 
 
 @click.command()
 @click.argument("profile_id", type=click.STRING)
 def main(profile_id):
-    with BaseData() as session:
+    with Session() as session:
 
         profiles_ids = [
             e[0]
