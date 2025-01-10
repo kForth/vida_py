@@ -21,7 +21,7 @@ You can install `vida_py` using pip.
 
 `vida_py` is compatible with python 3.6 and up.
 
-## Database Files
+## VIDA Database Files
 
 Please note that VIDA database files are not supplied with this package. Users must obtain these files separately, typically from an existing VIDA installation.
 
