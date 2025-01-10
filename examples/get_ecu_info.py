@@ -3,7 +3,7 @@ import json
 import click
 from sqlalchemy.orm import Session, sessionmaker
 
-from vida_py.db import carcom
+from vida_py.db import carcom_session
 from vida_py.models.carcom import (
     T100_EcuVariant,
     T110_Service_EcuVariant,
@@ -134,83 +134,83 @@ def get_child_blocks(session: Session, language: int, ecu_var: int, parent: int)
 @click.option("--language", "-l", type=click.STRING, default="en-US")
 @click.option("--outfile", "-o", type=click.Path(dir_okay=False))
 def main(identifier, language, outfile):
-    session = sessionmaker(bind=carcom)()
-
-    variant = (
-        session.query(T100_EcuVariant)
-        .filter(T100_EcuVariant.identifier == identifier)
-        .one()
-    )
-    ecu = {
-        "variant": {
-            "id": variant.id,
-            "identifier": variant.identifier,
-            "status": variant.status,
-        },
-        "ecu": {
-            "identifier": variant.ecu.identifier,
-            "name": variant.ecu.name,
-            "type": variant.ecu.type.description,
-        },
-        "configs": [
-            {
-                "bus": conf.bus.name,
-                "protocol": conf.protocol.identifier,
-                "physical_address": conf.physicalAddress,
-                "functional_address": conf.functionalAddress,
-                "can_address": conf.canAddress,
-                "comm_address": conf.commAddress,
-                "priority": conf.priority,
-            }
-            for conf in session.query(T121_Config)
-            .outerjoin(
-                T120_Config_EcuVariant,
-                T120_Config_EcuVariant.fkT121_Config == T121_Config.id,
-            )
-            .filter(T120_Config_EcuVariant.fkT100_EcuVariant == variant.id)
-            .all()
-        ],
-        "blocks": get_child_blocks(session, language, variant.id, 1),
-        "services": [
-            {
-                "id": s.id,
-                "protocol": s.protocol.identifier,
-                "service": s.service,
-                "mode": s.mode,
-                "service_name": s.serviceName,
-                "mode_name": s.modeName,
-                "description": s.description,
-                "definition": str(s.definition),
-                "type": s.type,
-                "status": s.status,
-            }
-            for s in session.query(T111_Service)
-            .outerjoin(
-                T110_Service_EcuVariant,
-                T110_Service_EcuVariant.fkT100_EcuVariant == variant.id,
-            )
-            .all()
-        ],
-        "security_codes": [
-            {
-                "id": s.id,
-                "code": s.code,
-                "description": s.description,
-                "type": {
-                    "id": s.type.id,
-                    "identifier": s.type.identifier,
-                    "description": s.type.description,
-                },
-            }
-            for s in session.query(T171_SecurityCode)
-            .outerjoin(
-                T170_SecurityCode_EcuVariant,
-                T170_SecurityCode_EcuVariant.fkT171_SecurityCode == T171_SecurityCode.id,
-            )
-            .filter(T170_SecurityCode_EcuVariant.fkT100_EcuVariant == variant.id)
-            .all()
-        ],
-    }
+    with carcom_session() as session:
+        variant = (
+            session.query(T100_EcuVariant)
+            .filter(T100_EcuVariant.identifier == identifier)
+            .one()
+        )
+        ecu = {
+            "variant": {
+                "id": variant.id,
+                "identifier": variant.identifier,
+                "status": variant.status,
+            },
+            "ecu": {
+                "identifier": variant.ecu.identifier,
+                "name": variant.ecu.name,
+                "type": variant.ecu.type.description,
+            },
+            "configs": [
+                {
+                    "bus": conf.bus.name,
+                    "protocol": conf.protocol.identifier,
+                    "physical_address": conf.physicalAddress,
+                    "functional_address": conf.functionalAddress,
+                    "can_address": conf.canAddress,
+                    "comm_address": conf.commAddress,
+                    "priority": conf.priority,
+                }
+                for conf in session.query(T121_Config)
+                .outerjoin(
+                    T120_Config_EcuVariant,
+                    T120_Config_EcuVariant.fkT121_Config == T121_Config.id,
+                )
+                .filter(T120_Config_EcuVariant.fkT100_EcuVariant == variant.id)
+                .all()
+            ],
+            "blocks": get_child_blocks(session, language, variant.id, 1),
+            "services": [
+                {
+                    "id": s.id,
+                    "protocol": s.protocol.identifier,
+                    "service": s.service,
+                    "mode": s.mode,
+                    "service_name": s.serviceName,
+                    "mode_name": s.modeName,
+                    "description": s.description,
+                    "definition": str(s.definition),
+                    "type": s.type,
+                    "status": s.status,
+                }
+                for s in session.query(T111_Service)
+                .outerjoin(
+                    T110_Service_EcuVariant,
+                    T110_Service_EcuVariant.fkT100_EcuVariant == variant.id,
+                )
+                .all()
+            ],
+            "security_codes": [
+                {
+                    "id": s.id,
+                    "code": s.code,
+                    "description": s.description,
+                    "type": {
+                        "id": s.type.id,
+                        "identifier": s.type.identifier,
+                        "description": s.type.description,
+                    },
+                }
+                for s in session.query(T171_SecurityCode)
+                .outerjoin(
+                    T170_SecurityCode_EcuVariant,
+                    T170_SecurityCode_EcuVariant.fkT171_SecurityCode
+                    == T171_SecurityCode.id,
+                )
+                .filter(T170_SecurityCode_EcuVariant.fkT100_EcuVariant == variant.id)
+                .all()
+            ],
+        }
 
     with open(outfile, "w+", encoding="utf-8") as out:
         json.dump(ecu, out, indent=4)
