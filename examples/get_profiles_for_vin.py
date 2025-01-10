@@ -1,7 +1,7 @@
 import click
 from sqlalchemy import or_
 
-from vida_py.db import basedata_session, diag_session
+from vida_py.db import BaseData, DiagRepo
 from vida_py.models.basedata import (
     Engine,
     ModelYear,
@@ -15,7 +15,7 @@ from vida_py.scripts.diag import get_vin_components
 @click.command()
 @click.argument("vin", type=click.STRING)
 def main(vin):
-    with basedata_session() as _basedata, diag_session() as _diag:
+    with BaseData() as _basedata, DiagRepo() as _diag:
         (
             model_id,
             model_str,

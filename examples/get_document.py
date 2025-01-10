@@ -4,7 +4,7 @@ import zipfile
 
 import click
 
-from vida_py.db import service_session
+from vida_py.db import ServiceRepo
 from vida_py.models.service import Document
 
 
@@ -12,7 +12,7 @@ from vida_py.models.service import Document
 @click.argument("doc", type=click.INT)
 @click.option("--outdir", "-o", type=click.Path(file_okay=False))
 def main(doc, outdir):
-    with service_session() as session:
+    with ServiceRepo() as session:
 
         document = session.query(Document).filter(Document.id == doc).first()
         with zipfile.ZipFile(io.BytesIO(document.XmlContent)) as _zip:

@@ -3,7 +3,7 @@ import json
 import click
 from sqlalchemy.orm import Session, sessionmaker
 
-from vida_py.db import carcom_session
+from vida_py.db import CarCom
 from vida_py.models.carcom import (
     T100_EcuVariant,
     T110_Service_EcuVariant,
@@ -134,7 +134,7 @@ def get_child_blocks(session: Session, language: int, ecu_var: int, parent: int)
 @click.option("--language", "-l", type=click.STRING, default="en-US")
 @click.option("--outfile", "-o", type=click.Path(dir_okay=False))
 def main(identifier, language, outfile):
-    with carcom_session() as session:
+    with CarCom() as session:
         variant = (
             session.query(T100_EcuVariant)
             .filter(T100_EcuVariant.identifier == identifier)

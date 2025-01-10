@@ -13,12 +13,12 @@ epc_db = create_engine(os.getenv("VIDA_EPC_DB_URI"))
 images_db = create_engine(os.getenv("VIDA_IMAGES_DB_URI"))
 service_db = create_engine(os.getenv("VIDA_SERVICE_DB_URI"))
 
-access_session = sessionmaker(bind=access_db)
-basedata_session = sessionmaker(bind=basedata_db)
-carcom_session = sessionmaker(bind=carcom_db)
-diag_session = sessionmaker(bind=diag_db)
-session_session = sessionmaker(bind=session_db)
-timing_session = sessionmaker(bind=timing_db)
-epc_session = sessionmaker(bind=epc_db)
-images_session = sessionmaker(bind=images_db)
-service_session = sessionmaker(bind=service_db)
+ServerAccess = sessionmaker(bind=access_db)  # AccessServer
+BaseData = sessionmaker(bind=basedata_db)  # basedata
+CarCom = sessionmaker(bind=carcom_db)  # carcom
+DiagRepo = sessionmaker(bind=diag_db)  # DiagSwdlRepository
+DiagSession = sessionmaker(bind=session_db)  # DiagSwdlSession
+Timing = sessionmaker(bind=timing_db)  # DiceTiming
+Epc = sessionmaker(bind=epc_db)  # EPC
+ImageRepo = sessionmaker(bind=images_db)  # ImageRepository
+ServiceRepo = sessionmaker(bind=service_db)  # servicerep_en
