@@ -261,20 +261,3 @@ class SymptomIEMap(Model):
     Periods: Mapped[int] = mapped_column(Integer)
     Qualified: Mapped[bool] = mapped_column(Boolean)
     Order: Mapped[bool] = mapped_column(Boolean)
-
-
-class diagnostic_ImageWithProfile(Model):
-    __bind_key__ = "diag"
-    __tablename__ = "diagnostic_ImageWithProfile"
-
-    id: Mapped[int] = mapped_column(Integer, primary_key=True)  # Not in DB
-    Expr1: Mapped[str] = mapped_column(String(1))
-    FullTitle: Mapped[str] = mapped_column(String(2337))
-
-
-class ProfileDescription(Model):
-    __bind_key__ = "diag"
-    __tablename__ = "ProfileDescription"
-
-    Id: Mapped[str] = mapped_column(String, primary_key=True)
-    NavTitle: Mapped[str] = mapped_column(String(1309))

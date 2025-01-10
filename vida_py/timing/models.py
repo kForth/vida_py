@@ -37,14 +37,3 @@ class TimeoutAndResend(Model):
     Timeout: Mapped[int] = mapped_column(Integer)
     Resend: Mapped[int] = mapped_column(Integer)
     Comment: Mapped[str] = mapped_column(String(500))
-
-
-class RequestTimeoutAndResendView(Model):
-    __bind_key__ = "timing"
-    __tablename__ = "RequestTimeoutAndResendView"
-
-    B1: Mapped[int] = mapped_column(SmallInteger)
-    B2: Mapped[int] = mapped_column(SmallInteger)
-    B3: Mapped[int] = mapped_column(SmallInteger)
-    Timeout: Mapped[int] = mapped_column(Integer)
-    Resend: Mapped[int] = mapped_column(Integer)
