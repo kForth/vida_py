@@ -106,7 +106,7 @@ class VehicleProfile(Model):
     __bind_key__ = "basedata"
     __tablename__ = "VehicleProfile"
 
-    Id: Mapped[str] = mapped_column(String(1), primary_key=True)
+    Id: Mapped[str] = mapped_column(String(16), primary_key=True)
     FolderLevel: Mapped[int] = mapped_column(SmallInteger)
     Description: Mapped[str] = mapped_column(String(255))
     Title: Mapped[str] = mapped_column(String(255))

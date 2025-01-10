@@ -250,7 +250,7 @@ class SymptomIEMap(Model):
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
     fkSymptom: Mapped[int] = mapped_column(ForeignKey("Symptom.id"))
     fkIE: Mapped[str] = mapped_column(ForeignKey("IE.Id"))
-    Type: Mapped[str] = mapped_column(String(1))
+    Type: Mapped[str] = mapped_column(String(2))
     fkProfile: Mapped[str] = mapped_column(ForeignKey("Profile.id"))
     CarFunction: Mapped[int] = mapped_column(Integer)
     DTCId: Mapped[int] = mapped_column(Integer, primary_key=True)
