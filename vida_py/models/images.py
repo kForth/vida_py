@@ -8,6 +8,7 @@ class GraphicCarConfigs(Model):
     __bind_key__ = "images"
     __tablename__ = "GraphicCarConfigs"
 
+    fkGraphic: Mapped[str] = mapped_column(String(16))
     fkCarConfig: Mapped[str] = mapped_column(String(16))
     width: Mapped[int] = mapped_column(Integer, default=0)
     height: Mapped[int] = mapped_column(Integer, default=0)
@@ -17,6 +18,7 @@ class GraphicFormats(Model):
     __bind_key__ = "images"
     __tablename__ = "GraphicFormats"
 
+    id: Mapped[int] = mapped_column(Integer)
     description: Mapped[str] = mapped_column(String(50))
 
 
@@ -37,6 +39,7 @@ class LocalizedGraphics(Model):
     __bind_key__ = "images"
     __tablename__ = "LocalizedGraphics"
 
+    fkGraphic: Mapped[str] = mapped_column(String(16))
     languageId: Mapped[int] = mapped_column(Integer)
     title: Mapped[str] = mapped_column(String(2000))
     path: Mapped[str] = mapped_column(String(255))
