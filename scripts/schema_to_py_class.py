@@ -54,8 +54,11 @@ def db_to_py_type(d):
 
 
 def db_to_sql_type(d, s=None):
+    if d == "int":
+        return "Integer"
+    if d == "nvarchar":
+        return "NVARCHAR"
     if (d := d.lower()) in (
-        "nvarchar",
         "varchar",
         "char",
         "nchar",
@@ -70,8 +73,6 @@ def db_to_sql_type(d, s=None):
         return "SmallInteger"
     if d == "bigint":
         return "BigInteger"
-    if d == "int":
-        return "Integer"
     if d == "decimal":
         return "DECIMAL"
     if d in ("numeric", "money", "smallmoney"):
