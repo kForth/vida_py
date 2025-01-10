@@ -3,7 +3,7 @@ from typing import List
 from sqlalchemy import Row
 from sqlalchemy.orm import Session
 
-from vida_py.funcs import run_func
+from vida_py.util import run_func
 
 
 def get_profile_nav_title(session: Session, fk_profile: str) -> str:

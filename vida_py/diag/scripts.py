@@ -3,7 +3,7 @@ from typing import List
 from sqlalchemy import Row
 from sqlalchemy.orm import Session
 
-from vida_py.scripts import run_script
+from vida_py.util import run_script
 
 
 def clean_up(session: Session) -> List[Row]:
