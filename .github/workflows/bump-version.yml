@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       bump-type:
-        description: 'Bump type'
+        description: 'Bump Type'
         required: true
-        default: 'patch'
+        default: 'pre_l'
         type: choice
         options:
         - major
@@ -21,11 +21,12 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v4
 
-      - name: Bump version
+      - name: Bump Version
         id: bump
         uses: callowayproject/bump-my-version@master
         env:
           BUMPVERSION_TAG: "false"
+          BUMPVERSION_COMMIT: "true"
         with:
           args: ${{ inputs.bump-type }}
           github-token: ${{ secrets.GH_TOKEN }}
