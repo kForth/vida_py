@@ -124,12 +124,12 @@ def main(schemafile, db, outfile):
                 _name = line[3]
                 _type = line[7]
                 _size = line[8]
-                _pk = ", primary_key=True" if line[7] == "uniqueidentifier" else ""
+                # _pk = ", primary_key=True" if line[7] == "uniqueidentifier" else ""
                 _def = (
                     f", default={line[5][1:-1]}" if "null" not in line[5].lower() else ""
                 )
                 py_type = db_to_py_type(_type)
-                col_Args = db_to_sql_type(_type, _size) + _pk + _def
+                col_Args = db_to_sql_type(_type, _size) + _def
                 class_str += (
                     f"    {_name}: Mapped[{py_type}] = mapped_column({col_Args})\n"
                 )
