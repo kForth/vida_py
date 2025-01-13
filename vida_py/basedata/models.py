@@ -6,7 +6,8 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from vida_py.models import Model
 
 
-class _ProfileParam(Model):
+class _ProfileParam:
+    __bind_key__ = "basedata"
     __bind_key__ = "basedata"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -27,27 +28,27 @@ class AMYProfileMap(Model):
     )
 
 
-class BodyStyle(_ProfileParam):
+class BodyStyle(_ProfileParam, Model):
     __tablename__ = "BodyStyle"
 
 
-class BrakeSystem(_ProfileParam):
+class BrakeSystem(_ProfileParam, Model):
     __tablename__ = "BrakeSystem"
 
 
-class Engine(_ProfileParam):
+class Engine(_ProfileParam, Model):
     __tablename__ = "Engine"
 
 
-class ModelYear(_ProfileParam):
+class ModelYear(_ProfileParam, Model):
     __tablename__ = "ModelYear"
 
 
-class NodeECU(_ProfileParam):
+class NodeECU(_ProfileParam, Model):
     __tablename__ = "NodeECU"
 
 
-class PartnerGroup(_ProfileParam):
+class PartnerGroup(_ProfileParam, Model):
     __tablename__ = "PartnerGroup"
 
     Cid: Mapped[str] = mapped_column(String(10))
@@ -61,25 +62,25 @@ class SelectedProfiles(Model):
     SelectedProfiles: Mapped[str] = mapped_column(String(255))
 
 
-class SpecialVehicle(_ProfileParam):
+class SpecialVehicle(_ProfileParam, Model):
     __tablename__ = "SpecialVehicle"
 
 
-class Steering(_ProfileParam):
+class Steering(_ProfileParam, Model):
     __tablename__ = "Steering"
 
 
-class StructureWeek(_ProfileParam):
+class StructureWeek(_ProfileParam, Model):
     __tablename__ = "StructureWeek"
 
     Cid: Mapped[str] = mapped_column(String(50))
 
 
-class Suspension(_ProfileParam):
+class Suspension(_ProfileParam, Model):
     __tablename__ = "Suspension"
 
 
-class Transmission(_ProfileParam):
+class Transmission(_ProfileParam, Model):
     __tablename__ = "Transmission"
 
 
