@@ -46,7 +46,7 @@ class ApplicationProperty(Model):
     __bind_key__ = "access"
     __tablename__ = "ApplicationProperty"
 
-    key: Mapped[str] = mapped_column(String(150))
+    key: Mapped[str] = mapped_column(String(150), primary_key=True)
     value: Mapped[str] = mapped_column(String(150))
 
 
@@ -328,6 +328,7 @@ class Publications(Model):
     __bind_key__ = "access"
     __tablename__ = "Publications"
 
+    Id: Mapped[str] = mapped_column(String, primary_key=True)
     fkPublicationType: Mapped[str] = mapped_column(ForeignKey("PublicationTypes.Id"))
     PublicationTitle: Mapped[str] = mapped_column(String(50))
     Info: Mapped[str] = mapped_column(String(200))
@@ -341,7 +342,7 @@ class RecentSymptoms(Model):
     __tablename__ = "RecentSymptoms"
 
     fkRecentVins: Mapped[str] = mapped_column(
-        String, primary_key=ForeignKey("RecentVINs.Id")
+        String, ForeignKey("RecentVINs.Id"), primary_key=True
     )
     SymptomId: Mapped[int] = mapped_column(Integer, primary_key=True)
     CscSymptom: Mapped[str] = mapped_column(String(2))
@@ -436,7 +437,7 @@ class SessionCache(Model):
     __bind_key__ = "access"
     __tablename__ = "SessionCache"
 
-    UserId: Mapped[str] = mapped_column(String(50))
+    UserId: Mapped[str] = mapped_column(String(50), primary_key=True)
     SessionId: Mapped[str] = mapped_column(String(50))
 
 
