@@ -1,12 +1,10 @@
 from sqlalchemy import Integer, String
 from sqlalchemy.orm import Mapped, mapped_column
 
-from vida_py.models import Model
 
-
-class VehicleProfileDescriptions(Model):
+class VehicleProfileDescriptions:
     __bind_key__ = "basedata"
-    __tablename__ = "VehicleProfileDescriptions"
+    __viewname__ = "VehicleProfileDescriptions"
 
     Id: Mapped[str] = mapped_column(String(16))
     FullTitle: Mapped[str] = mapped_column(String(2337))
