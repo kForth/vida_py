@@ -1,12 +1,10 @@
 from sqlalchemy import Integer, SmallInteger
 from sqlalchemy.orm import Mapped, mapped_column
 
-from vida_py.models import Model
 
-
-class RequestTimeoutAndResendView(Model):
+class RequestTimeoutAndResendView:
     __bind_key__ = "timing"
-    __tablename__ = "RequestTimeoutAndResendView"
+    __viewname__ = "RequestTimeoutAndResendView"
 
     ECU_variant: Mapped[int] = mapped_column(Integer)
     B1: Mapped[int] = mapped_column(SmallInteger)
@@ -16,9 +14,9 @@ class RequestTimeoutAndResendView(Model):
     Resend: Mapped[int] = mapped_column(Integer)
 
 
-class RequestTimingView(Model):
+class RequestTimingView:
     __bind_key__ = "timing"
-    __tablename__ = "RequestTimingView"
+    __viewname__ = "RequestTimingView"
 
     ECU_variant: Mapped[int] = mapped_column(Integer)
     B1: Mapped[int] = mapped_column(SmallInteger)
