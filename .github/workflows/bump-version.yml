@@ -4,15 +4,20 @@ on:
   workflow_dispatch:
     inputs:
       bump-type:
-        description: 'Bump Type'
+        description: "Bump Type"
         required: true
-        default: 'pre_l'
+        default: "pre_l"
         type: choice
         options:
-        - major
-        - minor
-        - patch
-        - pre_l
+          - major
+          - minor
+          - patch
+          - pre_l
+      create-tag:
+        description: "Create Tag"
+        required: true
+        default: false
+        type: boolean
 
 jobs:
   build:
@@ -25,7 +30,7 @@ jobs:
         id: bump
         uses: callowayproject/bump-my-version@master
         env:
-          BUMPVERSION_TAG: "false"
+          BUMPVERSION_TAG: "${{ inputs.create-tag }}"
           BUMPVERSION_COMMIT: "true"
         with:
           args: ${{ inputs.bump-type }}
