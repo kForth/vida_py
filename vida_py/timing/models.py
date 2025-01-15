@@ -1,7 +1,9 @@
 from sqlalchemy import Integer, SmallInteger, String
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
-from vida_py.models import Model
+
+class Model(DeclarativeBase):
+    pass
 
 
 class MessageTiming(Model):
@@ -20,10 +22,10 @@ class Requests(Model):
     __tablename__ = "Requests"
 
     # No PK
-    ECU_variant: Mapped[int] = mapped_column(SmallInteger)
-    B1: Mapped[int] = mapped_column(SmallInteger)
-    B2: Mapped[int] = mapped_column(SmallInteger)
-    B3: Mapped[int] = mapped_column(SmallInteger)
+    ECU_variant: Mapped[int] = mapped_column(SmallInteger, primary_key=True)
+    B1: Mapped[int] = mapped_column(SmallInteger, primary_key=True)
+    B2: Mapped[int] = mapped_column(SmallInteger, primary_key=True)
+    B3: Mapped[int] = mapped_column(SmallInteger, primary_key=True)
     MessageTimingId: Mapped[int] = mapped_column(Integer)
     TimeoutAndResendId: Mapped[int] = mapped_column(Integer)
     Commet: Mapped[str] = mapped_column(String(500))

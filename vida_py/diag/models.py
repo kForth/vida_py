@@ -1,7 +1,9 @@
 from sqlalchemy import BINARY, NVARCHAR, BigInteger, Boolean, ForeignKey, Integer, String
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
-from vida_py.models import Model
+
+class Model(DeclarativeBase):
+    pass
 
 
 class ECU(Model):

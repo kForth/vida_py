@@ -1,7 +1,9 @@
 from sqlalchemy import BINARY, Boolean, Integer, String
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
-from vida_py.models import Model
+
+class Model(DeclarativeBase):
+    pass
 
 
 class GraphicCarConfigs(Model):

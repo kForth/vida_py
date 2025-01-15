@@ -1,9 +1,11 @@
 from datetime import datetime
 
 from sqlalchemy import Boolean, DateTime, Integer, Numeric, SmallInteger, String
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
-from vida_py.models import Model
+
+class Model(DeclarativeBase):
+    pass
 
 
 class AttachmentData(Model):

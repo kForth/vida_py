@@ -11,9 +11,11 @@ from sqlalchemy import (
     Integer,
     String,
 )
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
-from vida_py.models import Model
+
+class Model(DeclarativeBase):
+    pass
 
 
 class T100_EcuVariant(Model):

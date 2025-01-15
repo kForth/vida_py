@@ -1,9 +1,11 @@
 from datetime import datetime
 
 from sqlalchemy import BINARY, VARBINARY, BigInteger, Boolean, DateTime, Integer, String
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
-from vida_py.models import Model
+
+class Model(DeclarativeBase):
+    pass
 
 
 class ActionItem(Model):
@@ -200,8 +202,8 @@ class HistoryLoadedEcuItem(Model):
     __tablename__ = "HistoryLoadedEcuItem"
 
     # No PK
-    fkHistoryItem: Mapped[int] = mapped_column(Integer)
-    LoadedEcu: Mapped[str] = mapped_column(String(30))
+    fkHistoryItem: Mapped[int] = mapped_column(Integer, primary_key=True)
+    LoadedEcu: Mapped[str] = mapped_column(String(30), primary_key=True)
 
 
 class HistoryVehicleOrderItem(Model):
@@ -330,9 +332,9 @@ class RestoredParameter(Model):
     __tablename__ = "RestoredParameter"
 
     # No PK
-    pieOrderId: Mapped[int] = mapped_column(BigInteger)
-    Name: Mapped[str] = mapped_column(String(100))
-    Value: Mapped[str] = mapped_column(String(100))
+    pieOrderId: Mapped[int] = mapped_column(BigInteger, primary_key=True)
+    Name: Mapped[str] = mapped_column(String(100), primary_key=True)
+    Value: Mapped[str] = mapped_column(String(100), primary_key=True)
 
 
 class SlaveEcuInfo(Model):
@@ -352,7 +354,7 @@ class StatusIdentifier(Model):
     __tablename__ = "StatusIdentifier"
 
     # No PK
-    Id: Mapped[int] = mapped_column(Integer)
+    Id: Mapped[int] = mapped_column(Integer, primary_key=True)
     fkDtc: Mapped[int] = mapped_column(Integer)
     statusidentifierid: Mapped[int] = mapped_column(Integer)
     statusidentifiername: Mapped[str] = mapped_column(String(100))

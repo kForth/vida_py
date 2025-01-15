@@ -1,7 +1,9 @@
 from sqlalchemy import BINARY, NVARCHAR, Boolean, ForeignKey, Integer, String
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
-from vida_py.models import Model
+
+class Model(DeclarativeBase):
+    pass
 
 
 class Document(Model):
