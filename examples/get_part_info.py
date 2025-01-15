@@ -1,6 +1,6 @@
 import click
 
-from vida_py import BaeDataSession, EpcSession
+from vida_py import BaseDataSession, EpcSession
 from vida_py.basedata import VehicleProfile
 from vida_py.epc import (
     CatalogueComponents,
@@ -15,7 +15,7 @@ from vida_py.epc import (
 @click.argument("partnumber", type=click.STRING)
 @click.argument("language", type=click.INT, default=15)
 def main(partnumber, language):
-    with EpcSession() as _epc, BaeDataSession() as _basedata:
+    with EpcSession() as _epc, BaseDataSession() as _basedata:
 
         part = _epc.query(PartItems).filter(PartItems.ItemNumber == partnumber).one()
         title = (

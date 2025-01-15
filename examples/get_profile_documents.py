@@ -2,7 +2,7 @@ import json
 
 import click
 
-from vida_py import BaeDataSession, ServiceRepoSession
+from vida_py import BaseDataSession, ServiceRepoSession
 from vida_py.basedata import VehicleProfile, get_valid_profile_manager
 from vida_py.service import Document, DocumentProfile
 
@@ -11,7 +11,7 @@ from vida_py.service import Document, DocumentProfile
 @click.argument("profile_id", type=click.STRING)
 @click.option("--outfile", "-o", type=click.Path(dir_okay=False))
 def main(profile_id, outfile):
-    with BaeDataSession() as _basedata, ServiceRepoSession() as _service:
+    with BaseDataSession() as _basedata, ServiceRepoSession() as _service:
 
         profile_ids = [e[0] for e in get_valid_profile_manager(_basedata, profile_id)]
         profiles = (
