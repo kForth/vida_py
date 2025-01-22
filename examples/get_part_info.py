@@ -36,7 +36,8 @@ def main(partnumber, language):
                 )
                 .filter(
                     Lexicon.fkLanguage == language,
-                    ComponentDescriptions.fkCatalogueComponent == component.Id,
+                    ComponentDescriptions.fkCatalogueComponent
+                    == component.ParentComponentId,
                 )
                 .all(),
                 (
