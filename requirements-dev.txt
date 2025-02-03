@@ -1,2 +1,2 @@
 pre-commit==4.1.0
-bump-my-version==0.30.1
+bump-my-version==0.31.1
