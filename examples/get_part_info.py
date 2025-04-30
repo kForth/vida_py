@@ -1,4 +1,5 @@
 import click
+from sqlalchemy import or_
 
 from vida_py import BaseDataSession, EpcSession
 from vida_py.basedata import VehicleProfile
@@ -17,13 +18,10 @@ from vida_py.epc import (
 def main(partnumber, language):
     with EpcSession() as _epc, BaseDataSession() as _basedata:
 
-        part = _epc.query(PartItems).filter(PartItems.ItemNumber == partnumber).one()
-        title = (
-            _epc.query(Lexicon)
-            .filter(
-                Lexicon.DescriptionId == part.DescriptionId,
-                Lexicon.fkLanguage == language,
-            )
+        part, title = (
+            _epc.query(PartItems, Lexicon)
+            .outerjoin(Lexicon, Lexicon.DescriptionId == PartItems.DescriptionId)
+            .filter(PartItems.ItemNumber == partnumber, Lexicon.fkLanguage == language)
             .one()
         )
         components = [
@@ -36,8 +34,11 @@ def main(partnumber, language):
                 )
                 .filter(
                     Lexicon.fkLanguage == language,
-                    ComponentDescriptions.fkCatalogueComponent
-                    == component.ParentComponentId,
+                    or_(
+                        ComponentDescriptions.fkCatalogueComponent
+                        == component.ParentComponentId,
+                        ComponentDescriptions.fkCatalogueComponent == component.Id,
+                    ),
                 )
                 .all(),
                 (
