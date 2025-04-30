@@ -25,6 +25,8 @@ You can install `vida_py` using pip.
 
 Please note that VIDA database files are not supplied with this package. Users must obtain these files separately, typically from an existing VIDA installation.
 
+The easiest way to access Volvo's VIDA databases is to extract the `.mdf` and `.ldf` files from the VIDA installer, then attached them to a database using the `Microsoft SQL Server Management Studio`
+
 ## Contributing
 
 Contributions are welcome! Please submit a pull request or open and issue to discuss changes or report bugs.
