@@ -212,8 +212,11 @@ def main(identifier, language, outfile):
             ],
         }
 
-    with open(outfile, "w+", encoding="utf-8") as out:
-        json.dump(ecu, out, indent=4)
+    if outfile:
+        with open(outfile, "w+", encoding="utf-8") as out:
+            json.dump(ecu, out, indent=4)
+    else:
+        print(json.dumps(ecu, indent=4, ensure_ascii=False))
 
 
 if __name__ == "__main__":
