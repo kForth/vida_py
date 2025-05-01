@@ -39,9 +39,10 @@ def main(identifier, language, outfile):
         b.fkT142_BlockType = 5
         """
         params = (
-            session.query(T141_Block, T150_BlockValue)
+            session.query(T141_Block, T150_BlockValue, T155_Scaling)
             .join(T150_BlockValue, T150_BlockValue.fkT141_Block == T141_Block.id)
             .join(T144_BlockChild, T144_BlockChild.fkT141_Block_Child == T141_Block.id)
+            .join(T155_Scaling, T155_Scaling.id == T150_BlockValue.fkT155_Scaling)
             .join(
                 T100_EcuVariant, T100_EcuVariant.id == T144_BlockChild.fkT100_EcuVariant
             )
@@ -49,18 +50,24 @@ def main(identifier, language, outfile):
                 T141_Block.fkT142_BlockType == 5,
                 T100_EcuVariant.identifier == identifier,
             )
+            .order_by(
+                T141_Block.id,
+            )
             .all()
         )
 
         _params = []
-        for block, value in params:
+        for block, value, scaling in params:
             _params.append({
                 "name": block.name,
                 "offset": block.offset,
                 "length": block.length,
-                "scaling": value.scaling.definition,
+                "scaling": scaling.definition,
+                "scaling_id": scaling.id,
+                "scaling_type": scaling.type,
                 "text_value": "\n".join(e.data for e in value.text_value.data),
                 "text_unit": "\n".join(e.data for e in value.text_unit.data),
+                "compare": value.CompareValue,
             })
 
         if outfile:
