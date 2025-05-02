@@ -7,6 +7,7 @@ from vida_py.diag import Session, get_vin_components
 @click.argument("vin", type=click.STRING)
 def main(vin):
     with Session() as session:
+        click.echo(f"VIN: {vin}")
         (
             model_id,
             model_str,
@@ -17,7 +18,6 @@ def main(vin):
             transm_str,
         ) = get_vin_components(session, vin)[0]
 
-        click.echo(f"VIN: {vin}")
         click.echo(f"Model: {model_str} [{model_id}]")
         click.echo(f"Year: {model_year}")
         click.echo(f"Engine: {engine_str} [{engine_id}]")
