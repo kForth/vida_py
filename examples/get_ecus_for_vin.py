@@ -19,7 +19,13 @@ from vida_py.carcom import Session as CarcomSession
 @click.option("--outfile", "-o", type=click.Path(dir_okay=False))
 def main(vin, outfile):
     with Session() as session:
+        click.echo(f"VIN: {vin}")
+
         (_, model_str, model_year, _, engine_str, _, transm_str) = get_vin_components(session, vin)[0]
+        click.echo(f"Model: {model_str}")
+        click.echo(f"Model Year: {model_year}")
+        click.echo(f"Engine: {engine_str}")
+        click.echo(f"Transmission: {transm_str}")
 
         with CarcomSession() as session:
             profileValueModel = aliased(T162_ProfileValue)
@@ -51,21 +57,27 @@ def main(vin, outfile):
             ).filter(
                 or_(
                     T161_Profile.fkT162_ProfileValue_Model == None,
-                    profileValueModel.description == model_str
+                    profileValueModel.description == model_str,
+                    model_str == None
                 ),
                 or_(
                     T161_Profile.fkT162_ProfileValue_Year == None,
                     profileValueYear.description == model_year,
+                    model_year == None
                 ),
                 or_(
                     T161_Profile.fkT162_ProfileValue_Engine == None,
                     profileValueEngine.description == engine_str,
+                    engine_str == None
                 ),
                 or_(
                     T161_Profile.fkT162_ProfileValue_Transmission == None,
                     profileValueTrans.description == transm_str,
+                    transm_str == None
                 ),
             ).all()
+        click.echo()
+        click.echo(f"Found {len(ecus)} ECUs")
 
         _ecus = [
             {
@@ -85,9 +97,10 @@ def main(vin, outfile):
         ]
         if outfile:
             with open(outfile, "w+", encoding="utf-8") as out:
-                json.dump(_ecus, out, indent=4)
+                json.dump(_ecus, out, indent=2)
         else:
-            click.echo(json.dumps(_ecus, indent=4))
+            click.echo()
+            click.echo(json.dumps(_ecus, indent=2))
 
 
 if __name__ == "__main__":
