@@ -169,27 +169,6 @@ def main(identifier, language, outfile):
                 .filter(T120_Config_EcuVariant.fkT100_EcuVariant == variant.id)
                 .all()
             ],
-            "blocks": get_child_blocks(session, language, variant.id, 1),
-            "services": [
-                {
-                    "id": s.id,
-                    "protocol": s.protocol.identifier,
-                    "service": s.service,
-                    "mode": s.mode,
-                    "service_name": s.serviceName,
-                    "mode_name": s.modeName,
-                    "description": s.description,
-                    "definition": str(s.definition),
-                    "type": s.type,
-                    "status": s.status,
-                }
-                for s in session.query(T111_Service)
-                .outerjoin(
-                    T110_Service_EcuVariant,
-                    T110_Service_EcuVariant.fkT100_EcuVariant == variant.id,
-                )
-                .all()
-            ],
             "security_codes": [
                 {
                     "id": s.id,
@@ -210,6 +189,7 @@ def main(identifier, language, outfile):
                 .filter(T170_SecurityCode_EcuVariant.fkT100_EcuVariant == variant.id)
                 .all()
             ],
+            "blocks": get_child_blocks(session, language, variant.id, 1),
         }
 
     if outfile:
