@@ -30,25 +30,21 @@ def main(identifier, outfile):
         ).filter(
             T100_EcuVariant.identifier == identifier,
         ).order_by(
-            T111_Service.service,
+            T111_Service.service, T111_Service.mode
         )
 
         _services = []
         for variant, service, config in services:
             _services.append({
-                "service": {
-                    "service": f"0x{service.service}" if service.service else None,
-                    "mode": f"0x{service.mode}" if service.mode else None,
-                    "service_name": service.serviceName,
-                    "mode_name": service.modeName,
-                    "description": service.description,
-                    "definition": bytearray(service.definition).decode("utf-8") if service.definition else None,
-                },
-                "config": {
-                    "comm_address": f"0x{config.commAddress}" if config.commAddress else None,
-                    "can_address": f"0x{config.canAddress}" if config.canAddress else None,
-                },
-
+                "id": service.id,
+                "service": f"0x{service.service}" if service.service else None,
+                "mode": f"0x{service.mode}" if service.mode else None,
+                "service_name": service.serviceName,
+                "mode_name": service.modeName,
+                "description": service.description,
+                "definition": bytearray(service.definition).decode("utf-8") if service.definition else None,
+                "func_address": f"0x{config.functionalAddress}" if config.functionalAddress else None,
+                "comm_address": f"0x{config.commAddress}" if config.commAddress else None,
             })
 
         if outfile:
