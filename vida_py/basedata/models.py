@@ -171,6 +171,11 @@ class VINDecodeModel(Model):
     YearCode: Mapped[str] = mapped_column(String(1))
     ObjVersion: Mapped[datetime] = mapped_column(DateTime)
 
+    VehicleModel: Mapped["VehicleModel"] = relationship()
+    BodyStyle: Mapped["BodyStyle"] = relationship()
+    PartnerGroup: Mapped["PartnerGroup"] = relationship()
+    ModelYear: Mapped["ModelYear"] = relationship()
+
 
 class VINDecodeVariant(Model):
     __bind_key__ = "basedata"
@@ -186,6 +191,12 @@ class VINDecodeVariant(Model):
     fkEngine: Mapped[int] = mapped_column(ForeignKey("Engine.Id"))
     fkTransmission: Mapped[int] = mapped_column(ForeignKey("Transmission.Id"))
     ObjVersion: Mapped[datetime] = mapped_column(DateTime)
+
+    VehicleModel: Mapped["VehicleModel"] = relationship()
+    Transmission: Mapped["Transmission"] = relationship()
+    Engine: Mapped["Engine"] = relationship()
+    PartnerGroup: Mapped["PartnerGroup"] = relationship()
+    ModelYear: Mapped["ModelYear"] = relationship()
 
 
 class VINVariantCodes(Model):
