@@ -8,7 +8,7 @@ from vida_py.images import LocalizedGraphics, Session
 
 @click.command()
 @click.argument("path", type=click.STRING)
-@click.option("--outfile", "-o", type=click.Path(dir_okay=False), default=None)
+@click.option("--outfile", "-o", type=click.Path(), default=None)
 def main(path, outfile):
     """
     Convert a string of bytes to a file.
