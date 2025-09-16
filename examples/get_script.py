@@ -4,7 +4,7 @@ import zipfile
 import click
 
 from vida_py.basedata import Session as BaseDataSession
-from vida_py.basedata import VehicleProfile, get_valid_profile_manager
+from vida_py.basedata import get_valid_profile_manager
 from vida_py.diag import Session as DiagSession
 from vida_py.diag import get_script
 
