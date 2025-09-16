@@ -69,8 +69,8 @@ class IEParentChildMap(Model):
     __bind_key__ = "diag"
     __tablename__ = "IEParentChildMap"
 
-    fkIEparent: Mapped[str] = mapped_column(ForeignKey("IEparent.id"), primary_key=True)
-    fkIEchild: Mapped[str] = mapped_column(ForeignKey("IEchild.id"), primary_key=True)
+    fkIEparent: Mapped[str] = mapped_column(ForeignKey("IE.id"), primary_key=True)
+    fkIEchild: Mapped[str] = mapped_column(ForeignKey("IE.id"), primary_key=True)
 
 
 class IEProfileMap(Model):
