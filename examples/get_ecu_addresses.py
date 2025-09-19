@@ -60,7 +60,7 @@ def main(profile_id, outfile):
     ]
 
     if outfile:
-        with open(outfile, "w+") as f:
+        with open(outfile, "w+", encoding="utf-8") as f:
             json.dump(ecu_addresses, f, indent=4)
     else:
         click.echo(ecu_addresses)
