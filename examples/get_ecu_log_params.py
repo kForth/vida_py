@@ -48,6 +48,29 @@ def main(identifier, language, outfile):
         T150_BlockValue_2 = aliased(T150_BlockValue)
         T144_BlockChild_2 = aliased(T144_BlockChild)
 
+        # string cmdText = $"select
+        # val=case fkt155_scaling
+        #   when 0 then fkt190_text_ppevalue
+        #   else fkt190_text_value
+        #   end,
+        # unit=case fkt155_scaling
+        #   when 0 then fkt190_text_ppeunit
+        #   else fkt190_text_unit
+        #   end
+        # from t150_blockvalue
+        #  join t141_block t141
+        #  on fkt141_block = t141.id
+        #  where t141.fkt190_text in ({parameterIds}) and t141.fkt142_blocktype=8";
+
+        # SELECT *
+        # FROM [T150_BlockValue] AS Val
+        # JOIN [T141_Block] AS Blk ON Blk.id = Val.fkT141_Block
+        # JOIN [T144_BlockChild] Chld ON Chld.fkT141_Block_Parent = Blk.Id
+        # JOIN [T148_BlockMetaPARA] AS Meta ON Meta.fkT141_Block = Chld.fkT141_Block_Child
+        # JOIN [T141_Block] AS Blk2 ON Blk2.id = Chld.fkT141_Block_Child
+        # JOIN [T143_BlockDataType] Typ ON Typ.id = Blk2.fkT143_BlockDataType
+        # WHERE Meta.fkT100_EcuVariant = 348
+
         params = (
             session.query(T141_Block, T150_BlockValue, T141_Block_2, T150_BlockValue_2)
             .join(T144_BlockChild, T144_BlockChild.fkT141_Block_Child == T141_Block.id)
