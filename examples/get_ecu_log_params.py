@@ -11,10 +11,35 @@ from vida_py.carcom import (
     T150_BlockValue,
 )
 
+LANGUAGES = (
+    "de-DE",
+    "en-GB",
+    "es-ES",
+    "fi-FI",
+    "fr-FR",
+    "it-IT",
+    "ja-JP",
+    "ko-KR",
+    "nl-NL",
+    "pt-PT",
+    "ru-RU",
+    "sv-SE",
+    "th-TH",
+    "tr-TR",
+    "en-US",
+    "zh-TW",
+    "zh-CN",
+)
+
 
 @click.command()
 @click.argument("identifier", type=click.STRING)
-@click.option("--language", "-l", type=click.STRING, default="en-US")
+@click.option(
+    "--language",
+    "-l",
+    type=click.Choice(LANGUAGES, case_sensitive=False),
+    default="en-US",
+)
 @click.option("--outfile", "-o", type=click.Path(dir_okay=False))
 def main(identifier, language, outfile):
     with Session() as session:
