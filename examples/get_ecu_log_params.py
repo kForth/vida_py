@@ -77,7 +77,7 @@ def main(identifier, language, outfile):
                 {
                     "id": block.id,
                     "type": block.type.identifier,
-                    "datatype": block.datatype.name,
+                    "datatype": block2.datatype.name,
                     "name": block.name,
                     "offset": block.offset,
                     "length": block.length,
