@@ -308,6 +308,8 @@ class T141_Block(Model):
     datatype: Mapped["T143_BlockDataType"] = relationship()
     text: Mapped["T190_Text"] = relationship()
 
+    values: Mapped[List["T150_BlockValue"]] = relationship()
+
 
 class T142_BlockType(Model):
     __bind_key__ = "carcom"
@@ -384,7 +386,9 @@ class T150_BlockValue(Model):
     fkT190_Text_ppeUnit: Mapped[int] = mapped_column(ForeignKey("T190_Text.id"))
     fkT155_ppeScaling: Mapped[int] = mapped_column(ForeignKey("T155_Scaling.id"))
 
-    block: Mapped["T141_Block"] = relationship(foreign_keys=[fkT141_Block])
+    block: Mapped["T141_Block"] = relationship(
+        foreign_keys=[fkT141_Block], back_populates="values"
+    )
     text_value: Mapped["T190_Text"] = relationship(foreign_keys=[fkT190_Text_Value])
     text_unit: Mapped["T190_Text"] = relationship(foreign_keys=[fkT190_Text_Unit])
     scaling: Mapped["T155_Scaling"] = relationship(foreign_keys=[fkT155_Scaling])
