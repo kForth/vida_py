@@ -175,7 +175,7 @@ def main(vin, language, outfile):
                 )
                 .filter(
                     T100_EcuVariant.identifier == identifier,
-                    T148_BlockMetaPARA.showAsFreezeFrame == True,
+                    # T148_BlockMetaPARA.showAsFreezeFrame == True,
                 )
                 .order_by(T141_Block.id)
                 .all()
