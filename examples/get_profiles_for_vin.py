@@ -12,14 +12,15 @@ def main(vin):
     with BaseDataSession() as _basedata, DiagRepoSession() as _diag:
         (
             model_id,
-            model_str,
+            _,
             model_year,
             engine_id,
-            engine_str,
+            _,
             transm_id,
-            transm_str,
-        ) = get_vin_components(_diag, vin)[0]
-        print(model_id, engine_id, transm_id)
+            _,
+        ) = get_vin_components(
+            _diag, vin
+        )[0]
         query = (
             _basedata.query(VehicleProfile)
             .outerjoin(VehicleModel, VehicleModel.Id == VehicleProfile.fkVehicleModel)
