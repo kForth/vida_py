@@ -7,3 +7,17 @@ from vida_py.images import Session as ImageRepoSession
 from vida_py.service import Session as ServiceRepoSession
 from vida_py.session import Session as DiagSessionSession
 from vida_py.timing import Session as DiceTimingSession
+
+__version__ = "0.1.7"
+
+__all__ = [
+    "AccessServerSession",
+    "BaseDataSession",
+    "CarComSession",
+    "DiagRepoSession",
+    "DiagSessionSession",
+    "DiceTimingSession",
+    "EpcSession",
+    "ImageRepoSession",
+    "ServiceRepoSession",
+]
