@@ -50,6 +50,7 @@ env/
 
 # Configuration
 .env
+.env.bat
 
 # Misc. Data
 cache/
