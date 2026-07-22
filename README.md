@@ -23,7 +23,7 @@ You can install `vida_py` using pip.
 
 `vida_py` depends on a few python modules, these modules will be installed automatically when installing with `pip`.
 
-`vida_py` is compatible with python 3.6 and up.
+`vida_py` is compatible with python 3.13 and up.
 
 ## VIDA Database Files
 
