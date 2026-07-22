@@ -32,6 +32,7 @@ dev = [
   "codespell==2.4.*",
   "isort==8.0.*",
   "mypy==2.3.*",
+  "pytest==8.4.*",
   "pylint==4.0.*",
   "ruff==0.15.*",
   "pre-commit==4.2.0",
