@@ -37,4 +37,6 @@ Contributions are welcome! Please submit a pull request or open and issue to dis
 
 ## License
 
-This project is licensed under the AGPL v3.0 License - see the [LICENSE](LICENSE) file for details.
+vida_py (C) 2026 Kestin Goforth.
+
+This project is licensed under the BSD 3-Clause License - see the [license file](LICENSE) for details.

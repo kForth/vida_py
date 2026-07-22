@@ -10,7 +10,7 @@ keywords = ["VIDA", "volvo"]
 authors = [{ name = "Kestin Goforth", email = "kgoforth1503@gmail.com" }]
 dependencies = ["click==8.1.8", "pyodbc==5.2.0", "SQLAlchemy==2.0.41"]
 requires-python = '>= 3.6'
-license = "AGPL-3.0"
+license = "BSD-3-Clause"
 classifiers = [
   "Development Status :: 3 - Alpha",
   "Intended Audience :: Developers",
