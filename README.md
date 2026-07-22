@@ -1,9 +1,13 @@
 # vida_py
 
+[![GitHub](https://img.shields.io/badge/github-repo-blue?logo=github)](https://github.com/kForth/vida_py)
+[![GitHub License](https://img.shields.io/github/license/kforth/vida_py)](https://github.com/kForth/vida_py/blob/main/LICENSE)
+[![GitHub Forks](https://img.shields.io/github/forks/kforth/vida_py)](https://github.com/kForth/vida_py/forks)
+[![GitHub Stars](https://img.shields.io/github/stars/kforth/vida_py)](https://github.com/kForth/vida_py/stargazers)
+
 [![PyPI Version](https://img.shields.io/pypi/v/vida_py?logo=python&logoColor=white)](https://pypi.org/p/vida_py)
-[![GitHub Release](https://img.shields.io/github/v/release/kForth/vida_py?logo=github&logoColor=white)](https://github.com/kForth/vida_py/releases)
-[![License](https://img.shields.io/github/license/kForth/vida_py)](https://github.com/kForth/vida_py/blob/main/LICENSE)
-[![GitHub deployments](https://img.shields.io/github/deployments/kForth/vida_py/pypi)](https://github.com/kForth/vida_py/releases)
+![Pepy Total Downloads](https://img.shields.io/pepy/dt/vida_py)
+![PyPI Downloads](https://img.shields.io/pypi/dm/vida_py)
 
 Python interface Volvo's VIDA databases.
 
