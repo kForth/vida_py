@@ -7,7 +7,7 @@ __license__ = "BSD-3-Clause"
 from sqlalchemy import Row
 from sqlalchemy.orm import Session
 
-from vida_py.util import run_func
+from vida_py.util import require_scalar, run_func, run_func_scalar
 
 
 def get_compatible_profiles(session: Session, profile: str) -> list[Row]:
@@ -17,19 +17,26 @@ def get_compatible_profiles(session: Session, profile: str) -> list[Row]:
 def get_dtc_code_for_customer_symptom(
     session: Session, fk_t100_ecu_variant: int, customer_symptom_id: int
 ) -> str:
-    return str(
-        run_func(
+    value = require_scalar(
+        run_func_scalar(
             session, "GetDTCCodeForCustomerSymptom", fk_t100_ecu_variant, customer_symptom_id
-        ).all()
+        ),
+        "GetDTCCodeForCustomerSymptom",
     )
+    return str(value)
 
 
 def get_text(session: Session, text_id: int) -> str:
-    return str(run_func(session, "GetText", text_id).all())
+    value = require_scalar(run_func_scalar(session, "GetText", text_id), "GetText")
+    return str(value)
 
 
 def get_text_from_lang(session: Session, text_id: int, language_code: str) -> str:
-    return str(run_func(session, "GetTextFromLang", text_id, language_code).all())
+    value = require_scalar(
+        run_func_scalar(session, "GetTextFromLang", text_id, language_code),
+        "GetTextFromLang",
+    )
+    return str(value)
 
 
 def split_big_numbers(session: Session, list_: str, delimiter: str) -> list[Row]:

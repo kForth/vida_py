@@ -40,3 +40,13 @@ def run_func(session: Session, script: str, *args: Any) -> Result:
         ),
         kwargs,
     )
+
+
+def run_func_scalar(session: Session, script: str, *args: Any) -> Any | None:
+    return run_func(session, script, *args).scalar_one_or_none()
+
+
+def require_scalar[T](value: T | None, function_name: str) -> T:
+    if value is None:
+        raise ValueError(f"{function_name} returned no rows")
+    return value

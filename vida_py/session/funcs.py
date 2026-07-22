@@ -8,19 +8,27 @@ from datetime import datetime
 
 from sqlalchemy.orm import Session
 
-from vida_py.util import run_func
+from vida_py.util import require_scalar, run_func, run_func_scalar
 
 
 def get_order_date(session: Session, vehicle_id: int) -> datetime:
-    return datetime.fromisoformat(str(run_func(session, "GetOrderDate", vehicle_id).all()))
+    value = require_scalar(run_func_scalar(session, "GetOrderDate", vehicle_id), "GetOrderDate")
+    if isinstance(value, datetime):
+        return value
+    return datetime.fromisoformat(str(value))
 
 
 def get_status(session: Session, vehicle_id: int) -> str:
-    return str(run_func(session, "GetStatus", vehicle_id).all())
+    value = require_scalar(run_func_scalar(session, "GetStatus", vehicle_id), "GetStatus")
+    return str(value)
 
 
 def get_transaction_nbr(session: Session, vehicle_id: int) -> int:
-    return int(str(run_func(session, "GetTransactionNbr", vehicle_id).all()))
+    value = require_scalar(
+        run_func_scalar(session, "GetTransactionNbr", vehicle_id),
+        "GetTransactionNbr",
+    )
+    return int(str(value))
 
 
 def split(session: Session, string: str, delimiter: str) -> list[str]:

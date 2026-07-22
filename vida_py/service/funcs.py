@@ -7,7 +7,7 @@ __license__ = "BSD-3-Clause"
 from sqlalchemy import Row
 from sqlalchemy.orm import Session
 
-from vida_py.util import run_func
+from vida_py.util import require_scalar, run_func, run_func_scalar
 
 
 def fn__split(session: Session, s_text: str, s_delim: str) -> list[Row]:
@@ -27,7 +27,8 @@ def get_search_string_matches(session: Session, data: str, all_: bool) -> list[R
 
 
 def hex_to_int(session: Session, vs_data: str) -> int:
-    return int(str(run_func(session, "HexToInt", vs_data).all()))
+    value = require_scalar(run_func_scalar(session, "HexToInt", vs_data), "HexToInt")
+    return int(str(value))
 
 
 def parse_search_string(session: Session, data: str) -> list[Row]:
