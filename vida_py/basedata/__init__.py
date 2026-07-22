@@ -1,14 +1,38 @@
-"""Session factory and public exports for the basedata VIDA database module."""
+"""Session factory and public exports for the `basedata` VIDA database module."""
 
 __author__ = "Kestin Goforth"
 __copyright__ = "Copyright 2026"
 __license__ = "BSD-3-Clause"
 
-import os
+from typing import Any
 
-from sqlalchemy import Engine, create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import Session as OrmSession
 
-db: Engine = create_engine(os.getenv("VIDA_BASEDATA_DB_URI") or "")
+from vida_py.database_module import DatabaseModule
 
-Session: sessionmaker = sessionmaker(bind=db)
+_DATABASE = DatabaseModule("VIDA_BASEDATA_DB_URI")
+
+create_engine_from_env = _DATABASE.create_engine_from_env
+create_engine_from_url = _DATABASE.create_engine_from_url
+create_session_factory = _DATABASE.create_session_factory
+initialize = _DATABASE.initialize
+get_engine = _DATABASE.get_engine
+get_session_factory = _DATABASE.get_session_factory
+
+
+def create_session(**session_kwargs: Any) -> OrmSession:
+    return _DATABASE.create_session(**session_kwargs)
+
+
+Session = create_session
+
+__all__ = [
+    "Session",
+    "create_engine_from_env",
+    "create_engine_from_url",
+    "create_session",
+    "create_session_factory",
+    "get_engine",
+    "get_session_factory",
+    "initialize",
+]

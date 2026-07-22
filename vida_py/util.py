@@ -1,13 +1,32 @@
-"""Shared SQL execution helpers for invoking VIDA stored procedures and functions."""
+"""Shared SQL execution helpers and configuration validation for VIDA databases."""
 
 __author__ = "Kestin Goforth"
 __copyright__ = "Copyright 2026"
 __license__ = "BSD-3-Clause"
 
+import os
 from typing import Any
 
 from sqlalchemy import Result, text
+from sqlalchemy.engine.url import make_url
 from sqlalchemy.orm import Session
+
+
+def get_required_db_uri(variable_name: str) -> str:
+    value = os.getenv(variable_name)
+    if not value:
+        raise RuntimeError(
+            f"Missing required VIDA database URI environment variable: {variable_name}"
+        )
+
+    try:
+        make_url(value)
+    except Exception as exc:
+        raise ValueError(
+            f"Invalid SQLAlchemy database URI in environment variable {variable_name}: {value!r}"
+        ) from exc
+
+    return value
 
 
 def run_script(session: Session, script: str, **kwargs: Any) -> Result:
