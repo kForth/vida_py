@@ -4,7 +4,6 @@ import click
 
 FILE_HEADER = """
 from datetime import datetime
-from typing import List
 
 from sqlalchemy import (
     BINARY,
@@ -27,7 +26,7 @@ from vida_py.models import Model
 """
 
 
-def db_to_py_type(d):
+def db_to_py_type(d: str) -> str:
     if (d := d.lower()) in (
         "nvarchar",
         "varchar",
@@ -53,13 +52,11 @@ def db_to_py_type(d):
     return d
 
 
-def db_to_sql_type(d, s=None):
+def db_to_sql_type(d: str, s: str | None = None) -> str:
     if d == "int":
         return "Integer"
     if d == "nvarchar":
-        return "NVARCHAR" + (
-            f"({s})" if s is not None and "null" not in s.lower() else ""
-        )
+        return "NVARCHAR" + (f"({s})" if s is not None and "null" not in s.lower() else "")
     if (d := d.lower()) in (
         "varchar",
         "char",
@@ -98,13 +95,13 @@ def main(schemafile, db, outfile):
         if outfile:
             _file = open(outfile, "w+", encoding="utf-8")
 
-            def writeline(s: str):
+            def writeline(s: str) -> None:
                 _file.write(f"{s}\n")
 
             _write = writeline
             _write(FILE_HEADER)
 
-        with open(schemafile, "r", encoding="utf-8") as csvfile:
+        with open(schemafile, encoding="utf-8") as csvfile:
 
             reader = csv.reader(csvfile)
             _ = next(reader)  # skip header row
@@ -128,14 +125,10 @@ def main(schemafile, db, outfile):
                 _type = line[7]
                 _size = line[8]
                 # _pk = ", primary_key=True" if line[7] == "uniqueidentifier" else ""
-                _def = (
-                    f", default={line[5][1:-1]}" if "null" not in line[5].lower() else ""
-                )
+                _def = f", default={line[5][1:-1]}" if "null" not in line[5].lower() else ""
                 py_type = db_to_py_type(_type)
                 col_Args = db_to_sql_type(_type, _size) + _def
-                class_str += (
-                    f"    {_name}: Mapped[{py_type}] = mapped_column({col_Args})\n"
-                )
+                class_str += f"    {_name}: Mapped[{py_type}] = mapped_column({col_Args})\n"
 
                 last_class = _class
             classes.append((last_class, class_str))

@@ -29,7 +29,7 @@ def to_py_type(d: str) -> str:
     if d in ("none", "null"):
         return "None"
     if d == "table":
-        return "List[Row]"
+        return "list[Row]"
     return d
 
 

@@ -3,7 +3,7 @@ import re
 import click
 
 
-def _db_to_py_type(d):
+def _db_to_py_type(d: str) -> str:
     if (d := d.lower()) in (
         "nvarchar",
         "varchar",
@@ -29,7 +29,7 @@ def _db_to_py_type(d):
     return d
 
 
-def _s(s):
+def _s(s: str) -> str:
     s = re.sub("(.)([A-Z][a-z]+)", r"\1_\2", s)
     return re.sub("([a-z0-9])([A-Z])", r"\1_\2", s).lower()
 
@@ -88,7 +88,7 @@ def main(srcfiles, outfile):
             "\n".join(
                 [
                     "",
-                    f"def {_s(name)}(session: Session{args1}) -> List[Row]:",
+                    f"def {_s(name)}(session: Session{args1}) -> list[Row]:",
                     f'    return runScript(session, "{name}"{args2}).all()',
                     "",
                 ]
