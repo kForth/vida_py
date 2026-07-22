@@ -1,3 +1,9 @@
+"""SQLAlchemy mappings for SQL views in the timing VIDA database."""
+
+__author__ = "Kestin Goforth"
+__copyright__ = "Copyright 2026"
+__license__ = "BSD-3-Clause"
+
 from sqlalchemy import Integer, SmallInteger
 from sqlalchemy.orm import Mapped, mapped_column
 

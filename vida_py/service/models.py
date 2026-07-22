@@ -1,12 +1,20 @@
+"""SQLAlchemy ORM models for the service VIDA database."""
+
+# ruff: noqa: N815
+
+__author__ = "Kestin Goforth"
+__copyright__ = "Copyright 2026"
+__license__ = "BSD-3-Clause"
+
 from sqlalchemy import BINARY, NVARCHAR, Boolean, ForeignKey, Integer, String
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 
-class Model(DeclarativeBase):
+class _Model(DeclarativeBase):
     pass
 
 
-class Document(Model):
+class Document(_Model):
     __bind_key__ = "service"
     __tablename__ = "Document"
 
@@ -29,20 +37,18 @@ class Document(Model):
     type: Mapped["DocumentType"] = relationship()
 
 
-class DocumentIndexedWord(Model):
+class DocumentIndexedWord(_Model):
     __bind_key__ = "service"
     __tablename__ = "DocumentIndexedWord"
 
     fkDocument: Mapped[int] = mapped_column(ForeignKey("Document.id"), primary_key=True)
-    fkIndexedWord: Mapped[int] = mapped_column(
-        ForeignKey("IndexedWord.id"), primary_key=True
-    )
+    fkIndexedWord: Mapped[int] = mapped_column(ForeignKey("IndexedWord.id"), primary_key=True)
 
     document: Mapped["Document"] = relationship()
     indexed_word: Mapped["IndexedWord"] = relationship()
 
 
-class DocumentLink(Model):
+class DocumentLink(_Model):
     __bind_key__ = "service"
     __tablename__ = "DocumentLink"
 
@@ -56,7 +62,7 @@ class DocumentLink(Model):
     document: Mapped["Document"] = relationship()
 
 
-class DocumentLinkTitle(Model):
+class DocumentLinkTitle(_Model):
     __bind_key__ = "service"
     __tablename__ = "DocumentLinkTitle"
 
@@ -67,7 +73,7 @@ class DocumentLinkTitle(Model):
     document: Mapped["Document"] = relationship()
 
 
-class DocumentProfile(Model):
+class DocumentProfile(_Model):
     __bind_key__ = "service"
     __tablename__ = "DocumentProfile"
 
@@ -77,7 +83,7 @@ class DocumentProfile(Model):
     document: Mapped["Document"] = relationship()
 
 
-class DocumentType(Model):
+class DocumentType(_Model):
     __bind_key__ = "service"
     __tablename__ = "DocumentType"
 
@@ -85,7 +91,7 @@ class DocumentType(Model):
     name: Mapped[str] = mapped_column(NVARCHAR(50))
 
 
-class DroppedWord(Model):
+class DroppedWord(_Model):
     __bind_key__ = "service"
     __tablename__ = "DroppedWord"
 
@@ -93,7 +99,7 @@ class DroppedWord(Model):
     text: Mapped[str] = mapped_column(NVARCHAR(2000))
 
 
-class FunctionGroupText(Model):
+class FunctionGroupText(_Model):
     __bind_key__ = "service"
     __tablename__ = "FunctionGroupText"
 
@@ -101,14 +107,14 @@ class FunctionGroupText(Model):
     title: Mapped[str] = mapped_column(NVARCHAR(100))
 
 
-class IndexDelimiter(Model):
+class IndexDelimiter(_Model):
     __bind_key__ = "service"
     __tablename__ = "IndexDelimiter"
 
     delimiter: Mapped[str] = mapped_column(NVARCHAR(50), primary_key=True)
 
 
-class IndexedWord(Model):
+class IndexedWord(_Model):
     __bind_key__ = "service"
     __tablename__ = "IndexedWord"
 
@@ -116,7 +122,7 @@ class IndexedWord(Model):
     text: Mapped[str] = mapped_column(NVARCHAR(2000))
 
 
-class Qualifier(Model):
+class Qualifier(_Model):
     __bind_key__ = "service"
     __tablename__ = "Qualifier"
 
@@ -130,20 +136,18 @@ class Qualifier(Model):
     group: Mapped["QualifierGroup"] = relationship()
 
 
-class QualifierAttachment(Model):
+class QualifierAttachment(_Model):
     __bind_key__ = "service"
     __tablename__ = "QualifierAttachment"
 
     fkQualifier: Mapped[int] = mapped_column(ForeignKey("Qualifier.id"), primary_key=True)
     url: Mapped[str] = mapped_column(NVARCHAR(255))
-    InstallationType: Mapped[str] = mapped_column(
-        NVARCHAR(50), default="ALL", primary_key=True
-    )
+    InstallationType: Mapped[str] = mapped_column(NVARCHAR(50), default="ALL", primary_key=True)
 
     qualifier: Mapped["Qualifier"] = relationship()
 
 
-class QualifierDocument(Model):
+class QualifierDocument(_Model):
     __bind_key__ = "service"
     __tablename__ = "QualifierDocument"
 
@@ -154,7 +158,7 @@ class QualifierDocument(Model):
     qualifier: Mapped["Qualifier"] = relationship()
 
 
-class QualifierGroup(Model):
+class QualifierGroup(_Model):
     __bind_key__ = "service"
     __tablename__ = "QualifierGroup"
 
@@ -163,7 +167,7 @@ class QualifierGroup(Model):
     displayOrder: Mapped[int] = mapped_column(Integer)
 
 
-class Resource(Model):
+class Resource(_Model):
     __bind_key__ = "service"
     __tablename__ = "Resource"
 
@@ -175,7 +179,7 @@ class Resource(Model):
     type: Mapped["ResourceType"] = relationship()
 
 
-class ResourceType(Model):
+class ResourceType(_Model):
     __bind_key__ = "service"
     __tablename__ = "ResourceType"
 
@@ -183,7 +187,7 @@ class ResourceType(Model):
     Title: Mapped[str] = mapped_column(String(50))
 
 
-class SymptomIEMap(Model):
+class SymptomIEMap(_Model):
     __bind_key__ = "service"
     __tablename__ = "SymptomIEMap"
 
@@ -194,7 +198,7 @@ class SymptomIEMap(Model):
     document: Mapped["Document"] = relationship()
 
 
-class TreeItem(Model):
+class TreeItem(_Model):
     __bind_key__ = "service"
     __tablename__ = "TreeItem"
 
@@ -215,7 +219,7 @@ class TreeItem(Model):
     qualifier: Mapped["Qualifier"] = relationship()
 
 
-class TreeItemDocument(Model):
+class TreeItemDocument(_Model):
     __bind_key__ = "service"
     __tablename__ = "TreeItemDocument"
 
@@ -225,7 +229,7 @@ class TreeItemDocument(Model):
     item: Mapped["TreeItem"] = relationship()
 
 
-class TreeItemProfile(Model):
+class TreeItemProfile(_Model):
     __bind_key__ = "service"
     __tablename__ = "TreeItemProfile"
 
@@ -235,7 +239,7 @@ class TreeItemProfile(Model):
     item: Mapped["TreeItem"] = relationship()
 
 
-class UnIndexedWord(Model):
+class UnIndexedWord(_Model):
     __bind_key__ = "service"
     __tablename__ = "UnIndexedWord"
 

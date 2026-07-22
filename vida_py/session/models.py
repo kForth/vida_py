@@ -1,14 +1,22 @@
+"""SQLAlchemy ORM models for the session VIDA database."""
+
+# ruff: noqa: N815
+
+__author__ = "Kestin Goforth"
+__copyright__ = "Copyright 2026"
+__license__ = "BSD-3-Clause"
+
 from datetime import datetime
 
 from sqlalchemy import BINARY, VARBINARY, BigInteger, Boolean, DateTime, Integer, String
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 
-class Model(DeclarativeBase):
+class _Model(DeclarativeBase):
     pass
 
 
-class ActionItem(Model):
+class ActionItem(_Model):
     __bind_key__ = "session"
     __tablename__ = "ActionItem"
 
@@ -25,7 +33,7 @@ class ActionItem(Model):
     dtcReadoutConclusion: Mapped[int] = mapped_column(Integer)
 
 
-class CommToolInfo(Model):
+class CommToolInfo(_Model):
     __bind_key__ = "session"
     __tablename__ = "CommToolInfo"
 
@@ -37,7 +45,7 @@ class CommToolInfo(Model):
     ApiVersion: Mapped[str] = mapped_column(String(80))
 
 
-class CryptKey(Model):
+class CryptKey(_Model):
     __bind_key__ = "session"
     __tablename__ = "CryptKey"
 
@@ -45,7 +53,7 @@ class CryptKey(Model):
     KeyData: Mapped[bytes] = mapped_column(VARBINARY)
 
 
-class DiagnosticScript(Model):
+class DiagnosticScript(_Model):
     __bind_key__ = "session"
     __tablename__ = "DiagnosticScript"
 
@@ -54,7 +62,7 @@ class DiagnosticScript(Model):
     XmlData: Mapped[bytes] = mapped_column(BINARY(2147483647))
 
 
-class DownloadConfirmation(Model):
+class DownloadConfirmation(_Model):
     __bind_key__ = "session"
     __tablename__ = "DownloadConfirmation"
 
@@ -64,7 +72,7 @@ class DownloadConfirmation(Model):
     VehicleCodes: Mapped[bytes] = mapped_column(BINARY(2147483647))
 
 
-class DroLog(Model):
+class DroLog(_Model):
     __bind_key__ = "session"
     __tablename__ = "DroLog"
 
@@ -75,7 +83,7 @@ class DroLog(Model):
     Response: Mapped[bytes] = mapped_column(VARBINARY)
 
 
-class Dtc(Model):
+class Dtc(_Model):
     __bind_key__ = "session"
     __tablename__ = "Dtc"
 
@@ -97,7 +105,7 @@ class Dtc(Model):
     IsActive: Mapped[bool] = mapped_column(Boolean)
 
 
-class DtcReadout(Model):
+class DtcReadout(_Model):
     __bind_key__ = "session"
     __tablename__ = "DtcReadout"
 
@@ -109,7 +117,7 @@ class DtcReadout(Model):
     IsFirst: Mapped[bool] = mapped_column(Boolean)
 
 
-class ESWDL(Model):
+class ESWDL(_Model):
     __bind_key__ = "session"
     __tablename__ = "ESWDL"
 
@@ -120,7 +128,7 @@ class ESWDL(Model):
     Installed: Mapped[bool] = mapped_column(Boolean)
 
 
-class EcuInfo(Model):
+class EcuInfo(_Model):
     __bind_key__ = "session"
     __tablename__ = "EcuInfo"
 
@@ -137,7 +145,7 @@ class EcuInfo(Model):
     EcuVariantId: Mapped[str] = mapped_column(String(50))
 
 
-class EcuSoftware(Model):
+class EcuSoftware(_Model):
     __bind_key__ = "session"
     __tablename__ = "EcuSoftware"
 
@@ -147,7 +155,7 @@ class EcuSoftware(Model):
     softwarePartNo: Mapped[str] = mapped_column(String(50))
 
 
-class FaultCounter(Model):
+class FaultCounter(_Model):
     __bind_key__ = "session"
     __tablename__ = "FaultCounter"
 
@@ -158,7 +166,7 @@ class FaultCounter(Model):
     countertextid: Mapped[int] = mapped_column(Integer)
 
 
-class FreezeFrameParam(Model):
+class FreezeFrameParam(_Model):
     __bind_key__ = "session"
     __tablename__ = "FreezeFrameParam"
 
@@ -170,7 +178,7 @@ class FreezeFrameParam(Model):
     blockId: Mapped[int] = mapped_column(Integer)
 
 
-class GblPackage(Model):
+class GblPackage(_Model):
     __bind_key__ = "session"
     __tablename__ = "GblPackage"
 
@@ -180,7 +188,7 @@ class GblPackage(Model):
     Code: Mapped[bytes] = mapped_column(BINARY(2147483647))
 
 
-class HistoryItem(Model):
+class HistoryItem(_Model):
     __bind_key__ = "session"
     __tablename__ = "HistoryItem"
 
@@ -197,7 +205,7 @@ class HistoryItem(Model):
     OrderId: Mapped[int] = mapped_column(BigInteger)
 
 
-class HistoryLoadedEcuItem(Model):
+class HistoryLoadedEcuItem(_Model):
     __bind_key__ = "session"
     __tablename__ = "HistoryLoadedEcuItem"
 
@@ -206,7 +214,7 @@ class HistoryLoadedEcuItem(Model):
     LoadedEcu: Mapped[str] = mapped_column(String(30), primary_key=True)
 
 
-class HistoryVehicleOrderItem(Model):
+class HistoryVehicleOrderItem(_Model):
     __bind_key__ = "session"
     __tablename__ = "HistoryVehicleOrderItem"
 
@@ -214,7 +222,7 @@ class HistoryVehicleOrderItem(Model):
     SwProdId: Mapped[int] = mapped_column(BigInteger, primary_key=True)
 
 
-class KeyValue(Model):
+class KeyValue(_Model):
     __bind_key__ = "session"
     __tablename__ = "KeyValue"
 
@@ -223,7 +231,7 @@ class KeyValue(Model):
     description: Mapped[str] = mapped_column(String(250))
 
 
-class ObservedSymptom(Model):
+class ObservedSymptom(_Model):
     __bind_key__ = "session"
     __tablename__ = "ObservedSymptom"
 
@@ -233,7 +241,7 @@ class ObservedSymptom(Model):
     Note: Mapped[str] = mapped_column(String(256))
 
 
-class OrderVehicle(Model):
+class OrderVehicle(_Model):
     __bind_key__ = "session"
     __tablename__ = "OrderVehicle"
 
@@ -245,7 +253,7 @@ class OrderVehicle(Model):
     FYON: Mapped[int] = mapped_column(Integer)
 
 
-class OrderVehiclePackage(Model):
+class OrderVehiclePackage(_Model):
     __bind_key__ = "session"
     __tablename__ = "OrderVehiclePackage"
 
@@ -258,7 +266,7 @@ class OrderVehiclePackage(Model):
     ConfirmTime: Mapped[int] = mapped_column(BigInteger)
 
 
-class Parameter(Model):
+class Parameter(_Model):
     __bind_key__ = "session"
     __tablename__ = "Parameter"
 
@@ -269,7 +277,7 @@ class Parameter(Model):
     CarConfigParam: Mapped[bool] = mapped_column(Boolean)
 
 
-class PendingConfirmation(Model):
+class PendingConfirmation(_Model):
     __bind_key__ = "session"
     __tablename__ = "PendingConfirmation"
 
@@ -278,7 +286,7 @@ class PendingConfirmation(Model):
     ConfirmPackageXmlData: Mapped[bytes] = mapped_column(BINARY(2147483647))
 
 
-class PieDownloadConfirmation(Model):
+class PieDownloadConfirmation(_Model):
     __bind_key__ = "session"
     __tablename__ = "PieDownloadConfirmation"
 
@@ -289,7 +297,7 @@ class PieDownloadConfirmation(Model):
     ErrorReturnCode: Mapped[int] = mapped_column(Integer)
 
 
-class PieOrder(Model):
+class PieOrder(_Model):
     __bind_key__ = "session"
     __tablename__ = "PieOrder"
 
@@ -300,7 +308,7 @@ class PieOrder(Model):
     ErrorReturnCode: Mapped[int] = mapped_column(Integer)
 
 
-class PieOrderAttempt(Model):
+class PieOrderAttempt(_Model):
     __bind_key__ = "session"
     __tablename__ = "PieOrderAttempt"
 
@@ -309,14 +317,14 @@ class PieOrderAttempt(Model):
     Lock: Mapped[datetime] = mapped_column(DateTime, default=datetime.now())
 
 
-class PiePackage(Model):
+class PiePackage(_Model):
     __bind_key__ = "session"
     __tablename__ = "PiePackage"
 
     fkPieOrder: Mapped[int] = mapped_column(BigInteger, primary_key=True)
 
 
-class RestoreableParameter(Model):
+class RestoreableParameter(_Model):
     __bind_key__ = "session"
     __tablename__ = "RestoreableParameter"
 
@@ -327,7 +335,7 @@ class RestoreableParameter(Model):
     Value: Mapped[str] = mapped_column(String(255))
 
 
-class RestoredParameter(Model):
+class RestoredParameter(_Model):
     __bind_key__ = "session"
     __tablename__ = "RestoredParameter"
 
@@ -337,7 +345,7 @@ class RestoredParameter(Model):
     Value: Mapped[str] = mapped_column(String(100), primary_key=True)
 
 
-class SlaveEcuInfo(Model):
+class SlaveEcuInfo(_Model):
     __bind_key__ = "session"
     __tablename__ = "SlaveEcuInfo"
 
@@ -349,7 +357,7 @@ class SlaveEcuInfo(Model):
     HwSerialNumberName: Mapped[str] = mapped_column(String(200))
 
 
-class StatusIdentifier(Model):
+class StatusIdentifier(_Model):
     __bind_key__ = "session"
     __tablename__ = "StatusIdentifier"
 
@@ -362,7 +370,7 @@ class StatusIdentifier(Model):
     statusidentifiertext: Mapped[str] = mapped_column(String(250))
 
 
-class UpdateOrder(Model):
+class UpdateOrder(_Model):
     __bind_key__ = "session"
     __tablename__ = "UpdateOrder"
 
@@ -374,7 +382,7 @@ class UpdateOrder(Model):
     ErrorReturnCode: Mapped[int] = mapped_column(Integer)
 
 
-class UpdateOrderAttempt(Model):
+class UpdateOrderAttempt(_Model):
     __bind_key__ = "session"
     __tablename__ = "UpdateOrderAttempt"
 
@@ -383,7 +391,7 @@ class UpdateOrderAttempt(Model):
     Lock: Mapped[datetime] = mapped_column(DateTime, default=datetime.now())
 
 
-class UpdateOrderDelivery(Model):
+class UpdateOrderDelivery(_Model):
     __bind_key__ = "session"
     __tablename__ = "UpdateOrderDelivery"
 
@@ -392,7 +400,7 @@ class UpdateOrderDelivery(Model):
     PieTransactionId: Mapped[int] = mapped_column(BigInteger)
 
 
-class UpdateVehiclePackage(Model):
+class UpdateVehiclePackage(_Model):
     __bind_key__ = "session"
     __tablename__ = "UpdateVehiclePackage"
 
@@ -405,7 +413,7 @@ class UpdateVehiclePackage(Model):
     ConfirmTime: Mapped[int] = mapped_column(BigInteger)
 
 
-class Vbf(Model):
+class Vbf(_Model):
     __bind_key__ = "session"
     __tablename__ = "Vbf"
 
@@ -415,7 +423,7 @@ class Vbf(Model):
     XmlData: Mapped[bytes] = mapped_column(BINARY(2147483647))
 
 
-class VehConfig(Model):
+class VehConfig(_Model):
     __bind_key__ = "session"
     __tablename__ = "VehConfig"
 
@@ -432,7 +440,7 @@ class VehConfig(Model):
     IssueNo: Mapped[str] = mapped_column(String(50))
 
 
-class VehicleOrder(Model):
+class VehicleOrder(_Model):
     __bind_key__ = "session"
     __tablename__ = "VehicleOrder"
 
@@ -442,7 +450,7 @@ class VehicleOrder(Model):
     ErrorDetails: Mapped[str] = mapped_column(String(100))
 
 
-class VehicleOrderDelivery(Model):
+class VehicleOrderDelivery(_Model):
     __bind_key__ = "session"
     __tablename__ = "VehicleOrderDelivery"
 
@@ -451,7 +459,7 @@ class VehicleOrderDelivery(Model):
     PieTransactionId: Mapped[int] = mapped_column(BigInteger)
 
 
-class VehicleOrderSpec(Model):
+class VehicleOrderSpec(_Model):
     __bind_key__ = "session"
     __tablename__ = "VehicleOrderSpec"
 
@@ -462,7 +470,7 @@ class VehicleOrderSpec(Model):
     PreOrderedOrderId: Mapped[int] = mapped_column(BigInteger)
 
 
-class VehicleOrderSpecItem(Model):
+class VehicleOrderSpecItem(_Model):
     __bind_key__ = "session"
     __tablename__ = "VehicleOrderSpecItem"
 
@@ -470,7 +478,7 @@ class VehicleOrderSpecItem(Model):
     SwProductId: Mapped[int] = mapped_column(BigInteger, primary_key=True)
 
 
-class VehicleParameter(Model):
+class VehicleParameter(_Model):
     __bind_key__ = "session"
     __tablename__ = "VehicleParameter"
 
@@ -481,7 +489,7 @@ class VehicleParameter(Model):
     type: Mapped[int] = mapped_column(Integer)
 
 
-class WorkshopSession(Model):
+class WorkshopSession(_Model):
     __bind_key__ = "session"
     __tablename__ = "WorkshopSession"
 

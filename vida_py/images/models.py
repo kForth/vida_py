@@ -1,12 +1,20 @@
+"""SQLAlchemy ORM models for the images VIDA database."""
+
+# ruff: noqa: N815
+
+__author__ = "Kestin Goforth"
+__copyright__ = "Copyright 2026"
+__license__ = "BSD-3-Clause"
+
 from sqlalchemy import BINARY, Boolean, Integer, String
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 
-class Model(DeclarativeBase):
+class _Model(DeclarativeBase):
     pass
 
 
-class GraphicCarConfigs(Model):
+class GraphicCarConfigs(_Model):
     __bind_key__ = "images"
     __tablename__ = "GraphicCarConfigs"
 
@@ -16,7 +24,7 @@ class GraphicCarConfigs(Model):
     height: Mapped[int] = mapped_column(Integer, default=0, primary_key=True)
 
 
-class GraphicFormats(Model):
+class GraphicFormats(_Model):
     __bind_key__ = "images"
     __tablename__ = "GraphicFormats"
 
@@ -24,7 +32,7 @@ class GraphicFormats(Model):
     description: Mapped[str] = mapped_column(String(50))
 
 
-class Graphics(Model):
+class Graphics(_Model):
     __bind_key__ = "images"
     __tablename__ = "Graphics"
 
@@ -38,7 +46,7 @@ class Graphics(Model):
     isParts: Mapped[bool] = mapped_column(Boolean)
 
 
-class LocalizedGraphics(Model):
+class LocalizedGraphics(_Model):
     __bind_key__ = "images"
     __tablename__ = "LocalizedGraphics"
 

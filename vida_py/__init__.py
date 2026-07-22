@@ -1,3 +1,9 @@
+"""Public package API exposing session factory aliases for VIDA databases."""
+
+__author__ = "Kestin Goforth"
+__copyright__ = "Copyright 2026"
+__license__ = "BSD-3-Clause"
+
 from vida_py.access import Session as AccessServerSession
 from vida_py.basedata import Session as BaseDataSession
 from vida_py.carcom import Session as CarComSession

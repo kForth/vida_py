@@ -1,14 +1,22 @@
+"""SQLAlchemy ORM models for the epc VIDA database."""
+
+# ruff: noqa: N815
+
+__author__ = "Kestin Goforth"
+__copyright__ = "Copyright 2026"
+__license__ = "BSD-3-Clause"
+
 from datetime import datetime
 
 from sqlalchemy import Boolean, DateTime, Integer, Numeric, SmallInteger, String
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 
-class Model(DeclarativeBase):
+class _Model(DeclarativeBase):
     pass
 
 
-class AttachmentData(Model):
+class AttachmentData(_Model):
     __bind_key__ = "epc"
     __tablename__ = "AttachmentData"
 
@@ -19,7 +27,7 @@ class AttachmentData(Model):
     VersionUpdate: Mapped[str] = mapped_column(String(10))
 
 
-class CatalogueComponents(Model):
+class CatalogueComponents(_Model):
     __bind_key__ = "epc"
     __tablename__ = "CatalogueComponents"
 
@@ -49,7 +57,7 @@ class CatalogueComponents(Model):
     NEVISVersion: Mapped[str] = mapped_column(String(32))
 
 
-class CCLexicon(Model):
+class CCLexicon(_Model):
     __bind_key__ = "epc"
     __tablename__ = "CCLexicon"
 
@@ -59,7 +67,7 @@ class CCLexicon(Model):
     ParentComponentId: Mapped[int] = mapped_column(Integer)
 
 
-class CCPartnerGroup(Model):
+class CCPartnerGroup(_Model):
     __bind_key__ = "epc"
     __tablename__ = "CCPartnerGroup"
 
@@ -68,7 +76,7 @@ class CCPartnerGroup(Model):
     ID: Mapped[str] = mapped_column(String(50), primary_key=True)
 
 
-class CodeDictionary(Model):
+class CodeDictionary(_Model):
     __bind_key__ = "epc"
     __tablename__ = "CodeDictionary"
 
@@ -77,7 +85,7 @@ class CodeDictionary(Model):
     ValueText: Mapped[str] = mapped_column(String(50))
 
 
-class ComponentAttachments(Model):
+class ComponentAttachments(_Model):
     __bind_key__ = "epc"
     __tablename__ = "ComponentAttachments"
 
@@ -88,7 +96,7 @@ class ComponentAttachments(Model):
     VersionUpdate: Mapped[str] = mapped_column(String(10))
 
 
-class ComponentConditions(Model):
+class ComponentConditions(_Model):
     __bind_key__ = "epc"
     __tablename__ = "ComponentConditions"
 
@@ -101,7 +109,7 @@ class ComponentConditions(Model):
     VersionUpdate: Mapped[str] = mapped_column(String(10))
 
 
-class ComponentDescriptions(Model):
+class ComponentDescriptions(_Model):
     __bind_key__ = "epc"
     __tablename__ = "ComponentDescriptions"
 
@@ -112,7 +120,7 @@ class ComponentDescriptions(Model):
     VersionUpdate: Mapped[str] = mapped_column(String(10))
 
 
-class Languages(Model):
+class Languages(_Model):
     __bind_key__ = "epc"
     __tablename__ = "Languages"
 
@@ -121,7 +129,7 @@ class Languages(Model):
     VersionUpdate: Mapped[str] = mapped_column(String(10), default=1.0)
 
 
-class Lexicon(Model):
+class Lexicon(_Model):
     __bind_key__ = "epc"
     __tablename__ = "Lexicon"
 
@@ -133,7 +141,7 @@ class Lexicon(Model):
     TransDate: Mapped[datetime] = mapped_column(DateTime)
 
 
-class LexiconNoteWords(Model):
+class LexiconNoteWords(_Model):
     __bind_key__ = "epc"
     __tablename__ = "LexiconNoteWords"
 
@@ -142,7 +150,7 @@ class LexiconNoteWords(Model):
     fkWord: Mapped[int] = mapped_column(Integer, primary_key=True)
 
 
-class LexiconPartWords(Model):
+class LexiconPartWords(_Model):
     __bind_key__ = "epc"
     __tablename__ = "LexiconPartWords"
 
@@ -150,7 +158,7 @@ class LexiconPartWords(Model):
     fkWord: Mapped[int] = mapped_column(Integer, primary_key=True)
 
 
-class NoteWords(Model):
+class NoteWords(_Model):
     __bind_key__ = "epc"
     __tablename__ = "NoteWords"
 
@@ -159,7 +167,7 @@ class NoteWords(Model):
     revword: Mapped[str] = mapped_column(String(100))
 
 
-class PartItems(Model):
+class PartItems(_Model):
     __bind_key__ = "epc"
     __tablename__ = "PartItems"
 
@@ -174,7 +182,7 @@ class PartItems(Model):
     VersionUpdate: Mapped[str] = mapped_column(String(10))
 
 
-class PartWords(Model):
+class PartWords(_Model):
     __bind_key__ = "epc"
     __tablename__ = "PartWords"
 
@@ -184,7 +192,7 @@ class PartWords(Model):
     revword: Mapped[str] = mapped_column(String(100))
 
 
-class StructuredNoteTypes(Model):
+class StructuredNoteTypes(_Model):
     __bind_key__ = "epc"
     __tablename__ = "StructuredNoteTypes"
 
@@ -193,7 +201,7 @@ class StructuredNoteTypes(Model):
     VersionUpdate: Mapped[str] = mapped_column(String(10))
 
 
-class StructuredNoteValues(Model):
+class StructuredNoteValues(_Model):
     __bind_key__ = "epc"
     __tablename__ = "StructuredNoteValues"
 
@@ -204,7 +212,7 @@ class StructuredNoteValues(Model):
     VersionUpdate: Mapped[str] = mapped_column(String(10))
 
 
-class StructuredNotes(Model):
+class StructuredNotes(_Model):
     __bind_key__ = "epc"
     __tablename__ = "StructuredNotes"
 
@@ -213,7 +221,7 @@ class StructuredNotes(Model):
     VersionUpdate: Mapped[str] = mapped_column(String(10))
 
 
-class TableCodes(Model):
+class TableCodes(_Model):
     __bind_key__ = "epc"
     __tablename__ = "TableCodes"
 
@@ -221,7 +229,7 @@ class TableCodes(Model):
     Name: Mapped[str] = mapped_column(String(50))
 
 
-class VirtualToShared(Model):
+class VirtualToShared(_Model):
     __bind_key__ = "epc"
     __tablename__ = "VirtualToShared"
 

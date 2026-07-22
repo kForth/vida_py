@@ -1,5 +1,12 @@
+"""SQLAlchemy ORM models for the carcom VIDA database."""
+
+# ruff: noqa: N815, N801
+
+__author__ = "Kestin Goforth"
+__copyright__ = "Copyright 2026"
+__license__ = "BSD-3-Clause"
+
 from datetime import datetime
-from typing import List
 
 from sqlalchemy import (
     BINARY,
@@ -14,11 +21,11 @@ from sqlalchemy import (
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 
-class Model(DeclarativeBase):
+class _Model(DeclarativeBase):
     pass
 
 
-class T100_EcuVariant(Model):
+class T100_EcuVariant(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T100_EcuVariant"
 
@@ -29,13 +36,11 @@ class T100_EcuVariant(Model):
     status: Mapped[int] = mapped_column(Integer)
     inheritance: Mapped[str] = mapped_column(String(1))
 
-    ecu: Mapped["T101_Ecu"] = relationship(
-        back_populates="variants", foreign_keys=fkT101_Ecu
-    )
+    ecu: Mapped["T101_Ecu"] = relationship(back_populates="variants", foreign_keys=fkT101_Ecu)
     gateway: Mapped["T101_Ecu"] = relationship(foreign_keys=fkT101_Ecu_Gateway)
 
 
-class T101_Ecu(Model):
+class T101_Ecu(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T101_Ecu"
 
@@ -50,7 +55,7 @@ class T101_Ecu(Model):
     type: Mapped["T102_EcuType"] = relationship()
 
 
-class T102_EcuType(Model):
+class T102_EcuType(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T102_EcuType"
 
@@ -62,22 +67,20 @@ class T102_EcuType(Model):
     text: Mapped["T190_Text"] = relationship()
 
 
-class T103_EcuVariant_Project(Model):
+class T103_EcuVariant_Project(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T103_EcuVariant_Project"
 
     fkT100_EcuVariant: Mapped[int] = mapped_column(
         ForeignKey("T100_EcuVariant.id"), primary_key=True
     )
-    fkT104_Project: Mapped[int] = mapped_column(
-        ForeignKey("T104_Project.id"), primary_key=True
-    )
+    fkT104_Project: Mapped[int] = mapped_column(ForeignKey("T104_Project.id"), primary_key=True)
 
     variant: Mapped["T100_EcuVariant"] = relationship()
     project: Mapped["T104_Project"] = relationship()
 
 
-class T104_Project(Model):
+class T104_Project(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T104_Project"
 
@@ -90,13 +93,11 @@ class T104_Project(Model):
     prodDataFrom: Mapped[datetime] = mapped_column()
 
 
-class T110_Service_EcuVariant(Model):
+class T110_Service_EcuVariant(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T110_Service_EcuVariant"
 
-    fkT111_Service: Mapped[int] = mapped_column(
-        ForeignKey("T111_Service.id"), primary_key=True
-    )
+    fkT111_Service: Mapped[int] = mapped_column(ForeignKey("T111_Service.id"), primary_key=True)
     fkT100_EcuVariant: Mapped[int] = mapped_column(
         ForeignKey("T100_EcuVariant.id"), primary_key=True
     )
@@ -107,7 +108,7 @@ class T110_Service_EcuVariant(Model):
     init_timing_service: Mapped["T130_Init"] = relationship()
 
 
-class T111_Service(Model):
+class T111_Service(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T111_Service"
 
@@ -121,21 +122,17 @@ class T111_Service(Model):
     definition: Mapped[bytes] = mapped_column(BINARY(2147483647))
     type: Mapped[int] = mapped_column(Integer)
     status: Mapped[int] = mapped_column(Integer)
-    fkt130_Init_Timing_Service_Default: Mapped[int] = mapped_column(
-        ForeignKey("T130_Init.id")
-    )
+    fkt130_Init_Timing_Service_Default: Mapped[int] = mapped_column(ForeignKey("T130_Init.id"))
 
     protocol: Mapped["T122_Protocol"] = relationship()
     init_timing_service: Mapped["T130_Init"] = relationship()
 
 
-class T120_Config_EcuVariant(Model):
+class T120_Config_EcuVariant(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T120_Config_EcuVariant"
 
-    fkT121_Config: Mapped[int] = mapped_column(
-        ForeignKey("T121_Config.id"), primary_key=True
-    )
+    fkT121_Config: Mapped[int] = mapped_column(ForeignKey("T121_Config.id"), primary_key=True)
     fkT100_EcuVariant: Mapped[int] = mapped_column(
         ForeignKey("T100_EcuVariant.id"), primary_key=True
     )
@@ -144,7 +141,7 @@ class T120_Config_EcuVariant(Model):
     ecu_variant: Mapped["T100_EcuVariant"] = relationship()
 
 
-class T121_Config(Model):
+class T121_Config(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T121_Config"
 
@@ -173,7 +170,7 @@ class T121_Config(Model):
     config: Mapped["T121_Config"] = relationship()
 
 
-class T122_Protocol(Model):
+class T122_Protocol(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T122_Protocol"
 
@@ -183,7 +180,7 @@ class T122_Protocol(Model):
     description: Mapped[str] = mapped_column(String(200))
 
 
-class T123_Bus(Model):
+class T123_Bus(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T123_Bus"
 
@@ -199,7 +196,7 @@ class T123_Bus(Model):
     text: Mapped["T190_Text"] = relationship()
 
 
-class T124_Net(Model):
+class T124_Net(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T124_Net"
 
@@ -208,7 +205,7 @@ class T124_Net(Model):
     name: Mapped[str] = mapped_column(String(200))
 
 
-class T130_Init(Model):
+class T130_Init(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T130_Init"
 
@@ -218,7 +215,7 @@ class T130_Init(Model):
     init_category: Mapped["T133_InitCategory"] = relationship()
 
 
-class T131_InitValue(Model):
+class T131_InitValue(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T131_InitValue"
 
@@ -232,7 +229,7 @@ class T131_InitValue(Model):
     init_value_type: Mapped["T132_InitValueType"] = relationship()
 
 
-class T132_InitValueType(Model):
+class T132_InitValueType(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T132_InitValueType"
 
@@ -240,7 +237,7 @@ class T132_InitValueType(Model):
     name: Mapped[str] = mapped_column(String(200))
 
 
-class T133_InitCategory(Model):
+class T133_InitCategory(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T133_InitCategory"
 
@@ -248,7 +245,7 @@ class T133_InitCategory(Model):
     name: Mapped[str] = mapped_column(String(200))
 
 
-class T134_InitCategory_Type(Model):
+class T134_InitCategory_Type(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T134_InitCategory_Type"
 
@@ -263,34 +260,30 @@ class T134_InitCategory_Type(Model):
     init_value_type: Mapped["T132_InitValueType"] = relationship()
 
 
-class T136_InitHw_Profile(Model):
+class T136_InitHw_Profile(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T136_InitHw_Profile"
 
     fkT130_Init: Mapped[int] = mapped_column(ForeignKey("T130_Init.id"), primary_key=True)
-    fkT161_Profile: Mapped[int] = mapped_column(
-        ForeignKey("T161_Profile.id"), primary_key=True
-    )
+    fkT161_Profile: Mapped[int] = mapped_column(ForeignKey("T161_Profile.id"), primary_key=True)
 
     init: Mapped["T130_Init"] = relationship()
     profile: Mapped["T161_Profile"] = relationship()
 
 
-class T137_InitSwdl_Profile(Model):
+class T137_InitSwdl_Profile(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T137_InitSwdl_Profile"
 
     fkT130_Init: Mapped[int] = mapped_column(ForeignKey("T130_Init.id"), primary_key=True)
-    fkT161_Profile: Mapped[int] = mapped_column(
-        ForeignKey("T161_Profile.id"), primary_key=True
-    )
+    fkT161_Profile: Mapped[int] = mapped_column(ForeignKey("T161_Profile.id"), primary_key=True)
     ecuAddress: Mapped[str] = mapped_column(String(100))
 
     init: Mapped["T130_Init"] = relationship()
     profile: Mapped["T161_Profile"] = relationship()
 
 
-class T141_Block(Model):
+class T141_Block(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T141_Block"
 
@@ -308,10 +301,10 @@ class T141_Block(Model):
     datatype: Mapped["T143_BlockDataType"] = relationship()
     text: Mapped["T190_Text"] = relationship()
 
-    values: Mapped[List["T150_BlockValue"]] = relationship()
+    values: Mapped[list["T150_BlockValue"]] = relationship()
 
 
-class T142_BlockType(Model):
+class T142_BlockType(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T142_BlockType"
 
@@ -323,7 +316,7 @@ class T142_BlockType(Model):
     parent: Mapped["T142_BlockType"] = relationship()
 
 
-class T143_BlockDataType(Model):
+class T143_BlockDataType(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T143_BlockDataType"
 
@@ -331,19 +324,15 @@ class T143_BlockDataType(Model):
     name: Mapped[str] = mapped_column(String(200))
 
 
-class T144_BlockChild(Model):
+class T144_BlockChild(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T144_BlockChild"
 
     fkT100_EcuVariant: Mapped[int] = mapped_column(
         ForeignKey("T100_EcuVariant.id"), primary_key=True
     )
-    fkT141_Block_Child: Mapped[int] = mapped_column(
-        ForeignKey("T141_Block.id"), primary_key=True
-    )
-    fkT141_Block_Parent: Mapped[int] = mapped_column(
-        ForeignKey("T141_Block.id"), primary_key=True
-    )
+    fkT141_Block_Child: Mapped[int] = mapped_column(ForeignKey("T141_Block.id"), primary_key=True)
+    fkT141_Block_Parent: Mapped[int] = mapped_column(ForeignKey("T141_Block.id"), primary_key=True)
     SortOrder: Mapped[int] = mapped_column(Integer, primary_key=True)
 
     ecu_variant: Mapped["T100_EcuVariant"] = relationship()
@@ -351,13 +340,11 @@ class T144_BlockChild(Model):
     parent: Mapped["T141_Block"] = relationship(foreign_keys=[fkT141_Block_Parent])
 
 
-class T148_BlockMetaPARA(Model):
+class T148_BlockMetaPARA(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T148_BlockMetaPARA"
 
-    fkT141_Block: Mapped[int] = mapped_column(
-        ForeignKey("T141_Block.id"), primary_key=True
-    )
+    fkT141_Block: Mapped[int] = mapped_column(ForeignKey("T141_Block.id"), primary_key=True)
     fkT100_EcuVariant: Mapped[int] = mapped_column(
         ForeignKey("T100_EcuVariant.id"), primary_key=True
     )
@@ -369,7 +356,7 @@ class T148_BlockMetaPARA(Model):
     ecu_variant: Mapped["T100_EcuVariant"] = relationship()
 
 
-class T150_BlockValue(Model):
+class T150_BlockValue(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T150_BlockValue"
 
@@ -386,20 +373,16 @@ class T150_BlockValue(Model):
     fkT190_Text_ppeUnit: Mapped[int] = mapped_column(ForeignKey("T190_Text.id"))
     fkT155_ppeScaling: Mapped[int] = mapped_column(ForeignKey("T155_Scaling.id"))
 
-    block: Mapped["T141_Block"] = relationship(
-        foreign_keys=[fkT141_Block], back_populates="values"
-    )
+    block: Mapped["T141_Block"] = relationship(foreign_keys=[fkT141_Block], back_populates="values")
     text_value: Mapped["T190_Text"] = relationship(foreign_keys=[fkT190_Text_Value])
     text_unit: Mapped["T190_Text"] = relationship(foreign_keys=[fkT190_Text_Unit])
     scaling: Mapped["T155_Scaling"] = relationship(foreign_keys=[fkT155_Scaling])
-    ppe_text_value: Mapped["T190_Text"] = relationship(
-        foreign_keys=[fkT190_Text_ppeValue]
-    )
+    ppe_text_value: Mapped["T190_Text"] = relationship(foreign_keys=[fkT190_Text_ppeValue])
     ppe_text_unit: Mapped["T190_Text"] = relationship(foreign_keys=[fkT190_Text_ppeUnit])
     ppe_scaling: Mapped["T155_Scaling"] = relationship(foreign_keys=[fkT155_ppeScaling])
 
 
-class T151_BlockValue_Symptom(Model):
+class T151_BlockValue_Symptom(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T151_BlockValue_Symptom"
 
@@ -415,14 +398,12 @@ class T151_BlockValue_Symptom(Model):
     connection: Mapped["T157_SymptomConnection"] = relationship()
 
 
-class T152_Symptom(Model):
+class T152_Symptom(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T152_Symptom"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    fkT153_SymptomCategory: Mapped[int] = mapped_column(
-        ForeignKey("T153_SymptomCategory.id")
-    )
+    fkT153_SymptomCategory: Mapped[int] = mapped_column(ForeignKey("T153_SymptomCategory.id"))
     fkT190_Text: Mapped[int] = mapped_column(ForeignKey("T190_Text.id"))
     type: Mapped[str] = mapped_column(String(1))
 
@@ -430,15 +411,13 @@ class T152_Symptom(Model):
     text: Mapped["T190_Text"] = relationship()
 
 
-class T153_SymptomCategory(Model):
+class T153_SymptomCategory(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T153_SymptomCategory"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     fkT190_Text: Mapped[int] = mapped_column(ForeignKey("T190_Text.id"))
-    fkT156_SymptomSection: Mapped[int] = mapped_column(
-        ForeignKey("T156_SymptomSection.id")
-    )
+    fkT156_SymptomSection: Mapped[int] = mapped_column(ForeignKey("T156_SymptomSection.id"))
     fkT154_SymptomType: Mapped[int] = mapped_column(ForeignKey("T154_SymptomType.Id"))
 
     text: Mapped["T190_Text"] = relationship()
@@ -446,7 +425,7 @@ class T153_SymptomCategory(Model):
     type: Mapped["T154_SymptomType"] = relationship()
 
 
-class T154_SymptomType(Model):
+class T154_SymptomType(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T154_SymptomType"
 
@@ -456,7 +435,7 @@ class T154_SymptomType(Model):
     text: Mapped["T190_Text"] = relationship()
 
 
-class T155_Scaling(Model):
+class T155_Scaling(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T155_Scaling"
 
@@ -465,7 +444,7 @@ class T155_Scaling(Model):
     type: Mapped[int] = mapped_column(Integer)
 
 
-class T156_SymptomSection(Model):
+class T156_SymptomSection(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T156_SymptomSection"
 
@@ -475,7 +454,7 @@ class T156_SymptomSection(Model):
     text: Mapped["T190_Text"] = relationship()
 
 
-class T157_SymptomConnection(Model):
+class T157_SymptomConnection(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T157_SymptomConnection"
 
@@ -487,7 +466,7 @@ class T157_SymptomConnection(Model):
     ecu_variant: Mapped["T100_EcuVariant"] = relationship()
 
 
-class T158_Symptom_CSC(Model):
+class T158_Symptom_CSC(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T158_Symptom_CSC"
 
@@ -495,59 +474,41 @@ class T158_Symptom_CSC(Model):
     CSC: Mapped[str] = mapped_column(String(2))
     status: Mapped[str] = mapped_column(String(10))
     fkT190_Text_SymptomType: Mapped[int] = mapped_column(ForeignKey("T190_Text.id"))
-    fkT194_FunctionGroup_1: Mapped[int] = mapped_column(
-        ForeignKey("T194_FunctionGroup_1.id")
-    )
-    fkT196_FunctionGroup_2: Mapped[int] = mapped_column(
-        ForeignKey("T196_FunctionGroup_2.id")
-    )
+    fkT194_FunctionGroup_1: Mapped[int] = mapped_column(ForeignKey("T194_FunctionGroup_1.id"))
+    fkT196_FunctionGroup_2: Mapped[int] = mapped_column(ForeignKey("T196_FunctionGroup_2.id"))
     fkT190_Text_CompFunc: Mapped[int] = mapped_column(ForeignKey("T190_Text.id"))
     fkT190_Text_Deviation: Mapped[int] = mapped_column(ForeignKey("T190_Text.id"))
     fkT190_Text_Condition_1: Mapped[int] = mapped_column(ForeignKey("T190_Text.id"))
     fkT190_Text_Condition_2: Mapped[int] = mapped_column(ForeignKey("T190_Text.id"))
     validFromDate: Mapped[datetime] = mapped_column()
 
-    symptom_type: Mapped["T190_Text"] = relationship(
-        foreign_keys=[fkT190_Text_SymptomType]
-    )
+    symptom_type: Mapped["T190_Text"] = relationship(foreign_keys=[fkT190_Text_SymptomType])
     function_group_1: Mapped["T194_FunctionGroup_1"] = relationship()
     function_group_2: Mapped["T196_FunctionGroup_2"] = relationship()
-    text_comp_func: Mapped["T190_Text"] = relationship(
-        foreign_keys=[fkT190_Text_CompFunc]
-    )
-    text_comp_deviation: Mapped["T190_Text"] = relationship(
-        foreign_keys=[fkT190_Text_Deviation]
-    )
-    text_comp_cond_1: Mapped["T190_Text"] = relationship(
-        foreign_keys=[fkT190_Text_Condition_1]
-    )
-    text_comp_cond_2: Mapped["T190_Text"] = relationship(
-        foreign_keys=[fkT190_Text_Condition_2]
-    )
+    text_comp_func: Mapped["T190_Text"] = relationship(foreign_keys=[fkT190_Text_CompFunc])
+    text_comp_deviation: Mapped["T190_Text"] = relationship(foreign_keys=[fkT190_Text_Deviation])
+    text_comp_cond_1: Mapped["T190_Text"] = relationship(foreign_keys=[fkT190_Text_Condition_1])
+    text_comp_cond_2: Mapped["T190_Text"] = relationship(foreign_keys=[fkT190_Text_Condition_2])
 
 
-class T159_SymptomCSC_SymptomDTC(Model):
+class T159_SymptomCSC_SymptomDTC(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T159_SymptomCSC_SymptomDTC"
 
     fkT158_Symptom_CSC: Mapped[int] = mapped_column(
         ForeignKey("T158_Symptom_CSC.id"), primary_key=True
     )
-    fkT152_Symptom: Mapped[int] = mapped_column(
-        ForeignKey("T152_Symptom.id"), primary_key=True
-    )
+    fkT152_Symptom: Mapped[int] = mapped_column(ForeignKey("T152_Symptom.id"), primary_key=True)
 
     csc: Mapped["T158_Symptom_CSC"] = relationship()
     symptom: Mapped["T152_Symptom"] = relationship()
 
 
-class T160_DefaultEcuVariant(Model):
+class T160_DefaultEcuVariant(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T160_DefaultEcuVariant"
 
-    fkT161_Profile: Mapped[int] = mapped_column(
-        ForeignKey("T161_Profile.id"), primary_key=True
-    )
+    fkT161_Profile: Mapped[int] = mapped_column(ForeignKey("T161_Profile.id"), primary_key=True)
     fkT100_EcuVariant: Mapped[int] = mapped_column(
         ForeignKey("T100_EcuVariant.id"), primary_key=True
     )
@@ -556,7 +517,7 @@ class T160_DefaultEcuVariant(Model):
     ecu_variant: Mapped["T100_EcuVariant"] = relationship()
 
 
-class T161_Profile(Model):
+class T161_Profile(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T161_Profile"
 
@@ -565,58 +526,30 @@ class T161_Profile(Model):
     folderLevel: Mapped[int] = mapped_column(Integer)
     description: Mapped[str] = mapped_column(String(500))
     title: Mapped[str] = mapped_column(String(500))
-    fkT162_ProfileValue_Model: Mapped[int] = mapped_column(
-        ForeignKey("T162_ProfileValue.id")
-    )
-    fkT162_ProfileValue_Year: Mapped[int] = mapped_column(
-        ForeignKey("T162_ProfileValue.id")
-    )
-    fkT162_ProfileValue_Engine: Mapped[int] = mapped_column(
-        ForeignKey("T162_ProfileValue.id")
-    )
+    fkT162_ProfileValue_Model: Mapped[int] = mapped_column(ForeignKey("T162_ProfileValue.id"))
+    fkT162_ProfileValue_Year: Mapped[int] = mapped_column(ForeignKey("T162_ProfileValue.id"))
+    fkT162_ProfileValue_Engine: Mapped[int] = mapped_column(ForeignKey("T162_ProfileValue.id"))
     fkT162_ProfileValue_Transmission: Mapped[int] = mapped_column(
         ForeignKey("T162_ProfileValue.id")
     )
-    fkT162_ProfileValue_Body: Mapped[int] = mapped_column(
-        ForeignKey("T162_ProfileValue.id")
-    )
-    fkT162_ProfileValue_Steering: Mapped[int] = mapped_column(
-        ForeignKey("T162_ProfileValue.id")
-    )
-    fkT162_ProfileValue_Market: Mapped[int] = mapped_column(
-        ForeignKey("T162_ProfileValue.id")
-    )
-    fkT162_ProfileValue_ControlUnit: Mapped[int] = mapped_column(
-        ForeignKey("T162_ProfileValue.id")
-    )
-    fkT162_ProfileValue_ChassisFrom: Mapped[int] = mapped_column(
-        ForeignKey("T162_ProfileValue.id")
-    )
-    fkT162_ProfileValue_ChassisTo: Mapped[int] = mapped_column(
-        ForeignKey("T162_ProfileValue.id")
-    )
+    fkT162_ProfileValue_Body: Mapped[int] = mapped_column(ForeignKey("T162_ProfileValue.id"))
+    fkT162_ProfileValue_Steering: Mapped[int] = mapped_column(ForeignKey("T162_ProfileValue.id"))
+    fkT162_ProfileValue_Market: Mapped[int] = mapped_column(ForeignKey("T162_ProfileValue.id"))
+    fkT162_ProfileValue_ControlUnit: Mapped[int] = mapped_column(ForeignKey("T162_ProfileValue.id"))
+    fkT162_ProfileValue_ChassisFrom: Mapped[int] = mapped_column(ForeignKey("T162_ProfileValue.id"))
+    fkT162_ProfileValue_ChassisTo: Mapped[int] = mapped_column(ForeignKey("T162_ProfileValue.id"))
 
-    model: Mapped["T162_ProfileValue"] = relationship(
-        foreign_keys=[fkT162_ProfileValue_Model]
-    )
-    year: Mapped["T162_ProfileValue"] = relationship(
-        foreign_keys=[fkT162_ProfileValue_Year]
-    )
-    engine: Mapped["T162_ProfileValue"] = relationship(
-        foreign_keys=[fkT162_ProfileValue_Engine]
-    )
+    model: Mapped["T162_ProfileValue"] = relationship(foreign_keys=[fkT162_ProfileValue_Model])
+    year: Mapped["T162_ProfileValue"] = relationship(foreign_keys=[fkT162_ProfileValue_Year])
+    engine: Mapped["T162_ProfileValue"] = relationship(foreign_keys=[fkT162_ProfileValue_Engine])
     transmission: Mapped["T162_ProfileValue"] = relationship(
         foreign_keys=[fkT162_ProfileValue_Transmission]
     )
-    body: Mapped["T162_ProfileValue"] = relationship(
-        foreign_keys=[fkT162_ProfileValue_Body]
-    )
+    body: Mapped["T162_ProfileValue"] = relationship(foreign_keys=[fkT162_ProfileValue_Body])
     steering: Mapped["T162_ProfileValue"] = relationship(
         foreign_keys=[fkT162_ProfileValue_Steering]
     )
-    market: Mapped["T162_ProfileValue"] = relationship(
-        foreign_keys=[fkT162_ProfileValue_Market]
-    )
+    market: Mapped["T162_ProfileValue"] = relationship(foreign_keys=[fkT162_ProfileValue_Market])
     control_unit: Mapped["T162_ProfileValue"] = relationship(
         foreign_keys=[fkT162_ProfileValue_ControlUnit]
     )
@@ -628,21 +561,19 @@ class T161_Profile(Model):
     )
 
 
-class T162_ProfileValue(Model):
+class T162_ProfileValue(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T162_ProfileValue"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     identifier: Mapped[str] = mapped_column(String(100))
     description: Mapped[str] = mapped_column(String(200))
-    fkT163_ProfileValueType: Mapped[int] = mapped_column(
-        ForeignKey("T163_ProfileValueType.id")
-    )
+    fkT163_ProfileValueType: Mapped[int] = mapped_column(ForeignKey("T163_ProfileValueType.id"))
 
     type: Mapped["T163_ProfileValueType"] = relationship()
 
 
-class T163_ProfileValueType(Model):
+class T163_ProfileValueType(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T163_ProfileValueType"
 
@@ -650,7 +581,7 @@ class T163_ProfileValueType(Model):
     identifier: Mapped[str] = mapped_column(String(100))
 
 
-class T170_SecurityCode_EcuVariant(Model):
+class T170_SecurityCode_EcuVariant(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T170_SecurityCode_EcuVariant"
 
@@ -665,21 +596,19 @@ class T170_SecurityCode_EcuVariant(Model):
     ecu_variant: Mapped["T100_EcuVariant"] = relationship()
 
 
-class T171_SecurityCode(Model):
+class T171_SecurityCode(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T171_SecurityCode"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    fkT172_SecurityCodeType: Mapped[int] = mapped_column(
-        ForeignKey("T172_SecurityCodeType.id")
-    )
+    fkT172_SecurityCodeType: Mapped[int] = mapped_column(ForeignKey("T172_SecurityCodeType.id"))
     code: Mapped[str] = mapped_column(String(200))
     description: Mapped[str] = mapped_column(String(250))
 
     type: Mapped["T172_SecurityCodeType"] = relationship()
 
 
-class T172_SecurityCodeType(Model):
+class T172_SecurityCodeType(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T172_SecurityCodeType"
 
@@ -688,7 +617,7 @@ class T172_SecurityCodeType(Model):
     description: Mapped[str] = mapped_column(String(250))
 
 
-class T190_Text(Model):
+class T190_Text(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T190_Text"
 
@@ -696,17 +625,15 @@ class T190_Text(Model):
     fkT192_TextCategory: Mapped[int] = mapped_column(ForeignKey("T192_TextCategory.id"))
     status: Mapped[int] = mapped_column(Integer)
 
-    data: Mapped[List["T191_TextData"]] = relationship()
+    data: Mapped[list["T191_TextData"]] = relationship()
     category: Mapped["T192_TextCategory"] = relationship()
 
 
-class T191_TextData(Model):
+class T191_TextData(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T191_TextData"
 
-    fkT193_Language: Mapped[int] = mapped_column(
-        ForeignKey("T193_Language.id"), primary_key=True
-    )
+    fkT193_Language: Mapped[int] = mapped_column(ForeignKey("T193_Language.id"), primary_key=True)
     fkT190_Text: Mapped[int] = mapped_column(ForeignKey("T190_Text.id"), primary_key=True)
     status: Mapped[int] = mapped_column(Integer)
     data: Mapped[str] = mapped_column(NVARCHAR(500))
@@ -715,7 +642,7 @@ class T191_TextData(Model):
     text: Mapped["T190_Text"] = relationship(back_populates="data")
 
 
-class T192_TextCategory(Model):
+class T192_TextCategory(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T192_TextCategory"
 
@@ -724,7 +651,7 @@ class T192_TextCategory(Model):
     description: Mapped[str] = mapped_column(String(200))
 
 
-class T193_Language(Model):
+class T193_Language(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T193_Language"
 
@@ -733,7 +660,7 @@ class T193_Language(Model):
     description: Mapped[str] = mapped_column(String(80))
 
 
-class T194_FunctionGroup_1(Model):
+class T194_FunctionGroup_1(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T194_FunctionGroup_1"
 
@@ -743,21 +670,19 @@ class T194_FunctionGroup_1(Model):
     text: Mapped["T190_Text"] = relationship()
 
 
-class T196_FunctionGroup_2(Model):
+class T196_FunctionGroup_2(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T196_FunctionGroup_2"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    fkT194_FunctionGroup_1: Mapped[int] = mapped_column(
-        ForeignKey("T194_FunctionGroup_1.id")
-    )
+    fkT194_FunctionGroup_1: Mapped[int] = mapped_column(ForeignKey("T194_FunctionGroup_1.id"))
     fkT190_Text: Mapped[int] = mapped_column(ForeignKey("T190_Text.id"))
 
     function_group_1: Mapped["T194_FunctionGroup_1"] = relationship()
     text: Mapped["T190_Text"] = relationship()
 
 
-class T199_ControlTable(Model):
+class T199_ControlTable(_Model):
     __bind_key__ = "carcom"
     __tablename__ = "T199_ControlTable"
 

@@ -1,14 +1,22 @@
+"""SQLAlchemy ORM models for the access VIDA database."""
+
+# ruff: noqa: N815, N801
+
+__author__ = "Kestin Goforth"
+__copyright__ = "Copyright 2026"
+__license__ = "BSD-3-Clause"
+
 from datetime import datetime
 
 from sqlalchemy import BINARY, Boolean, DateTime, ForeignKey, Integer, Numeric, String
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 
-class Model(DeclarativeBase):
+class _Model(DeclarativeBase):
     pass
 
 
-class ASConfig(Model):
+class ASConfig(_Model):
     __bind_key__ = "access"
     __tablename__ = "ASConfig"
 
@@ -19,7 +27,7 @@ class ASConfig(Model):
     ObjVersion: Mapped[int] = mapped_column(Integer)
 
 
-class ASInstance(Model):
+class ASInstance(_Model):
     __bind_key__ = "access"
     __tablename__ = "ASInstance"
 
@@ -33,7 +41,7 @@ class ASInstance(Model):
     ObjVersion: Mapped[int] = mapped_column(Integer)
 
 
-class AdminRules(Model):
+class AdminRules(_Model):
     __bind_key__ = "access"
     __tablename__ = "AdminRules"
 
@@ -44,7 +52,7 @@ class AdminRules(Model):
     ObjVersion: Mapped[int] = mapped_column(Integer)
 
 
-class ApplicationProperty(Model):
+class ApplicationProperty(_Model):
     __bind_key__ = "access"
     __tablename__ = "ApplicationProperty"
 
@@ -52,7 +60,7 @@ class ApplicationProperty(Model):
     value: Mapped[str] = mapped_column(String(150))
 
 
-class ClientLog(Model):
+class ClientLog(_Model):
     __bind_key__ = "access"
     __tablename__ = "ClientLog"
 
@@ -63,7 +71,7 @@ class ClientLog(Model):
     EventType: Mapped[str] = mapped_column(String(50))
 
 
-class ComputerInfo(Model):
+class ComputerInfo(_Model):
     __bind_key__ = "access"
     __tablename__ = "ComputerInfo"
 
@@ -73,7 +81,7 @@ class ComputerInfo(Model):
     MotherBoardId: Mapped[str] = mapped_column(String(40))
 
 
-class Countries(Model):
+class Countries(_Model):
     __bind_key__ = "access"
     __tablename__ = "Countries"
 
@@ -85,7 +93,7 @@ class Countries(Model):
     ObjVersion: Mapped[int] = mapped_column(Integer)
 
 
-class Country_DeliveryTypes(Model):
+class Country_DeliveryTypes(_Model):
     __bind_key__ = "access"
     __tablename__ = "Country_DeliveryTypes"
 
@@ -97,7 +105,7 @@ class Country_DeliveryTypes(Model):
     ObjVersion: Mapped[int] = mapped_column(Integer)
 
 
-class CustomerOrgs(Model):
+class CustomerOrgs(_Model):
     __bind_key__ = "access"
     __tablename__ = "CustomerOrgs"
 
@@ -141,7 +149,7 @@ class CustomerOrgs(Model):
     fkMpCountries: Mapped[str] = mapped_column(ForeignKey("Countries.Id"))
 
 
-class CustomerTypes(Model):
+class CustomerTypes(_Model):
     __bind_key__ = "access"
     __tablename__ = "CustomerTypes"
 
@@ -153,7 +161,7 @@ class CustomerTypes(Model):
     ObjVersion: Mapped[int] = mapped_column(Integer)
 
 
-class DeliveryTypes(Model):
+class DeliveryTypes(_Model):
     __bind_key__ = "access"
     __tablename__ = "DeliveryTypes"
 
@@ -164,7 +172,7 @@ class DeliveryTypes(Model):
     ObjVersion: Mapped[int] = mapped_column(Integer)
 
 
-class DistributionTypes(Model):
+class DistributionTypes(_Model):
     __bind_key__ = "access"
     __tablename__ = "DistributionTypes"
 
@@ -175,7 +183,7 @@ class DistributionTypes(Model):
     ObjVersion: Mapped[int] = mapped_column(Integer)
 
 
-class GpssPartNumberTranslation(Model):
+class GpssPartNumberTranslation(_Model):
     __bind_key__ = "access"
     __tablename__ = "GpssPartNumberTranslation"
 
@@ -189,21 +197,19 @@ class GpssPartNumberTranslation(Model):
     price: Mapped[float] = mapped_column(Numeric, default=(0))
 
 
-class InstalledLanguage(Model):
+class InstalledLanguage(_Model):
     __bind_key__ = "access"
     __tablename__ = "InstalledLanguage"
 
     Id: Mapped[str] = mapped_column(String, primary_key=True)
-    fkInstalledPublication: Mapped[str] = mapped_column(
-        ForeignKey("InstalledPublication.Id")
-    )
+    fkInstalledPublication: Mapped[str] = mapped_column(ForeignKey("InstalledPublication.Id"))
     fkLanguage: Mapped[str] = mapped_column(ForeignKey("Languages.Id"))
     Description: Mapped[str] = mapped_column(String(50))
     Changed: Mapped[datetime] = mapped_column(DateTime)
     ObjVersion: Mapped[int] = mapped_column(Integer)
 
 
-class InstalledPublication(Model):
+class InstalledPublication(_Model):
     __bind_key__ = "access"
     __tablename__ = "InstalledPublication"
 
@@ -214,20 +220,18 @@ class InstalledPublication(Model):
     ObjVersion: Mapped[int] = mapped_column(Integer)
 
 
-class InstalledUpdate(Model):
+class InstalledUpdate(_Model):
     __bind_key__ = "access"
     __tablename__ = "InstalledUpdate"
 
     Id: Mapped[str] = mapped_column(String, primary_key=True)
-    fkInstalledPublication: Mapped[str] = mapped_column(
-        ForeignKey("InstalledPublication.Id")
-    )
+    fkInstalledPublication: Mapped[str] = mapped_column(ForeignKey("InstalledPublication.Id"))
     InstallDate: Mapped[datetime] = mapped_column(DateTime)
     ObjVersion: Mapped[int] = mapped_column(Integer)
     UpdateTitle: Mapped[str] = mapped_column(String(50))
 
 
-class Languages(Model):
+class Languages(_Model):
     __bind_key__ = "access"
     __tablename__ = "Languages"
 
@@ -239,22 +243,18 @@ class Languages(Model):
     ObjVersion: Mapped[int] = mapped_column(Integer)
 
 
-class LexiconId_Descriptions(Model):
+class LexiconId_Descriptions(_Model):
     __bind_key__ = "access"
     __tablename__ = "LexiconId_Descriptions"
 
-    fkLexiconId: Mapped[str] = mapped_column(
-        String, primary_key=ForeignKey("LexiconIds.Id")
-    )
-    fkLanguage: Mapped[str] = mapped_column(
-        String, primary_key=ForeignKey("Languages.Id")
-    )
+    fkLexiconId: Mapped[str] = mapped_column(String, primary_key=ForeignKey("LexiconIds.Id"))
+    fkLanguage: Mapped[str] = mapped_column(String, primary_key=ForeignKey("Languages.Id"))
     Description: Mapped[str] = mapped_column(String(255))
     Changed: Mapped[datetime] = mapped_column(DateTime)
     ObjVersion: Mapped[int] = mapped_column(Integer)
 
 
-class LexiconIds(Model):
+class LexiconIds(_Model):
     __bind_key__ = "access"
     __tablename__ = "LexiconIds"
 
@@ -264,7 +264,7 @@ class LexiconIds(Model):
     ObjVersion: Mapped[int] = mapped_column(Integer)
 
 
-class MenuPricingCustomerOrgLabourRate(Model):
+class MenuPricingCustomerOrgLabourRate(_Model):
     __bind_key__ = "access"
     __tablename__ = "MenuPricingCustomerOrgLabourRate"
 
@@ -275,7 +275,7 @@ class MenuPricingCustomerOrgLabourRate(Model):
     Changed: Mapped[datetime] = mapped_column(DateTime)
 
 
-class MenuPricing_MarketFactor(Model):
+class MenuPricing_MarketFactor(_Model):
     __bind_key__ = "access"
     __tablename__ = "MenuPricing_MarketFactor"
 
@@ -286,7 +286,7 @@ class MenuPricing_MarketFactor(Model):
     changed: Mapped[datetime] = mapped_column(DateTime)
 
 
-class PartnerGroups(Model):
+class PartnerGroups(_Model):
     __bind_key__ = "access"
     __tablename__ = "PartnerGroups"
 
@@ -297,7 +297,7 @@ class PartnerGroups(Model):
     ObjVersion: Mapped[int] = mapped_column(Integer)
 
 
-class PublicationLanguage(Model):
+class PublicationLanguage(_Model):
     __bind_key__ = "access"
     __tablename__ = "PublicationLanguage"
 
@@ -315,7 +315,7 @@ class PublicationLanguage(Model):
     CheckSum: Mapped[str] = mapped_column(String(50))
 
 
-class PublicationTypes(Model):
+class PublicationTypes(_Model):
     __bind_key__ = "access"
     __tablename__ = "PublicationTypes"
 
@@ -326,7 +326,7 @@ class PublicationTypes(Model):
     ObjVersion: Mapped[int] = mapped_column(Integer)
 
 
-class Publications(Model):
+class Publications(_Model):
     __bind_key__ = "access"
     __tablename__ = "Publications"
 
@@ -339,28 +339,24 @@ class Publications(Model):
     ParentPublicationTitle: Mapped[str] = mapped_column(String(50))
 
 
-class RecentSymptoms(Model):
+class RecentSymptoms(_Model):
     __bind_key__ = "access"
     __tablename__ = "RecentSymptoms"
 
-    fkRecentVins: Mapped[str] = mapped_column(
-        String, ForeignKey("RecentVINs.Id"), primary_key=True
-    )
+    fkRecentVins: Mapped[str] = mapped_column(String, ForeignKey("RecentVINs.Id"), primary_key=True)
     SymptomId: Mapped[int] = mapped_column(Integer, primary_key=True)
     CscSymptom: Mapped[str] = mapped_column(String(2))
     JobNo: Mapped[str] = mapped_column(String(10))
 
 
-class RecentVINs(Model):
+class RecentVINs(_Model):
     __bind_key__ = "access"
     __tablename__ = "RecentVINs"
 
     Id: Mapped[str] = mapped_column(String, primary_key=True)
     VIN: Mapped[str] = mapped_column(String(20))
     fkUser: Mapped[str] = mapped_column(ForeignKey("Users.Id"))
-    fkRecentVinOverridden: Mapped[str] = mapped_column(
-        ForeignKey("RecentVinOverridden.Id")
-    )
+    fkRecentVinOverridden: Mapped[str] = mapped_column(ForeignKey("RecentVinOverridden.Id"))
     chassisNumber: Mapped[str] = mapped_column(String(10))
     registrationNumber: Mapped[str] = mapped_column(String(20))
     fkPartnerGroup: Mapped[int] = mapped_column(ForeignKey("PartnerGroups.Id"))
@@ -368,7 +364,7 @@ class RecentVINs(Model):
     ObjVersion: Mapped[int] = mapped_column(Integer)
 
 
-class RecentVinOverridden(Model):
+class RecentVinOverridden(_Model):
     __bind_key__ = "access"
     __tablename__ = "RecentVinOverridden"
 
@@ -379,7 +375,7 @@ class RecentVinOverridden(Model):
     fkTransmission: Mapped[int] = mapped_column(ForeignKey("Transmission.Id"))
 
 
-class ServerConfig(Model):
+class ServerConfig(_Model):
     __bind_key__ = "access"
     __tablename__ = "ServerConfig"
 
@@ -416,14 +412,12 @@ class ServerConfig(Model):
     SwdlAreaURL: Mapped[str] = mapped_column(String(255))
 
 
-class ServerConsistency(Model):
+class ServerConsistency(_Model):
     __bind_key__ = "access"
     __tablename__ = "ServerConsistency"
 
     Id: Mapped[str] = mapped_column(String, primary_key=True)
-    fkInstalledPublication: Mapped[str] = mapped_column(
-        ForeignKey("InstalledPublication.Id")
-    )
+    fkInstalledPublication: Mapped[str] = mapped_column(ForeignKey("InstalledPublication.Id"))
     fkInstalledUpdate: Mapped[str] = mapped_column(ForeignKey("InstalledUpdate.Id"))
     ForceSynch: Mapped[bool] = mapped_column(Boolean)
     LastClientLog: Mapped[datetime] = mapped_column(DateTime)
@@ -435,7 +429,7 @@ class ServerConsistency(Model):
     difference: Mapped[int] = mapped_column(Integer)
 
 
-class SessionCache(Model):
+class SessionCache(_Model):
     __bind_key__ = "access"
     __tablename__ = "SessionCache"
 
@@ -443,7 +437,7 @@ class SessionCache(Model):
     SessionId: Mapped[str] = mapped_column(String(50))
 
 
-class UserRoles(Model):
+class UserRoles(_Model):
     __bind_key__ = "access"
     __tablename__ = "UserRoles"
 
@@ -455,7 +449,7 @@ class UserRoles(Model):
     ObjVersion: Mapped[int] = mapped_column(Integer)
 
 
-class User_DMSSettings(Model):
+class User_DMSSettings(_Model):
     __bind_key__ = "access"
     __tablename__ = "User_DMSSettings"
 
@@ -464,7 +458,7 @@ class User_DMSSettings(Model):
     dmsValue: Mapped[str] = mapped_column(String(50))
 
 
-class User_PersonalComments(Model):
+class User_PersonalComments(_Model):
     __bind_key__ = "access"
     __tablename__ = "User_PersonalComments"
 
@@ -477,7 +471,7 @@ class User_PersonalComments(Model):
     ModifiedDate: Mapped[datetime] = mapped_column(DateTime)
 
 
-class User_Settings(Model):
+class User_Settings(_Model):
     __bind_key__ = "access"
     __tablename__ = "User_Settings"
 
@@ -486,7 +480,7 @@ class User_Settings(Model):
     SettingValue: Mapped[str] = mapped_column(String(50))
 
 
-class User_ShoppingListParts(Model):
+class User_ShoppingListParts(_Model):
     __bind_key__ = "access"
     __tablename__ = "User_ShoppingListParts"
 
@@ -509,7 +503,7 @@ class User_ShoppingListParts(Model):
     Changed: Mapped[datetime] = mapped_column(DateTime)
 
 
-class User_ShoppingLists(Model):
+class User_ShoppingLists(_Model):
     __bind_key__ = "access"
     __tablename__ = "User_ShoppingLists"
 
@@ -520,7 +514,7 @@ class User_ShoppingLists(Model):
     Changed: Mapped[datetime] = mapped_column(DateTime)
 
 
-class Users(Model):
+class Users(_Model):
     __bind_key__ = "access"
     __tablename__ = "Users"
 
@@ -553,7 +547,7 @@ class Users(Model):
     DMSURLVOW: Mapped[str] = mapped_column(String(200))
 
 
-class VinPartnerGroupCountries(Model):
+class VinPartnerGroupCountries(_Model):
     __bind_key__ = "access"
     __tablename__ = "VinPartnerGroupCountries"
 
@@ -564,7 +558,7 @@ class VinPartnerGroupCountries(Model):
     ObjVersion: Mapped[int] = mapped_column(Integer)
 
 
-class VinPartnerGroups(Model):
+class VinPartnerGroups(_Model):
     __bind_key__ = "access"
     __tablename__ = "VinPartnerGroups"
 
@@ -576,7 +570,7 @@ class VinPartnerGroups(Model):
     ObjVersion: Mapped[int] = mapped_column(Integer)
 
 
-class WorkList(Model):
+class WorkList(_Model):
     __bind_key__ = "access"
     __tablename__ = "WorkList"
 
@@ -593,7 +587,7 @@ class WorkList(Model):
     partnerId: Mapped[str] = mapped_column(String(50))
 
 
-class WorkList_Csc(Model):
+class WorkList_Csc(_Model):
     __bind_key__ = "access"
     __tablename__ = "WorkList_Csc"
 
@@ -607,7 +601,7 @@ class WorkList_Csc(Model):
     qbDescription: Mapped[str] = mapped_column(String(20))
 
 
-class WorkList_CscText(Model):
+class WorkList_CscText(_Model):
     __bind_key__ = "access"
     __tablename__ = "WorkList_CscText"
 
@@ -621,7 +615,7 @@ class WorkList_CscText(Model):
     comment2: Mapped[str] = mapped_column(String(255))
 
 
-class WorkList_Operation(Model):
+class WorkList_Operation(_Model):
     __bind_key__ = "access"
     __tablename__ = "WorkList_Operation"
 
@@ -645,7 +639,7 @@ class WorkList_Operation(Model):
     qbDescription: Mapped[str] = mapped_column(String(20))
 
 
-class WorkList_OperationText(Model):
+class WorkList_OperationText(_Model):
     __bind_key__ = "access"
     __tablename__ = "WorkList_OperationText"
 
@@ -655,19 +649,17 @@ class WorkList_OperationText(Model):
     text: Mapped[str] = mapped_column(String(255))
 
 
-class WorkList_Operation_List(Model):
+class WorkList_Operation_List(_Model):
     __bind_key__ = "access"
     __tablename__ = "WorkList_Operation_List"
 
-    fkWorkList: Mapped[int] = mapped_column(
-        Integer, primary_key=ForeignKey("WorkList.Id")
-    )
+    fkWorkList: Mapped[int] = mapped_column(Integer, primary_key=ForeignKey("WorkList.Id"))
     fkWorkList_Operation: Mapped[int] = mapped_column(
         Integer, primary_key=ForeignKey("WorkList_Operation.Id")
     )
 
 
-class WorkList_Operation_Package(Model):
+class WorkList_Operation_Package(_Model):
     __bind_key__ = "access"
     __tablename__ = "WorkList_Operation_Package"
 
@@ -679,7 +671,7 @@ class WorkList_Operation_Package(Model):
     )
 
 
-class WorkList_Package(Model):
+class WorkList_Package(_Model):
     __bind_key__ = "access"
     __tablename__ = "WorkList_Package"
 
@@ -693,7 +685,7 @@ class WorkList_Package(Model):
     usingFixedPrice: Mapped[bool] = mapped_column(Boolean)
 
 
-class WorkList_PackageText(Model):
+class WorkList_PackageText(_Model):
     __bind_key__ = "access"
     __tablename__ = "WorkList_PackageText"
 
@@ -703,7 +695,7 @@ class WorkList_PackageText(Model):
     text: Mapped[str] = mapped_column(String(1000))
 
 
-class WorkList_Part(Model):
+class WorkList_Part(_Model):
     __bind_key__ = "access"
     __tablename__ = "WorkList_Part"
 
@@ -718,7 +710,7 @@ class WorkList_Part(Model):
     fkWorkList_Vehicle: Mapped[int] = mapped_column(ForeignKey("WorkList_Vehicle.Id"))
 
 
-class WorkList_PartText(Model):
+class WorkList_PartText(_Model):
     __bind_key__ = "access"
     __tablename__ = "WorkList_PartText"
 
@@ -728,19 +720,17 @@ class WorkList_PartText(Model):
     text: Mapped[str] = mapped_column(String(255))
 
 
-class WorkList_Part_List(Model):
+class WorkList_Part_List(_Model):
     __bind_key__ = "access"
     __tablename__ = "WorkList_Part_List"
 
-    fkWorkList: Mapped[int] = mapped_column(
-        Integer, primary_key=ForeignKey("WorkList.Id")
-    )
+    fkWorkList: Mapped[int] = mapped_column(Integer, primary_key=ForeignKey("WorkList.Id"))
     fkWorkList_Part: Mapped[int] = mapped_column(
         Integer, primary_key=ForeignKey("WorkList_Part.Id")
     )
 
 
-class WorkList_Part_Package(Model):
+class WorkList_Part_Package(_Model):
     __bind_key__ = "access"
     __tablename__ = "WorkList_Part_Package"
 
@@ -752,7 +742,7 @@ class WorkList_Part_Package(Model):
     )
 
 
-class WorkList_PostponedQb(Model):
+class WorkList_PostponedQb(_Model):
     __bind_key__ = "access"
     __tablename__ = "WorkList_PostponedQb"
 
@@ -762,7 +752,7 @@ class WorkList_PostponedQb(Model):
     qbDescription: Mapped[str] = mapped_column(String(20))
 
 
-class WorkList_Settings(Model):
+class WorkList_Settings(_Model):
     __bind_key__ = "access"
     __tablename__ = "WorkList_Settings"
 
@@ -772,7 +762,7 @@ class WorkList_Settings(Model):
     settingValue: Mapped[str] = mapped_column(String(50))
 
 
-class WorkList_User(Model):
+class WorkList_User(_Model):
     __bind_key__ = "access"
     __tablename__ = "WorkList_User"
 
@@ -782,7 +772,7 @@ class WorkList_User(Model):
     idSelectedWorkList: Mapped[int] = mapped_column(Integer)
 
 
-class WorkList_Vehicle(Model):
+class WorkList_Vehicle(_Model):
     __bind_key__ = "access"
     __tablename__ = "WorkList_Vehicle"
 

@@ -1,12 +1,18 @@
+"""SQLAlchemy ORM models for the timing VIDA database."""
+
+__author__ = "Kestin Goforth"
+__copyright__ = "Copyright 2026"
+__license__ = "BSD-3-Clause"
+
 from sqlalchemy import Integer, SmallInteger, String
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 
-class Model(DeclarativeBase):
+class _Model(DeclarativeBase):
     pass
 
 
-class MessageTiming(Model):
+class MessageTiming(_Model):
     __bind_key__ = "timing"
     __tablename__ = "MessageTiming"
 
@@ -17,7 +23,7 @@ class MessageTiming(Model):
     Comment: Mapped[str] = mapped_column(String(500))
 
 
-class Requests(Model):
+class Requests(_Model):
     __bind_key__ = "timing"
     __tablename__ = "Requests"
 
@@ -31,7 +37,7 @@ class Requests(Model):
     Commet: Mapped[str] = mapped_column(String(500))
 
 
-class TimeoutAndResend(Model):
+class TimeoutAndResend(_Model):
     __bind_key__ = "timing"
     __tablename__ = "TimeoutAndResend"
 

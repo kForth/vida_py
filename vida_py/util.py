@@ -1,8 +1,16 @@
+"""Shared SQL execution helpers for invoking VIDA stored procedures and functions."""
+
+__author__ = "Kestin Goforth"
+__copyright__ = "Copyright 2026"
+__license__ = "BSD-3-Clause"
+
+from typing import Any
+
 from sqlalchemy import Result, text
 from sqlalchemy.orm import Session
 
 
-def run_script(session: Session, script: str, **kwargs) -> Result:
+def run_script(session: Session, script: str, **kwargs: Any) -> Result:
     return session.execute(
         text(
             "\n".join(
@@ -18,7 +26,7 @@ def run_script(session: Session, script: str, **kwargs) -> Result:
     )
 
 
-def run_func(session: Session, script: str, *args) -> Result:
+def run_func(session: Session, script: str, *args: Any) -> Result:
     kwargs = {str(i): e for i, e in enumerate(args)}
     return session.execute(
         text(

@@ -1,11 +1,14 @@
+"""Session factory and public exports for the session VIDA database module."""
+
+__author__ = "Kestin Goforth"
+__copyright__ = "Copyright 2026"
+__license__ = "BSD-3-Clause"
+
 import os
 
 from sqlalchemy import Engine, create_engine
 from sqlalchemy.orm import sessionmaker
 
-from vida_py.session.funcs import *
-from vida_py.session.models import *
-from vida_py.session.scripts import *
+db: Engine = create_engine(os.getenv("VIDA_SESSION_DB_URI") or "")
 
-db: Engine = create_engine(os.getenv("VIDA_SESSION_DB_URI"))
 Session: sessionmaker = sessionmaker(bind=db)

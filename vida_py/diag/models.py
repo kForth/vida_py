@@ -1,19 +1,27 @@
+"""SQLAlchemy ORM models for the diag VIDA database."""
+
+# ruff: noqa: N815
+
+__author__ = "Kestin Goforth"
+__copyright__ = "Copyright 2026"
+__license__ = "BSD-3-Clause"
+
 from sqlalchemy import BINARY, NVARCHAR, BigInteger, Boolean, ForeignKey, Integer, String
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 
-class Model(DeclarativeBase):
+class _Model(DeclarativeBase):
     pass
 
 
-class ECU(Model):
+class ECU(_Model):
     __bind_key__ = "diag"
     __tablename__ = "ECU"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
 
 
-class EcuDescription(Model):
+class EcuDescription(_Model):
     __bind_key__ = "diag"
     __tablename__ = "EcuDescription"
 
@@ -23,7 +31,7 @@ class EcuDescription(Model):
     fkEcu: Mapped[int] = mapped_column(ForeignKey("Ecu.Id"))
 
 
-class ECUInformationReference(Model):
+class ECUInformationReference(_Model):
     __bind_key__ = "diag"
     __tablename__ = "ECUInformationReference"
 
@@ -32,7 +40,7 @@ class ECUInformationReference(Model):
     fkInformationQualifier: Mapped[int] = mapped_column(Integer, primary_key=True)
 
 
-class IE(Model):
+class IE(_Model):
     __bind_key__ = "diag"
     __tablename__ = "IE"
 
@@ -40,14 +48,12 @@ class IE(Model):
     VCCId: Mapped[str] = mapped_column(String(16))
     fkIEType: Mapped[int] = mapped_column(ForeignKey("IEType.id"))
     FirstTestgrpId: Mapped[str] = mapped_column(String(50), default="")
-    fkInformationQualifier: Mapped[int] = mapped_column(
-        ForeignKey("InformationQualifier.Id")
-    )
+    fkInformationQualifier: Mapped[int] = mapped_column(ForeignKey("InformationQualifier.Id"))
     ProjectDocumentId: Mapped[str] = mapped_column(String(16))
     Version: Mapped[str] = mapped_column(String(10))
 
 
-class IECustomerFunction(Model):
+class IECustomerFunction(_Model):
     __bind_key__ = "diag"
     __tablename__ = "IECustomerFunction"
 
@@ -55,7 +61,7 @@ class IECustomerFunction(Model):
     CF: Mapped[int] = mapped_column(Integer)
 
 
-class IEGenericComponent(Model):
+class IEGenericComponent(_Model):
     __bind_key__ = "diag"
     __tablename__ = "IEGenericComponent"
 
@@ -65,7 +71,7 @@ class IEGenericComponent(Model):
     GLID: Mapped[str] = mapped_column(String, primary_key=True)
 
 
-class IEParentChildMap(Model):
+class IEParentChildMap(_Model):
     __bind_key__ = "diag"
     __tablename__ = "IEParentChildMap"
 
@@ -73,7 +79,7 @@ class IEParentChildMap(Model):
     fkIEchild: Mapped[str] = mapped_column(ForeignKey("IE.id"), primary_key=True)
 
 
-class IEProfileMap(Model):
+class IEProfileMap(_Model):
     __bind_key__ = "diag"
     __tablename__ = "IEProfileMap"
 
@@ -81,7 +87,7 @@ class IEProfileMap(Model):
     fkProfile: Mapped[str] = mapped_column(ForeignKey("Profile.id"), primary_key=True)
 
 
-class IETitle(Model):
+class IETitle(_Model):
     __bind_key__ = "diag"
     __tablename__ = "IETitle"
 
@@ -90,7 +96,7 @@ class IETitle(Model):
     DisplayText: Mapped[str] = mapped_column(NVARCHAR(256))
 
 
-class IEType(Model):
+class IEType(_Model):
     __bind_key__ = "diag"
     __tablename__ = "IEType"
 
@@ -98,7 +104,7 @@ class IEType(Model):
     Name: Mapped[str] = mapped_column(String(64))
 
 
-class Image(Model):
+class Image(_Model):
     __bind_key__ = "diag"
     __tablename__ = "Image"
 
@@ -107,7 +113,7 @@ class Image(Model):
     Description: Mapped[str] = mapped_column(String(50))
 
 
-class ImageProfileMap(Model):
+class ImageProfileMap(_Model):
     __bind_key__ = "diag"
     __tablename__ = "ImageProfileMap"
 
@@ -115,7 +121,7 @@ class ImageProfileMap(Model):
     fkProfile: Mapped[str] = mapped_column(ForeignKey("Profile.id"), primary_key=True)
 
 
-class InformationQualifier(Model):
+class InformationQualifier(_Model):
     __bind_key__ = "diag"
     __tablename__ = "InformationQualifier"
 
@@ -123,7 +129,7 @@ class InformationQualifier(Model):
     Name: Mapped[str] = mapped_column(String(64))
 
 
-class InformationQualifierDescription(Model):
+class InformationQualifierDescription(_Model):
     __bind_key__ = "diag"
     __tablename__ = "InformationQualifierDescription"
 
@@ -134,7 +140,7 @@ class InformationQualifierDescription(Model):
     DisplayText: Mapped[str] = mapped_column(NVARCHAR(256))
 
 
-class Language(Model):
+class Language(_Model):
     __bind_key__ = "diag"
     __tablename__ = "Language"
 
@@ -142,7 +148,7 @@ class Language(Model):
     Code: Mapped[str] = mapped_column(String(10))
 
 
-class Script(Model):
+class Script(_Model):
     __bind_key__ = "diag"
     __tablename__ = "Script"
 
@@ -150,7 +156,7 @@ class Script(Model):
     fkScriptType: Mapped[int] = mapped_column(ForeignKey("ScriptType.Id"))
 
 
-class ScriptCarFunction(Model):
+class ScriptCarFunction(_Model):
     __bind_key__ = "diag"
     __tablename__ = "ScriptCarFunction"
 
@@ -158,7 +164,7 @@ class ScriptCarFunction(Model):
     FunctionGroup: Mapped[int] = mapped_column(Integer, primary_key=True)
 
 
-class ScriptContent(Model):
+class ScriptContent(_Model):
     __bind_key__ = "diag"
     __tablename__ = "ScriptContent"
 
@@ -169,7 +175,7 @@ class ScriptContent(Model):
     checksum: Mapped[str] = mapped_column(NVARCHAR(256))
 
 
-class ScriptProfileMap(Model):
+class ScriptProfileMap(_Model):
     __bind_key__ = "diag"
     __tablename__ = "ScriptProfileMap"
 
@@ -177,7 +183,7 @@ class ScriptProfileMap(Model):
     fkProfile: Mapped[str] = mapped_column(ForeignKey("Profile.id"), primary_key=True)
 
 
-class ScriptType(Model):
+class ScriptType(_Model):
     __bind_key__ = "diag"
     __tablename__ = "ScriptType"
 
@@ -185,7 +191,7 @@ class ScriptType(Model):
     Description: Mapped[str] = mapped_column(String(50))
 
 
-class ScriptVariant(Model):
+class ScriptVariant(_Model):
     __bind_key__ = "diag"
     __tablename__ = "ScriptVariant"
 
@@ -193,7 +199,7 @@ class ScriptVariant(Model):
     fkScript: Mapped[str] = mapped_column(ForeignKey("Script.Id"))
 
 
-class SmartToolScript(Model):
+class SmartToolScript(_Model):
     __bind_key__ = "diag"
     __tablename__ = "SmartToolScript"
 
@@ -203,7 +209,7 @@ class SmartToolScript(Model):
     SmartToolName: Mapped[str] = mapped_column(String(255))
 
 
-class SoftwareProduct(Model):
+class SoftwareProduct(_Model):
     __bind_key__ = "diag"
     __tablename__ = "SoftwareProduct"
 
@@ -213,7 +219,7 @@ class SoftwareProduct(Model):
     EmissionRelated: Mapped[bool] = mapped_column(Boolean)
 
 
-class SoftwareProductNote(Model):
+class SoftwareProductNote(_Model):
     __bind_key__ = "diag"
     __tablename__ = "SoftwareProductNote"
 
@@ -222,7 +228,7 @@ class SoftwareProductNote(Model):
     fkSoftwareProduct: Mapped[int] = mapped_column(ForeignKey("SoftwareProduct.Id"))
 
 
-class SoftwareProductTitle(Model):
+class SoftwareProductTitle(_Model):
     __bind_key__ = "diag"
     __tablename__ = "SoftwareProductTitle"
 
@@ -233,19 +239,17 @@ class SoftwareProductTitle(Model):
     DisplayText: Mapped[str] = mapped_column(NVARCHAR(256))
 
 
-class SWProductProfileMap(Model):
+class SWProductProfileMap(_Model):
     __bind_key__ = "diag"
     __tablename__ = "SWProductProfileMap"
 
     fkSoftwareProduct: Mapped[int] = mapped_column(
         ForeignKey("SoftwareProduct.Id"), primary_key=True
     )
-    fkVehicleProfile: Mapped[str] = mapped_column(
-        ForeignKey("VehicleProfile.id"), primary_key=True
-    )
+    fkVehicleProfile: Mapped[str] = mapped_column(ForeignKey("VehicleProfile.id"), primary_key=True)
 
 
-class SymptomIEMap(Model):
+class SymptomIEMap(_Model):
     __bind_key__ = "diag"
     __tablename__ = "SymptomIEMap"
 

@@ -1,10 +1,18 @@
+"""SQLAlchemy ORM models for the basedata VIDA database."""
+
+# ruff: noqa: N815
+
+__author__ = "Kestin Goforth"
+__copyright__ = "Copyright 2026"
+__license__ = "BSD-3-Clause"
+
 from datetime import datetime
 
 from sqlalchemy import DateTime, ForeignKey, Integer, SmallInteger, String
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 
-class Model(DeclarativeBase):
+class _Model(DeclarativeBase):
     pass
 
 
@@ -13,50 +21,55 @@ class _ProfileParam:
     __bind_key__ = "basedata"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    Cid: Mapped[int] = mapped_column(Integer)
     Description: Mapped[str] = mapped_column(String(255))
     ObjVersion: Mapped[datetime] = mapped_column(DateTime)
 
 
-class AMYProfileMap(Model):
+class AMYProfileMap(_Model):
     __bind_key__ = "basedata"
     __tablename__ = "AMYProfileMap"
 
-    fkSourceProfile: Mapped[str] = mapped_column(
-        ForeignKey("VehicleProfile.Id"), primary_key=True
-    )
-    fkTargetProfile: Mapped[str] = mapped_column(
-        ForeignKey("VehicleProfile.Id"), primary_key=True
-    )
+    fkSourceProfile: Mapped[str] = mapped_column(ForeignKey("VehicleProfile.Id"), primary_key=True)
+    fkTargetProfile: Mapped[str] = mapped_column(ForeignKey("VehicleProfile.Id"), primary_key=True)
 
 
-class BodyStyle(_ProfileParam, Model):
+class BodyStyle(_ProfileParam, _Model):
     __tablename__ = "BodyStyle"
 
+    Cid: Mapped[int] = mapped_column(Integer)
 
-class BrakeSystem(_ProfileParam, Model):
+
+class BrakeSystem(_ProfileParam, _Model):
     __tablename__ = "BrakeSystem"
 
+    Cid: Mapped[int] = mapped_column(Integer)
 
-class Engine(_ProfileParam, Model):
+
+class Engine(_ProfileParam, _Model):
     __tablename__ = "Engine"
 
+    Cid: Mapped[int] = mapped_column(Integer)
 
-class ModelYear(_ProfileParam, Model):
+
+class ModelYear(_ProfileParam, _Model):
     __tablename__ = "ModelYear"
 
+    Cid: Mapped[int] = mapped_column(Integer)
 
-class NodeECU(_ProfileParam, Model):
+
+class NodeECU(_ProfileParam, _Model):
     __tablename__ = "NodeECU"
 
+    Cid: Mapped[int] = mapped_column(Integer)
 
-class PartnerGroup(_ProfileParam, Model):
+
+class PartnerGroup(_ProfileParam, _Model):
     __tablename__ = "PartnerGroup"
 
     Cid: Mapped[str] = mapped_column(String(10))
 
 
-class SelectedProfiles(Model):
+class SelectedProfiles(_Model):
     __bind_key__ = "basedata"
     __tablename__ = "SelectedProfiles"
 
@@ -64,29 +77,29 @@ class SelectedProfiles(Model):
     SelectedProfiles: Mapped[str] = mapped_column(String(255))
 
 
-class SpecialVehicle(_ProfileParam, Model):
+class SpecialVehicle(_ProfileParam, _Model):
     __tablename__ = "SpecialVehicle"
 
 
-class Steering(_ProfileParam, Model):
+class Steering(_ProfileParam, _Model):
     __tablename__ = "Steering"
 
 
-class StructureWeek(_ProfileParam, Model):
+class StructureWeek(_ProfileParam, _Model):
     __tablename__ = "StructureWeek"
 
     Cid: Mapped[str] = mapped_column(String(50))
 
 
-class Suspension(_ProfileParam, Model):
+class Suspension(_ProfileParam, _Model):
     __tablename__ = "Suspension"
 
 
-class Transmission(_ProfileParam, Model):
+class Transmission(_ProfileParam, _Model):
     __tablename__ = "Transmission"
 
 
-class ValidProfiles(Model):
+class ValidProfiles(_Model):
     __bind_key__ = "basedata"
     __tablename__ = "ValidProfiles"
 
@@ -94,7 +107,7 @@ class ValidProfiles(Model):
     ValidProfile: Mapped[str] = mapped_column(String(255), primary_key=True)
 
 
-class VehicleModel(Model):
+class VehicleModel(_Model):
     __bind_key__ = "basedata"
     __tablename__ = "VehicleModel"
 
@@ -105,7 +118,7 @@ class VehicleModel(Model):
     ObjVersion: Mapped[datetime] = mapped_column(DateTime)
 
 
-class VehicleProfile(Model):
+class VehicleProfile(_Model):
     __bind_key__ = "basedata"
     __tablename__ = "VehicleProfile"
 
@@ -143,17 +156,15 @@ class VehicleProfile(Model):
     SpecialVehicle: Mapped["SpecialVehicle"] = relationship()
 
 
-class VehicleProfilePartnerGroup(Model):
+class VehicleProfilePartnerGroup(_Model):
     __bind_key__ = "basedata"
     __tablename__ = "VehicleProfilePartnerGroup"
 
-    fkVehicleProfile: Mapped[str] = mapped_column(
-        ForeignKey("VehicleProfile.Id"), primary_key=True
-    )
+    fkVehicleProfile: Mapped[str] = mapped_column(ForeignKey("VehicleProfile.Id"), primary_key=True)
     PartnerGroupCID: Mapped[str] = mapped_column(String(10), primary_key=True)
 
 
-class VINDecodeModel(Model):
+class VINDecodeModel(_Model):
     __bind_key__ = "basedata"
     __tablename__ = "VINDecodeModel"
 
@@ -177,7 +188,7 @@ class VINDecodeModel(Model):
     ModelYear: Mapped["ModelYear"] = relationship()
 
 
-class VINDecodeVariant(Model):
+class VINDecodeVariant(_Model):
     __bind_key__ = "basedata"
     __tablename__ = "VINDecodeVariant"
 
@@ -199,7 +210,7 @@ class VINDecodeVariant(Model):
     ModelYear: Mapped["ModelYear"] = relationship()
 
 
-class VINVariantCodes(Model):
+class VINVariantCodes(_Model):
     __bind_key__ = "basedata"
     __tablename__ = "VINVariantCodes"
 
