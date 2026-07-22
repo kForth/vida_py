@@ -7,31 +7,19 @@ __license__ = "BSD-3-Clause"
 from sqlalchemy import Row
 from sqlalchemy.orm import Session
 
-from vida_py.util import require_scalar, run_func, run_func_scalar
+from vida_py.util import run_func, run_func_scalar
 
 
 def get_profile_nav_title(session: Session, fk_profile: str) -> str:
-    value = require_scalar(
-        run_func_scalar(session, "getProfileNavTitle", fk_profile),
-        "getProfileNavTitle",
-    )
-    return str(value)
+    return run_func_scalar(session, "getProfileNavTitle", fk_profile)
 
 
 def get_sw_product_note(session: Session, sw_product_id: int) -> str:
-    value = require_scalar(
-        run_func_scalar(session, "getSwProductNote", sw_product_id),
-        "getSwProductNote",
-    )
-    return str(value)
+    return run_func_scalar(session, "getSwProductNote", sw_product_id)
 
 
 def get_text_from_lang(session: Session, text_id: int, language_code: str) -> str:
-    value = require_scalar(
-        run_func_scalar(session, "GetTextFromLang", text_id, language_code),
-        "GetTextFromLang",
-    )
-    return str(value)
+    return run_func_scalar(session, "GetTextFromLang", text_id, language_code)
 
 
 def get_valid_profiles_for_selected(session: Session, selected_profiles: str) -> list[Row]:
