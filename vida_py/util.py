@@ -67,5 +67,5 @@ def require_scalar[T](value: T | None, function_name: str) -> T:
     return value
 
 
-def run_func_scalar[T](session: Session, script: str, *args: Any) -> T:
+def run_func_scalar[T](session: Session, script: str, *args: Any, _: T | None = None) -> T:
     return require_scalar(run_func(session, script, *args).scalar_one_or_none(), script)
