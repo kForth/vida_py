@@ -94,6 +94,13 @@ def _table_columns(engine: Engine, table_name: str) -> set[str]:
     return {str(col["name"]) for col in columns}
 
 
+def _table_primary_key_columns(engine: Engine, table_name: str) -> set[str]:
+    inspector = inspect(engine)
+    pk = inspector.get_pk_constraint(table_name, schema="dbo")
+    constrained_columns = pk.get("constrained_columns") or []
+    return {str(column) for column in constrained_columns}
+
+
 def _normalize_columns(columns: set[str]) -> set[str]:
     return {column.lower() for column in columns}
 
@@ -178,4 +185,46 @@ def test_live_all_view_model_columns_exist_in_views(
         assert not missing_columns, (
             f"Missing columns in dbo.{view_name} for {view_module_name}.{class_name}: "
             f"{sorted(missing_columns)}"
+        )
+
+
+@pytest.mark.parametrize(("db_module_name", "model_module_name"), MODEL_MODULES.items())
+def test_live_model_primary_keys_match_database_constraints(
+    db_module_name: str, model_module_name: str
+) -> None:
+    model_module = importlib.import_module(model_module_name)
+    model_classes = _iter_declared_model_classes(model_module)
+    assert model_classes
+
+    engine = _engine_for_db_module(db_module_name)
+    inspector = inspect(engine)
+
+    for model_class in model_classes:
+        table_name = str(model_class.__tablename__)
+        class_name = str(model_class.__name__)
+        model_key = (model_module_name, class_name)
+
+        assert inspector.has_table(
+            table_name, schema="dbo"
+        ), f"Missing table dbo.{table_name} for model {model_module_name}.{class_name}"
+
+        raw_expected_pk = {str(column.name) for column in model_class.__table__.primary_key.columns}
+        expected_pk = raw_expected_pk - KNOWN_SYNTHETIC_COLUMNS.get(model_key, set())
+        actual_pk = _table_primary_key_columns(engine, table_name)
+
+        if not actual_pk:
+            # Some legacy tables have no PK constraint in SQL Server.
+            # For those tables, allow ORM synthetic identity columns.
+            assert raw_expected_pk, (
+                f"No DB PK on dbo.{table_name} and no ORM identity columns on "
+                f"{model_module_name}.{class_name}"
+            )
+            continue
+
+        expected_normalized = _normalize_columns(expected_pk)
+        actual_normalized = _normalize_columns(actual_pk)
+
+        assert expected_normalized == actual_normalized, (
+            f"PK mismatch for {model_module_name}.{class_name} (dbo.{table_name}). "
+            f"Model PK={sorted(expected_pk)}, DB PK={sorted(actual_pk)}"
         )
