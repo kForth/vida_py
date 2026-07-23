@@ -11,11 +11,10 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 
 class _Model(DeclarativeBase):
-    pass
+    __bind_key__ = "images"
 
 
 class GraphicCarConfigs(_Model):
-    __bind_key__ = "images"
     __tablename__ = "GraphicCarConfigs"
 
     fkGraphic: Mapped[str] = mapped_column(String(16), primary_key=True)
@@ -25,7 +24,6 @@ class GraphicCarConfigs(_Model):
 
 
 class GraphicFormats(_Model):
-    __bind_key__ = "images"
     __tablename__ = "GraphicFormats"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -33,7 +31,6 @@ class GraphicFormats(_Model):
 
 
 class Graphics(_Model):
-    __bind_key__ = "images"
     __tablename__ = "Graphics"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -47,7 +44,6 @@ class Graphics(_Model):
 
 
 class LocalizedGraphics(_Model):
-    __bind_key__ = "images"
     __tablename__ = "LocalizedGraphics"
 
     fkGraphic: Mapped[str] = mapped_column(String(16), primary_key=True)

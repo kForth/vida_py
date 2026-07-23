@@ -13,12 +13,10 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 
 class _Model(DeclarativeBase):
-    pass
+    __bind_key__ = "basedata"
 
 
 class _ProfileParam:
-    __bind_key__ = "basedata"
-    __bind_key__ = "basedata"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
     Description: Mapped[str] = mapped_column(String(255))
@@ -26,7 +24,6 @@ class _ProfileParam:
 
 
 class AMYProfileMap(_Model):
-    __bind_key__ = "basedata"
     __tablename__ = "AMYProfileMap"
 
     fkSourceProfile: Mapped[str] = mapped_column(ForeignKey("VehicleProfile.Id"), primary_key=True)
@@ -70,7 +67,6 @@ class PartnerGroup(_ProfileParam, _Model):
 
 
 class SelectedProfiles(_Model):
-    __bind_key__ = "basedata"
     __tablename__ = "SelectedProfiles"
 
     ID: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -100,7 +96,6 @@ class Transmission(_ProfileParam, _Model):
 
 
 class ValidProfiles(_Model):
-    __bind_key__ = "basedata"
     __tablename__ = "ValidProfiles"
 
     ID: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -108,7 +103,6 @@ class ValidProfiles(_Model):
 
 
 class VehicleModel(_Model):
-    __bind_key__ = "basedata"
     __tablename__ = "VehicleModel"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -119,7 +113,6 @@ class VehicleModel(_Model):
 
 
 class VehicleProfile(_Model):
-    __bind_key__ = "basedata"
     __tablename__ = "VehicleProfile"
 
     Id: Mapped[str] = mapped_column(String(16), primary_key=True)
@@ -157,7 +150,6 @@ class VehicleProfile(_Model):
 
 
 class VehicleProfilePartnerGroup(_Model):
-    __bind_key__ = "basedata"
     __tablename__ = "VehicleProfilePartnerGroup"
 
     fkVehicleProfile: Mapped[str] = mapped_column(ForeignKey("VehicleProfile.Id"), primary_key=True)
@@ -165,7 +157,6 @@ class VehicleProfilePartnerGroup(_Model):
 
 
 class VINDecodeModel(_Model):
-    __bind_key__ = "basedata"
     __tablename__ = "VINDecodeModel"
 
     ID: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -189,7 +180,6 @@ class VINDecodeModel(_Model):
 
 
 class VINDecodeVariant(_Model):
-    __bind_key__ = "basedata"
     __tablename__ = "VINDecodeVariant"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -211,7 +201,6 @@ class VINDecodeVariant(_Model):
 
 
 class VINVariantCodes(_Model):
-    __bind_key__ = "basedata"
     __tablename__ = "VINVariantCodes"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)

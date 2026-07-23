@@ -11,11 +11,10 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 
 class _Model(DeclarativeBase):
-    pass
+    __bind_key__ = "service"
 
 
 class Document(_Model):
-    __bind_key__ = "service"
     __tablename__ = "Document"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -38,7 +37,6 @@ class Document(_Model):
 
 
 class DocumentIndexedWord(_Model):
-    __bind_key__ = "service"
     __tablename__ = "DocumentIndexedWord"
 
     fkDocument: Mapped[int] = mapped_column(ForeignKey("Document.id"), primary_key=True)
@@ -49,7 +47,6 @@ class DocumentIndexedWord(_Model):
 
 
 class DocumentLink(_Model):
-    __bind_key__ = "service"
     __tablename__ = "DocumentLink"
 
     fkDocument: Mapped[int] = mapped_column(ForeignKey("Document.id"), primary_key=True)
@@ -63,7 +60,6 @@ class DocumentLink(_Model):
 
 
 class DocumentLinkTitle(_Model):
-    __bind_key__ = "service"
     __tablename__ = "DocumentLinkTitle"
 
     fkDocument: Mapped[int] = mapped_column(ForeignKey("Document.id"), primary_key=True)
@@ -74,7 +70,6 @@ class DocumentLinkTitle(_Model):
 
 
 class DocumentProfile(_Model):
-    __bind_key__ = "service"
     __tablename__ = "DocumentProfile"
 
     fkDocument: Mapped[int] = mapped_column(ForeignKey("Document.id"), primary_key=True)
@@ -84,7 +79,6 @@ class DocumentProfile(_Model):
 
 
 class DocumentType(_Model):
-    __bind_key__ = "service"
     __tablename__ = "DocumentType"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -92,7 +86,6 @@ class DocumentType(_Model):
 
 
 class DroppedWord(_Model):
-    __bind_key__ = "service"
     __tablename__ = "DroppedWord"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -100,7 +93,6 @@ class DroppedWord(_Model):
 
 
 class FunctionGroupText(_Model):
-    __bind_key__ = "service"
     __tablename__ = "FunctionGroupText"
 
     functionGroup: Mapped[str] = mapped_column(NVARCHAR(50), primary_key=True)
@@ -108,14 +100,12 @@ class FunctionGroupText(_Model):
 
 
 class IndexDelimiter(_Model):
-    __bind_key__ = "service"
     __tablename__ = "IndexDelimiter"
 
     delimiter: Mapped[str] = mapped_column(NVARCHAR(50), primary_key=True)
 
 
 class IndexedWord(_Model):
-    __bind_key__ = "service"
     __tablename__ = "IndexedWord"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -123,7 +113,6 @@ class IndexedWord(_Model):
 
 
 class Qualifier(_Model):
-    __bind_key__ = "service"
     __tablename__ = "Qualifier"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -137,7 +126,6 @@ class Qualifier(_Model):
 
 
 class QualifierAttachment(_Model):
-    __bind_key__ = "service"
     __tablename__ = "QualifierAttachment"
 
     fkQualifier: Mapped[int] = mapped_column(ForeignKey("Qualifier.id"), primary_key=True)
@@ -148,7 +136,6 @@ class QualifierAttachment(_Model):
 
 
 class QualifierDocument(_Model):
-    __bind_key__ = "service"
     __tablename__ = "QualifierDocument"
 
     fkQualifier: Mapped[int] = mapped_column(ForeignKey("Qualifier.id"), primary_key=True)
@@ -159,7 +146,6 @@ class QualifierDocument(_Model):
 
 
 class QualifierGroup(_Model):
-    __bind_key__ = "service"
     __tablename__ = "QualifierGroup"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -168,7 +154,6 @@ class QualifierGroup(_Model):
 
 
 class Resource(_Model):
-    __bind_key__ = "service"
     __tablename__ = "Resource"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -180,7 +165,6 @@ class Resource(_Model):
 
 
 class ResourceType(_Model):
-    __bind_key__ = "service"
     __tablename__ = "ResourceType"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -188,7 +172,6 @@ class ResourceType(_Model):
 
 
 class SymptomIEMap(_Model):
-    __bind_key__ = "service"
     __tablename__ = "SymptomIEMap"
 
     fkDocument: Mapped[int] = mapped_column(ForeignKey("Document.id"), primary_key=True)
@@ -199,7 +182,6 @@ class SymptomIEMap(_Model):
 
 
 class TreeItem(_Model):
-    __bind_key__ = "service"
     __tablename__ = "TreeItem"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -220,7 +202,6 @@ class TreeItem(_Model):
 
 
 class TreeItemDocument(_Model):
-    __bind_key__ = "service"
     __tablename__ = "TreeItemDocument"
 
     fkTreeItem: Mapped[int] = mapped_column(ForeignKey("TreeItem.id"), primary_key=True)
@@ -230,7 +211,6 @@ class TreeItemDocument(_Model):
 
 
 class TreeItemProfile(_Model):
-    __bind_key__ = "service"
     __tablename__ = "TreeItemProfile"
 
     fkTreeItem: Mapped[int] = mapped_column(ForeignKey("TreeItem.id"), primary_key=True)
@@ -240,7 +220,6 @@ class TreeItemProfile(_Model):
 
 
 class UnIndexedWord(_Model):
-    __bind_key__ = "service"
     __tablename__ = "UnIndexedWord"
 
     word: Mapped[str] = mapped_column(NVARCHAR(200), primary_key=True)

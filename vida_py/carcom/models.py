@@ -22,11 +22,10 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 
 class _Model(DeclarativeBase):
-    pass
+    __bind_key__ = "carcom"
 
 
 class T100_EcuVariant(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T100_EcuVariant"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -41,7 +40,6 @@ class T100_EcuVariant(_Model):
 
 
 class T101_Ecu(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T101_Ecu"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -56,7 +54,6 @@ class T101_Ecu(_Model):
 
 
 class T102_EcuType(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T102_EcuType"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -68,7 +65,6 @@ class T102_EcuType(_Model):
 
 
 class T103_EcuVariant_Project(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T103_EcuVariant_Project"
 
     fkT100_EcuVariant: Mapped[int] = mapped_column(
@@ -81,7 +77,6 @@ class T103_EcuVariant_Project(_Model):
 
 
 class T104_Project(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T104_Project"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -94,7 +89,6 @@ class T104_Project(_Model):
 
 
 class T110_Service_EcuVariant(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T110_Service_EcuVariant"
 
     fkT111_Service: Mapped[int] = mapped_column(ForeignKey("T111_Service.id"), primary_key=True)
@@ -109,7 +103,6 @@ class T110_Service_EcuVariant(_Model):
 
 
 class T111_Service(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T111_Service"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -129,7 +122,6 @@ class T111_Service(_Model):
 
 
 class T120_Config_EcuVariant(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T120_Config_EcuVariant"
 
     fkT121_Config: Mapped[int] = mapped_column(ForeignKey("T121_Config.id"), primary_key=True)
@@ -142,7 +134,6 @@ class T120_Config_EcuVariant(_Model):
 
 
 class T121_Config(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T121_Config"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -171,7 +162,6 @@ class T121_Config(_Model):
 
 
 class T122_Protocol(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T122_Protocol"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -181,7 +171,6 @@ class T122_Protocol(_Model):
 
 
 class T123_Bus(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T123_Bus"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -197,7 +186,6 @@ class T123_Bus(_Model):
 
 
 class T124_Net(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T124_Net"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -206,7 +194,6 @@ class T124_Net(_Model):
 
 
 class T130_Init(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T130_Init"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -216,7 +203,6 @@ class T130_Init(_Model):
 
 
 class T131_InitValue(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T131_InitValue"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -230,7 +216,6 @@ class T131_InitValue(_Model):
 
 
 class T132_InitValueType(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T132_InitValueType"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -238,7 +223,6 @@ class T132_InitValueType(_Model):
 
 
 class T133_InitCategory(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T133_InitCategory"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -246,7 +230,6 @@ class T133_InitCategory(_Model):
 
 
 class T134_InitCategory_Type(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T134_InitCategory_Type"
 
     fkT133_InitCategory: Mapped[int] = mapped_column(
@@ -261,7 +244,6 @@ class T134_InitCategory_Type(_Model):
 
 
 class T136_InitHw_Profile(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T136_InitHw_Profile"
 
     fkT130_Init: Mapped[int] = mapped_column(ForeignKey("T130_Init.id"), primary_key=True)
@@ -272,7 +254,6 @@ class T136_InitHw_Profile(_Model):
 
 
 class T137_InitSwdl_Profile(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T137_InitSwdl_Profile"
 
     fkT130_Init: Mapped[int] = mapped_column(ForeignKey("T130_Init.id"), primary_key=True)
@@ -284,7 +265,6 @@ class T137_InitSwdl_Profile(_Model):
 
 
 class T141_Block(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T141_Block"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -305,7 +285,6 @@ class T141_Block(_Model):
 
 
 class T142_BlockType(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T142_BlockType"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -317,7 +296,6 @@ class T142_BlockType(_Model):
 
 
 class T143_BlockDataType(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T143_BlockDataType"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -325,7 +303,6 @@ class T143_BlockDataType(_Model):
 
 
 class T144_BlockChild(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T144_BlockChild"
 
     fkT100_EcuVariant: Mapped[int] = mapped_column(
@@ -341,7 +318,6 @@ class T144_BlockChild(_Model):
 
 
 class T148_BlockMetaPARA(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T148_BlockMetaPARA"
 
     fkT141_Block: Mapped[int] = mapped_column(ForeignKey("T141_Block.id"), primary_key=True)
@@ -357,7 +333,6 @@ class T148_BlockMetaPARA(_Model):
 
 
 class T150_BlockValue(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T150_BlockValue"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -383,7 +358,6 @@ class T150_BlockValue(_Model):
 
 
 class T151_BlockValue_Symptom(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T151_BlockValue_Symptom"
 
     fkT150_BlockValue: Mapped[int] = mapped_column(
@@ -399,7 +373,6 @@ class T151_BlockValue_Symptom(_Model):
 
 
 class T152_Symptom(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T152_Symptom"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -412,7 +385,6 @@ class T152_Symptom(_Model):
 
 
 class T153_SymptomCategory(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T153_SymptomCategory"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -426,7 +398,6 @@ class T153_SymptomCategory(_Model):
 
 
 class T154_SymptomType(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T154_SymptomType"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -436,7 +407,6 @@ class T154_SymptomType(_Model):
 
 
 class T155_Scaling(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T155_Scaling"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -445,7 +415,6 @@ class T155_Scaling(_Model):
 
 
 class T156_SymptomSection(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T156_SymptomSection"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -455,7 +424,6 @@ class T156_SymptomSection(_Model):
 
 
 class T157_SymptomConnection(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T157_SymptomConnection"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -467,7 +435,6 @@ class T157_SymptomConnection(_Model):
 
 
 class T158_Symptom_CSC(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T158_Symptom_CSC"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -492,7 +459,6 @@ class T158_Symptom_CSC(_Model):
 
 
 class T159_SymptomCSC_SymptomDTC(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T159_SymptomCSC_SymptomDTC"
 
     fkT158_Symptom_CSC: Mapped[int] = mapped_column(
@@ -505,7 +471,6 @@ class T159_SymptomCSC_SymptomDTC(_Model):
 
 
 class T160_DefaultEcuVariant(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T160_DefaultEcuVariant"
 
     fkT161_Profile: Mapped[int] = mapped_column(ForeignKey("T161_Profile.id"), primary_key=True)
@@ -518,7 +483,6 @@ class T160_DefaultEcuVariant(_Model):
 
 
 class T161_Profile(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T161_Profile"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -562,7 +526,6 @@ class T161_Profile(_Model):
 
 
 class T162_ProfileValue(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T162_ProfileValue"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -574,7 +537,6 @@ class T162_ProfileValue(_Model):
 
 
 class T163_ProfileValueType(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T163_ProfileValueType"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -582,7 +544,6 @@ class T163_ProfileValueType(_Model):
 
 
 class T170_SecurityCode_EcuVariant(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T170_SecurityCode_EcuVariant"
 
     fkT171_SecurityCode: Mapped[int] = mapped_column(
@@ -597,7 +558,6 @@ class T170_SecurityCode_EcuVariant(_Model):
 
 
 class T171_SecurityCode(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T171_SecurityCode"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -609,7 +569,6 @@ class T171_SecurityCode(_Model):
 
 
 class T172_SecurityCodeType(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T172_SecurityCodeType"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -618,7 +577,6 @@ class T172_SecurityCodeType(_Model):
 
 
 class T190_Text(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T190_Text"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -630,7 +588,6 @@ class T190_Text(_Model):
 
 
 class T191_TextData(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T191_TextData"
 
     fkT193_Language: Mapped[int] = mapped_column(ForeignKey("T193_Language.id"), primary_key=True)
@@ -643,7 +600,6 @@ class T191_TextData(_Model):
 
 
 class T192_TextCategory(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T192_TextCategory"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -652,7 +608,6 @@ class T192_TextCategory(_Model):
 
 
 class T193_Language(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T193_Language"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -661,7 +616,6 @@ class T193_Language(_Model):
 
 
 class T194_FunctionGroup_1(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T194_FunctionGroup_1"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -671,7 +625,6 @@ class T194_FunctionGroup_1(_Model):
 
 
 class T196_FunctionGroup_2(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T196_FunctionGroup_2"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -683,7 +636,6 @@ class T196_FunctionGroup_2(_Model):
 
 
 class T199_ControlTable(_Model):
-    __bind_key__ = "carcom"
     __tablename__ = "T199_ControlTable"
 
     controlId: Mapped[str] = mapped_column(String(20), primary_key=True)

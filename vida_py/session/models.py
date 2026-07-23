@@ -13,11 +13,10 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 
 class _Model(DeclarativeBase):
-    pass
+    __bind_key__ = "session"
 
 
 class ActionItem(_Model):
-    __bind_key__ = "session"
     __tablename__ = "ActionItem"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)  # Not in DB
@@ -34,7 +33,6 @@ class ActionItem(_Model):
 
 
 class CommToolInfo(_Model):
-    __bind_key__ = "session"
     __tablename__ = "CommToolInfo"
 
     WorkshopSessionId: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -46,7 +44,6 @@ class CommToolInfo(_Model):
 
 
 class CryptKey(_Model):
-    __bind_key__ = "session"
     __tablename__ = "CryptKey"
 
     Version: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -54,7 +51,6 @@ class CryptKey(_Model):
 
 
 class DiagnosticScript(_Model):
-    __bind_key__ = "session"
     __tablename__ = "DiagnosticScript"
 
     ScriptId: Mapped[str] = mapped_column(String(32), primary_key=True)
@@ -63,7 +59,6 @@ class DiagnosticScript(_Model):
 
 
 class DownloadConfirmation(_Model):
-    __bind_key__ = "session"
     __tablename__ = "DownloadConfirmation"
 
     fkVehicleOrderSpec: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -73,7 +68,6 @@ class DownloadConfirmation(_Model):
 
 
 class DroLog(_Model):
-    __bind_key__ = "session"
     __tablename__ = "DroLog"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -84,7 +78,6 @@ class DroLog(_Model):
 
 
 class Dtc(_Model):
-    __bind_key__ = "session"
     __tablename__ = "Dtc"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -106,7 +99,6 @@ class Dtc(_Model):
 
 
 class DtcReadout(_Model):
-    __bind_key__ = "session"
     __tablename__ = "DtcReadout"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -118,7 +110,6 @@ class DtcReadout(_Model):
 
 
 class ESWDL(_Model):
-    __bind_key__ = "session"
     __tablename__ = "ESWDL"
 
     PartsId: Mapped[str] = mapped_column(String(16), primary_key=True)
@@ -129,7 +120,6 @@ class ESWDL(_Model):
 
 
 class EcuInfo(_Model):
-    __bind_key__ = "session"
     __tablename__ = "EcuInfo"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -146,7 +136,6 @@ class EcuInfo(_Model):
 
 
 class EcuSoftware(_Model):
-    __bind_key__ = "session"
     __tablename__ = "EcuSoftware"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -156,7 +145,6 @@ class EcuSoftware(_Model):
 
 
 class FaultCounter(_Model):
-    __bind_key__ = "session"
     __tablename__ = "FaultCounter"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -167,7 +155,6 @@ class FaultCounter(_Model):
 
 
 class FreezeFrameParam(_Model):
-    __bind_key__ = "session"
     __tablename__ = "FreezeFrameParam"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -179,7 +166,6 @@ class FreezeFrameParam(_Model):
 
 
 class GblPackage(_Model):
-    __bind_key__ = "session"
     __tablename__ = "GblPackage"
 
     SwPartNumber: Mapped[int] = mapped_column(BigInteger, primary_key=True)
@@ -189,7 +175,6 @@ class GblPackage(_Model):
 
 
 class HistoryItem(_Model):
-    __bind_key__ = "session"
     __tablename__ = "HistoryItem"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -206,7 +191,6 @@ class HistoryItem(_Model):
 
 
 class HistoryLoadedEcuItem(_Model):
-    __bind_key__ = "session"
     __tablename__ = "HistoryLoadedEcuItem"
 
     # No PK
@@ -215,7 +199,6 @@ class HistoryLoadedEcuItem(_Model):
 
 
 class HistoryVehicleOrderItem(_Model):
-    __bind_key__ = "session"
     __tablename__ = "HistoryVehicleOrderItem"
 
     fkHistoryItem: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -223,7 +206,6 @@ class HistoryVehicleOrderItem(_Model):
 
 
 class KeyValue(_Model):
-    __bind_key__ = "session"
     __tablename__ = "KeyValue"
 
     key: Mapped[str] = mapped_column(String(250), primary_key=True)
@@ -232,7 +214,6 @@ class KeyValue(_Model):
 
 
 class ObservedSymptom(_Model):
-    __bind_key__ = "session"
     __tablename__ = "ObservedSymptom"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -242,7 +223,6 @@ class ObservedSymptom(_Model):
 
 
 class OrderVehicle(_Model):
-    __bind_key__ = "session"
     __tablename__ = "OrderVehicle"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -254,7 +234,6 @@ class OrderVehicle(_Model):
 
 
 class OrderVehiclePackage(_Model):
-    __bind_key__ = "session"
     __tablename__ = "OrderVehiclePackage"
 
     fkVehicleOrderSpec: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -267,7 +246,6 @@ class OrderVehiclePackage(_Model):
 
 
 class Parameter(_Model):
-    __bind_key__ = "session"
     __tablename__ = "Parameter"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -278,7 +256,6 @@ class Parameter(_Model):
 
 
 class PendingConfirmation(_Model):
-    __bind_key__ = "session"
     __tablename__ = "PendingConfirmation"
 
     fkVehicleOrderSpec: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -287,7 +264,6 @@ class PendingConfirmation(_Model):
 
 
 class PieDownloadConfirmation(_Model):
-    __bind_key__ = "session"
     __tablename__ = "PieDownloadConfirmation"
 
     fkVehicleOrderSpec: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -298,7 +274,6 @@ class PieDownloadConfirmation(_Model):
 
 
 class PieOrder(_Model):
-    __bind_key__ = "session"
     __tablename__ = "PieOrder"
 
     PieOrderId: Mapped[int] = mapped_column(BigInteger, primary_key=True)
@@ -309,7 +284,6 @@ class PieOrder(_Model):
 
 
 class PieOrderAttempt(_Model):
-    __bind_key__ = "session"
     __tablename__ = "PieOrderAttempt"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -318,14 +292,12 @@ class PieOrderAttempt(_Model):
 
 
 class PiePackage(_Model):
-    __bind_key__ = "session"
     __tablename__ = "PiePackage"
 
     fkPieOrder: Mapped[int] = mapped_column(BigInteger, primary_key=True)
 
 
 class RestoreableParameter(_Model):
-    __bind_key__ = "session"
     __tablename__ = "RestoreableParameter"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -336,7 +308,6 @@ class RestoreableParameter(_Model):
 
 
 class RestoredParameter(_Model):
-    __bind_key__ = "session"
     __tablename__ = "RestoredParameter"
 
     # No PK
@@ -346,7 +317,6 @@ class RestoredParameter(_Model):
 
 
 class SlaveEcuInfo(_Model):
-    __bind_key__ = "session"
     __tablename__ = "SlaveEcuInfo"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -358,7 +328,6 @@ class SlaveEcuInfo(_Model):
 
 
 class StatusIdentifier(_Model):
-    __bind_key__ = "session"
     __tablename__ = "StatusIdentifier"
 
     # No PK
@@ -371,7 +340,6 @@ class StatusIdentifier(_Model):
 
 
 class UpdateOrder(_Model):
-    __bind_key__ = "session"
     __tablename__ = "UpdateOrder"
 
     fkVehicleOrderSpec: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -383,7 +351,6 @@ class UpdateOrder(_Model):
 
 
 class UpdateOrderAttempt(_Model):
-    __bind_key__ = "session"
     __tablename__ = "UpdateOrderAttempt"
 
     fkVehicleOrderSpec: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -392,7 +359,6 @@ class UpdateOrderAttempt(_Model):
 
 
 class UpdateOrderDelivery(_Model):
-    __bind_key__ = "session"
     __tablename__ = "UpdateOrderDelivery"
 
     fkVehicleOrderSpec: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -401,7 +367,6 @@ class UpdateOrderDelivery(_Model):
 
 
 class UpdateVehiclePackage(_Model):
-    __bind_key__ = "session"
     __tablename__ = "UpdateVehiclePackage"
 
     fkVehicleOrderSpec: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -414,7 +379,6 @@ class UpdateVehiclePackage(_Model):
 
 
 class Vbf(_Model):
-    __bind_key__ = "session"
     __tablename__ = "Vbf"
 
     SwPartNumber: Mapped[int] = mapped_column(BigInteger, primary_key=True)
@@ -424,7 +388,6 @@ class Vbf(_Model):
 
 
 class VehConfig(_Model):
-    __bind_key__ = "session"
     __tablename__ = "VehConfig"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -441,7 +404,6 @@ class VehConfig(_Model):
 
 
 class VehicleOrder(_Model):
-    __bind_key__ = "session"
     __tablename__ = "VehicleOrder"
 
     fkVehicleOrderSpec: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -451,7 +413,6 @@ class VehicleOrder(_Model):
 
 
 class VehicleOrderDelivery(_Model):
-    __bind_key__ = "session"
     __tablename__ = "VehicleOrderDelivery"
 
     fkVehicleOrderSpec: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -460,7 +421,6 @@ class VehicleOrderDelivery(_Model):
 
 
 class VehicleOrderSpec(_Model):
-    __bind_key__ = "session"
     __tablename__ = "VehicleOrderSpec"
 
     fkOrderVehicleId: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -471,7 +431,6 @@ class VehicleOrderSpec(_Model):
 
 
 class VehicleOrderSpecItem(_Model):
-    __bind_key__ = "session"
     __tablename__ = "VehicleOrderSpecItem"
 
     fkOrderVehicleId: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -479,7 +438,6 @@ class VehicleOrderSpecItem(_Model):
 
 
 class VehicleParameter(_Model):
-    __bind_key__ = "session"
     __tablename__ = "VehicleParameter"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -490,7 +448,6 @@ class VehicleParameter(_Model):
 
 
 class WorkshopSession(_Model):
-    __bind_key__ = "session"
     __tablename__ = "WorkshopSession"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)

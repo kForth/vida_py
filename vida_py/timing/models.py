@@ -9,11 +9,10 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 
 class _Model(DeclarativeBase):
-    pass
+    __bind_key__ = "timing"
 
 
 class MessageTiming(_Model):
-    __bind_key__ = "timing"
     __tablename__ = "MessageTiming"
 
     MessageTimingID: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -24,7 +23,6 @@ class MessageTiming(_Model):
 
 
 class Requests(_Model):
-    __bind_key__ = "timing"
     __tablename__ = "Requests"
 
     # No PK
@@ -38,7 +36,6 @@ class Requests(_Model):
 
 
 class TimeoutAndResend(_Model):
-    __bind_key__ = "timing"
     __tablename__ = "TimeoutAndResend"
 
     TimeoutAndResendId: Mapped[int] = mapped_column(Integer, primary_key=True)

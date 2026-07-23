@@ -13,11 +13,10 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 
 class _Model(DeclarativeBase):
-    pass
+    __bind_key__ = "epc"
 
 
 class AttachmentData(_Model):
-    __bind_key__ = "epc"
     __tablename__ = "AttachmentData"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -28,7 +27,6 @@ class AttachmentData(_Model):
 
 
 class CatalogueComponents(_Model):
-    __bind_key__ = "epc"
     __tablename__ = "CatalogueComponents"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -58,7 +56,6 @@ class CatalogueComponents(_Model):
 
 
 class CCLexicon(_Model):
-    __bind_key__ = "epc"
     __tablename__ = "CCLexicon"
 
     CCid: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -68,7 +65,6 @@ class CCLexicon(_Model):
 
 
 class CCPartnerGroup(_Model):
-    __bind_key__ = "epc"
     __tablename__ = "CCPartnerGroup"
 
     fkCatalogueComponent: Mapped[int] = mapped_column(Integer)
@@ -77,7 +73,6 @@ class CCPartnerGroup(_Model):
 
 
 class CodeDictionary(_Model):
-    __bind_key__ = "epc"
     __tablename__ = "CodeDictionary"
 
     fkTableCode: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -86,7 +81,6 @@ class CodeDictionary(_Model):
 
 
 class ComponentAttachments(_Model):
-    __bind_key__ = "epc"
     __tablename__ = "ComponentAttachments"
 
     fkCatalogueComponent: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -97,7 +91,6 @@ class ComponentAttachments(_Model):
 
 
 class ComponentConditions(_Model):
-    __bind_key__ = "epc"
     __tablename__ = "ComponentConditions"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -110,7 +103,6 @@ class ComponentConditions(_Model):
 
 
 class ComponentDescriptions(_Model):
-    __bind_key__ = "epc"
     __tablename__ = "ComponentDescriptions"
 
     fkCatalogueComponent: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -121,7 +113,6 @@ class ComponentDescriptions(_Model):
 
 
 class Languages(_Model):
-    __bind_key__ = "epc"
     __tablename__ = "Languages"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -130,7 +121,6 @@ class Languages(_Model):
 
 
 class Lexicon(_Model):
-    __bind_key__ = "epc"
     __tablename__ = "Lexicon"
 
     DescriptionId: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -142,7 +132,6 @@ class Lexicon(_Model):
 
 
 class LexiconNoteWords(_Model):
-    __bind_key__ = "epc"
     __tablename__ = "LexiconNoteWords"
 
     fkLanguage: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -151,7 +140,6 @@ class LexiconNoteWords(_Model):
 
 
 class LexiconPartWords(_Model):
-    __bind_key__ = "epc"
     __tablename__ = "LexiconPartWords"
 
     DescriptionId: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -159,7 +147,6 @@ class LexiconPartWords(_Model):
 
 
 class NoteWords(_Model):
-    __bind_key__ = "epc"
     __tablename__ = "NoteWords"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -168,7 +155,6 @@ class NoteWords(_Model):
 
 
 class PartItems(_Model):
-    __bind_key__ = "epc"
     __tablename__ = "PartItems"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -183,7 +169,6 @@ class PartItems(_Model):
 
 
 class PartWords(_Model):
-    __bind_key__ = "epc"
     __tablename__ = "PartWords"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -193,7 +178,6 @@ class PartWords(_Model):
 
 
 class StructuredNoteTypes(_Model):
-    __bind_key__ = "epc"
     __tablename__ = "StructuredNoteTypes"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -202,7 +186,6 @@ class StructuredNoteTypes(_Model):
 
 
 class StructuredNoteValues(_Model):
-    __bind_key__ = "epc"
     __tablename__ = "StructuredNoteValues"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -213,7 +196,6 @@ class StructuredNoteValues(_Model):
 
 
 class StructuredNotes(_Model):
-    __bind_key__ = "epc"
     __tablename__ = "StructuredNotes"
 
     fkCatalogueComponent: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -222,7 +204,6 @@ class StructuredNotes(_Model):
 
 
 class TableCodes(_Model):
-    __bind_key__ = "epc"
     __tablename__ = "TableCodes"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -230,7 +211,6 @@ class TableCodes(_Model):
 
 
 class VirtualToShared(_Model):
-    __bind_key__ = "epc"
     __tablename__ = "VirtualToShared"
 
     fkCatalogueComponent: Mapped[int] = mapped_column(Integer, primary_key=True)

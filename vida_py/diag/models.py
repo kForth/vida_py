@@ -11,18 +11,16 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 
 class _Model(DeclarativeBase):
-    pass
+    __bind_key__ = "diag"
 
 
 class ECU(_Model):
-    __bind_key__ = "diag"
     __tablename__ = "ECU"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
 
 
 class EcuDescription(_Model):
-    __bind_key__ = "diag"
     __tablename__ = "EcuDescription"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)  # Not in DB
@@ -32,7 +30,6 @@ class EcuDescription(_Model):
 
 
 class ECUInformationReference(_Model):
-    __bind_key__ = "diag"
     __tablename__ = "ECUInformationReference"
 
     fkIE: Mapped[str] = mapped_column(ForeignKey("IE.Id"), primary_key=True)
@@ -41,7 +38,6 @@ class ECUInformationReference(_Model):
 
 
 class IE(_Model):
-    __bind_key__ = "diag"
     __tablename__ = "IE"
 
     Id: Mapped[str] = mapped_column(String(16), primary_key=True)
@@ -54,7 +50,6 @@ class IE(_Model):
 
 
 class IECustomerFunction(_Model):
-    __bind_key__ = "diag"
     __tablename__ = "IECustomerFunction"
 
     fkIE: Mapped[str] = mapped_column(ForeignKey("IE.Id"), primary_key=True)
@@ -62,7 +57,6 @@ class IECustomerFunction(_Model):
 
 
 class IEGenericComponent(_Model):
-    __bind_key__ = "diag"
     __tablename__ = "IEGenericComponent"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)  # Not in DB
@@ -72,7 +66,6 @@ class IEGenericComponent(_Model):
 
 
 class IEParentChildMap(_Model):
-    __bind_key__ = "diag"
     __tablename__ = "IEParentChildMap"
 
     fkIEparent: Mapped[str] = mapped_column(ForeignKey("IE.id"), primary_key=True)
@@ -80,7 +73,6 @@ class IEParentChildMap(_Model):
 
 
 class IEProfileMap(_Model):
-    __bind_key__ = "diag"
     __tablename__ = "IEProfileMap"
 
     fkIE: Mapped[str] = mapped_column(ForeignKey("IE.Id"), primary_key=True)
@@ -88,7 +80,6 @@ class IEProfileMap(_Model):
 
 
 class IETitle(_Model):
-    __bind_key__ = "diag"
     __tablename__ = "IETitle"
 
     fkIE: Mapped[str] = mapped_column(ForeignKey("IE.Id"), primary_key=True)
@@ -97,7 +88,6 @@ class IETitle(_Model):
 
 
 class IEType(_Model):
-    __bind_key__ = "diag"
     __tablename__ = "IEType"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -105,7 +95,6 @@ class IEType(_Model):
 
 
 class Image(_Model):
-    __bind_key__ = "diag"
     __tablename__ = "Image"
 
     Id: Mapped[str] = mapped_column(String, primary_key=True)
@@ -114,7 +103,6 @@ class Image(_Model):
 
 
 class ImageProfileMap(_Model):
-    __bind_key__ = "diag"
     __tablename__ = "ImageProfileMap"
 
     fkImage: Mapped[str] = mapped_column(ForeignKey("Image.Id"), primary_key=True)
@@ -122,7 +110,6 @@ class ImageProfileMap(_Model):
 
 
 class InformationQualifier(_Model):
-    __bind_key__ = "diag"
     __tablename__ = "InformationQualifier"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -130,7 +117,6 @@ class InformationQualifier(_Model):
 
 
 class InformationQualifierDescription(_Model):
-    __bind_key__ = "diag"
     __tablename__ = "InformationQualifierDescription"
 
     fkInformationQualifier: Mapped[int] = mapped_column(
@@ -141,7 +127,6 @@ class InformationQualifierDescription(_Model):
 
 
 class Language(_Model):
-    __bind_key__ = "diag"
     __tablename__ = "Language"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -149,7 +134,6 @@ class Language(_Model):
 
 
 class Script(_Model):
-    __bind_key__ = "diag"
     __tablename__ = "Script"
 
     Id: Mapped[str] = mapped_column(String, primary_key=True)
@@ -157,7 +141,6 @@ class Script(_Model):
 
 
 class ScriptCarFunction(_Model):
-    __bind_key__ = "diag"
     __tablename__ = "ScriptCarFunction"
 
     fkScript: Mapped[str] = mapped_column(ForeignKey("Script.Id"), primary_key=True)
@@ -165,7 +148,6 @@ class ScriptCarFunction(_Model):
 
 
 class ScriptContent(_Model):
-    __bind_key__ = "diag"
     __tablename__ = "ScriptContent"
 
     fkScript: Mapped[str] = mapped_column(ForeignKey("Script.Id"), primary_key=True)
@@ -176,7 +158,6 @@ class ScriptContent(_Model):
 
 
 class ScriptProfileMap(_Model):
-    __bind_key__ = "diag"
     __tablename__ = "ScriptProfileMap"
 
     fkScript: Mapped[str] = mapped_column(ForeignKey("Script.Id"), primary_key=True)
@@ -184,7 +165,6 @@ class ScriptProfileMap(_Model):
 
 
 class ScriptType(_Model):
-    __bind_key__ = "diag"
     __tablename__ = "ScriptType"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -192,7 +172,6 @@ class ScriptType(_Model):
 
 
 class ScriptVariant(_Model):
-    __bind_key__ = "diag"
     __tablename__ = "ScriptVariant"
 
     Id: Mapped[str] = mapped_column(String, primary_key=True)
@@ -200,7 +179,6 @@ class ScriptVariant(_Model):
 
 
 class SmartToolScript(_Model):
-    __bind_key__ = "diag"
     __tablename__ = "SmartToolScript"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)  # Not in DB
@@ -210,7 +188,6 @@ class SmartToolScript(_Model):
 
 
 class SoftwareProduct(_Model):
-    __bind_key__ = "diag"
     __tablename__ = "SoftwareProduct"
 
     Id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
@@ -220,7 +197,6 @@ class SoftwareProduct(_Model):
 
 
 class SoftwareProductNote(_Model):
-    __bind_key__ = "diag"
     __tablename__ = "SoftwareProductNote"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -229,7 +205,6 @@ class SoftwareProductNote(_Model):
 
 
 class SoftwareProductTitle(_Model):
-    __bind_key__ = "diag"
     __tablename__ = "SoftwareProductTitle"
 
     fkSoftwareProduct: Mapped[int] = mapped_column(
@@ -240,7 +215,6 @@ class SoftwareProductTitle(_Model):
 
 
 class SWProductProfileMap(_Model):
-    __bind_key__ = "diag"
     __tablename__ = "SWProductProfileMap"
 
     fkSoftwareProduct: Mapped[int] = mapped_column(
@@ -250,7 +224,6 @@ class SWProductProfileMap(_Model):
 
 
 class SymptomIEMap(_Model):
-    __bind_key__ = "diag"
     __tablename__ = "SymptomIEMap"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
