@@ -247,8 +247,10 @@ class LexiconId_Descriptions(_Model):
     __bind_key__ = "access"
     __tablename__ = "LexiconId_Descriptions"
 
-    fkLexiconId: Mapped[str] = mapped_column(String, primary_key=ForeignKey("LexiconIds.Id"))
-    fkLanguage: Mapped[str] = mapped_column(String, primary_key=ForeignKey("Languages.Id"))
+    fkLexiconId: Mapped[str] = mapped_column(
+        String, primary_key=True
+    )  # ForeignKey("LexiconIds.Id")
+    fkLanguage: Mapped[str] = mapped_column(String, primary_key=True)  # ForeignKey("Languages.Id"))
     Description: Mapped[str] = mapped_column(String(255))
     Changed: Mapped[datetime] = mapped_column(DateTime)
     ObjVersion: Mapped[int] = mapped_column(Integer)
@@ -475,7 +477,7 @@ class User_Settings(_Model):
     __bind_key__ = "access"
     __tablename__ = "User_Settings"
 
-    fkUser: Mapped[str] = mapped_column(String, primary_key=ForeignKey("Users.Id"))
+    fkUser: Mapped[str] = mapped_column(String, primary_key=True)  # ForeignKey("Users.Id")
     SettingKey: Mapped[str] = mapped_column(String(50), primary_key=True)
     SettingValue: Mapped[str] = mapped_column(String(50))
 
@@ -653,10 +655,10 @@ class WorkList_Operation_List(_Model):
     __bind_key__ = "access"
     __tablename__ = "WorkList_Operation_List"
 
-    fkWorkList: Mapped[int] = mapped_column(Integer, primary_key=ForeignKey("WorkList.Id"))
+    fkWorkList: Mapped[int] = mapped_column(Integer, primary_key=True)  # ForeignKey("WorkList.Id")
     fkWorkList_Operation: Mapped[int] = mapped_column(
-        Integer, primary_key=ForeignKey("WorkList_Operation.Id")
-    )
+        Integer, primary_key=True
+    )  # ForeignKey("WorkList_Operation.Id")
 
 
 class WorkList_Operation_Package(_Model):
@@ -664,11 +666,11 @@ class WorkList_Operation_Package(_Model):
     __tablename__ = "WorkList_Operation_Package"
 
     fkWorkList_Package: Mapped[int] = mapped_column(
-        Integer, primary_key=ForeignKey("WorkList_Package.Id")
-    )
+        Integer, primary_key=True
+    )  # ForeignKey("WorkList_Package.Id")
     fkWorkList_Operation: Mapped[int] = mapped_column(
-        Integer, primary_key=ForeignKey("WorkList_Operation.Id")
-    )
+        Integer, primary_key=True
+    )  # ForeignKey("WorkList_Operation.Id")
 
 
 class WorkList_Package(_Model):
@@ -724,10 +726,10 @@ class WorkList_Part_List(_Model):
     __bind_key__ = "access"
     __tablename__ = "WorkList_Part_List"
 
-    fkWorkList: Mapped[int] = mapped_column(Integer, primary_key=ForeignKey("WorkList.Id"))
+    fkWorkList: Mapped[int] = mapped_column(Integer, primary_key=True)  # ForeignKey("WorkList.Id")
     fkWorkList_Part: Mapped[int] = mapped_column(
-        Integer, primary_key=ForeignKey("WorkList_Part.Id")
-    )
+        Integer, primary_key=True
+    )  # ForeignKey("WorkList_Part.Id")
 
 
 class WorkList_Part_Package(_Model):
@@ -735,11 +737,11 @@ class WorkList_Part_Package(_Model):
     __tablename__ = "WorkList_Part_Package"
 
     fkWorkList_Package: Mapped[int] = mapped_column(
-        Integer, primary_key=ForeignKey("WorkList_Package.Id")
-    )
+        Integer, primary_key=True
+    )  # ForeignKey("WorkList_Package.Id")
     fkWorkList_Part: Mapped[int] = mapped_column(
-        Integer, primary_key=ForeignKey("WorkList_Part.Id")
-    )
+        Integer, primary_key=True
+    )  # ForeignKey("WorkList_Part.Id")
 
 
 class WorkList_PostponedQb(_Model):
