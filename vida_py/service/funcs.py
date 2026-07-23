@@ -32,3 +32,12 @@ def hex_to_int(session: Session, vs_data: str) -> int:
 
 def parse_search_string(session: Session, data: str) -> list[Row]:
     return list(run_func(session, "ParseSearchString", data).all())
+
+
+FUNCTIONS = {
+    "fn_Split": fn__split,
+    "getSearchHits": get_search_hits,
+    "getSearchStringMatches": get_search_string_matches,
+    "HexToInt": hex_to_int,
+    "ParseSearchString": parse_search_string,
+}

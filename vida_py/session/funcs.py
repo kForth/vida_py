@@ -25,3 +25,11 @@ def get_transaction_nbr(session: Session, vehicle_id: int) -> int:
 
 def split(session: Session, string: str, delimiter: str) -> list[str]:
     return [str(e) for e in run_func(session, "Split", string, delimiter).all()]
+
+
+FUNCTIONS = {
+    "GetOrderDate": get_order_date,
+    "GetStatus": get_status,
+    "GetTransactionNbr": get_transaction_nbr,
+    "Split": split,
+}

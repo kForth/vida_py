@@ -67,3 +67,14 @@ def sp__return_csv(session: Session, column_name: str, table_name: str) -> list[
     return list(
         run_script(session, "sp_ReturnCSV", ColumnName=column_name, TableName=table_name).all()
     )
+
+
+STORED_PROCEDURES = {
+    "CleanUp": clean_up,
+    "getEnginesForModelAndModelYear": get_engines_for_model_and_model_year,
+    "getValidProfilesForSelectedBuilder": get_valid_profiles_for_selected_builder,
+    "getVINComponents": get_vin_components,
+    "getVINComponentsByPartnerGroupId": get_vin_components_by_partner_group_id,
+    "getVINComponentsByPartnerGroupIdSwdl": get_vin_components_by_partner_group_id_swdl,
+    "sp_ReturnCSV": sp__return_csv,
+}

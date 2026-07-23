@@ -20,3 +20,10 @@ def get_overridden_vin_component(session: Session, vin: str) -> list[Row]:
 
 def usp_purge_clientlogs_table(session: Session) -> list[Row]:
     return list(run_script(session, "usp_purge_clientlogs_table").all())
+
+
+STORED_PROCEDURES = {
+    "deleteWorkList": delete_work_list,
+    "getOverriddenVINComponent": get_overridden_vin_component,
+    "usp_purge_clientlogs_table": usp_purge_clientlogs_table,
+}

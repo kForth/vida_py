@@ -52,3 +52,18 @@ def set_normal_usage(session: Session) -> list[Row]:
 
 def update_lexicon(session: Session) -> list[Row]:
     return list(run_script(session, "UpdateLexicon").all())
+
+
+STORED_PROCEDURES = {
+    "CleanUp": clean_up,
+    "FreeTextSearch": free_text_search,
+    "FreeTextSearchSPGenerator": free_text_search_sp_generator,
+    "GenerateAll": generate_all,
+    "GetPartsDescriptionsXML": get_parts_descriptions_xml,
+    "InsertSearchNoteAndWordStrings": insert_search_note_and_word_strings,
+    "ParseLexiconFTS": parse_lexicon_fts,
+    "ParseLexiconFTSWithDelete": parse_lexicon_fts_with_delete,
+    "RestrictUsage": restrict_usage,
+    "SetNormalUsage": set_normal_usage,
+    "UpdateLexicon": update_lexicon,
+}

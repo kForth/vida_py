@@ -36,3 +36,13 @@ def split_big_numbers(session: Session, list_: str, delimiter: str) -> list[Row]
 
 def split_string(session: Session, string: str) -> list[Row]:
     return list(run_func(session, "SplitString", string).all())
+
+
+FUNCTIONS = {
+    "GetCompatibleProfiles": get_compatible_profiles,
+    "GetDTCCodeForCustomerSymptom": get_dtc_code_for_customer_symptom,
+    "GetText": get_text,
+    "GetTextFromLang": get_text_from_lang,
+    "SplitBigNumbers": split_big_numbers,
+    "SplitString": split_string,
+}

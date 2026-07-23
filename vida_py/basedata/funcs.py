@@ -40,3 +40,15 @@ def get_valid_profiles_for_selected(session: Session, selected_profiles: str) ->
 
 def parse_string(session: Session, value: str) -> list[Row]:
     return list(run_func(session, "ParseString", value).all())
+
+
+FUNCTIONS = {
+    "getProfileFullTitle": get_profile_full_title,
+    "getProfileModelYearDesc": get_profile_model_year_desc,
+    "getProfileNavTitle": get_profile_nav_title,
+    "getProfilesFullTitle": get_profiles_full_title,
+    "getProfileVehicleModelDesc": get_profile_vehicle_model_desc,
+    "GetValidProfileManager": get_valid_profile_manager,
+    "GetValidProfilesForSelected": get_valid_profiles_for_selected,
+    "ParseString": parse_string,
+}

@@ -58,3 +58,19 @@ def parse_string(session: Session, string: str) -> list[Row]:
 
 def parse_to_words(session: Session, data: str) -> list[Row]:
     return list(run_func(session, "ParseToWords", data).all())
+
+
+FUNCTIONS = {
+    "fn_SplitWithLevel": fn__split_with_level,
+    "GetNSText": get_ns_text,
+    "GetPartNotes": get_part_notes,
+    "GetPartText": get_part_text,
+    "getPath": get_path,
+    "getSectionDescription": get_section_description,
+    "getSectionDocFootnote": get_section_doc_footnote,
+    "getSectionVariantFootnote": get_section_variant_footnote,
+    "ParseNoteSearchString": parse_note_search_string,
+    "ParsePartSearchString": parse_part_search_string,
+    "ParseString": parse_string,
+    "ParseToWords": parse_to_words,
+}

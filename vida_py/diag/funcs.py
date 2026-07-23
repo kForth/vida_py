@@ -32,3 +32,13 @@ def split(session: Session, string: str, delimiter: str) -> list[Row]:
 
 def split_big_numbers(session: Session, list_: str, delimiter: str) -> list[Row]:
     return list(run_func(session, "SplitBigNumbers", list_, delimiter).all())
+
+
+FUNCTIONS = {
+    "getProfileNavTitle": get_profile_nav_title,
+    "getSwProductNote": get_sw_product_note,
+    "GetTextFromLang": get_text_from_lang,
+    "GetValidProfilesForSelected": get_valid_profiles_for_selected,
+    "Split": split,
+    "SplitBigNumbers": split_big_numbers,
+}

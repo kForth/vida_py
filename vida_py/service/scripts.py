@@ -16,3 +16,9 @@ def calculate_siblings(session: Session) -> list[Row]:
 
 def clean_up(session: Session, dest_database: str) -> list[Row]:
     return list(run_script(session, "CleanUp", DestDatabase=dest_database).all())
+
+
+STORED_PROCEDURES = {
+    "calculateSiblings": calculate_siblings,
+    "CleanUp": clean_up,
+}
