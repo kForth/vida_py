@@ -21,6 +21,18 @@ MODULE_ENV_VARS = {
     "vida_py.timing": "VIDA_TIMING_DB_URI",
 }
 
+SESSION_EXPORTS = {
+    "AccessServerSession": "vida_py.access",
+    "BaseDataSession": "vida_py.basedata",
+    "CarComSession": "vida_py.carcom",
+    "DiagRepoSession": "vida_py.diag",
+    "DiagSessionSession": "vida_py.session",
+    "DiceTimingSession": "vida_py.timing",
+    "EpcSession": "vida_py.epc",
+    "ImageRepoSession": "vida_py.images",
+    "ServiceRepoSession": "vida_py.service",
+}
+
 
 @pytest.mark.parametrize(("module_name", "env_var"), MODULE_ENV_VARS.items())
 def test_database_submodules_import_without_touching_env(
@@ -54,3 +66,54 @@ def test_top_level_package_exports_sessions_lazily() -> None:
     assert callable(session_factory)
     assert "vida_py.access" in sys.modules
 
+
+def test_top_level_package_rejects_unknown_export() -> None:
+    sys.modules.pop("vida_py", None)
+    package = importlib.import_module("vida_py")
+
+    with pytest.raises(AttributeError, match="Nope"):
+        _ = package.Nope
+
+
+def test_top_level_package_exports_all_session_aliases() -> None:
+    sys.modules.pop("vida_py", None)
+    package = importlib.import_module("vida_py")
+
+    assert set(package.__all__) == {
+        "AccessServerSession",
+        "BaseDataSession",
+        "CarComSession",
+        "DiagRepoSession",
+        "DiagSessionSession",
+        "DiceTimingSession",
+        "EpcSession",
+        "ImageRepoSession",
+        "ServiceRepoSession",
+    }
+
+
+@pytest.mark.parametrize(("export_name", "module_name"), SESSION_EXPORTS.items())
+def test_top_level_session_aliases_resolve_to_submodule_session(
+    export_name: str, module_name: str
+) -> None:
+    sys.modules.pop("vida_py", None)
+    sys.modules.pop(module_name, None)
+
+    package = importlib.import_module("vida_py")
+    exported_session = getattr(package, export_name)
+    submodule = importlib.import_module(module_name)
+
+    assert exported_session is submodule.Session
+
+
+@pytest.mark.parametrize(("export_name", "module_name"), SESSION_EXPORTS.items())
+def test_top_level_session_aliases_are_stable(export_name: str, module_name: str) -> None:
+    sys.modules.pop("vida_py", None)
+    sys.modules.pop(module_name, None)
+
+    package = importlib.import_module("vida_py")
+
+    first = getattr(package, export_name)
+    second = getattr(package, export_name)
+
+    assert first is second
