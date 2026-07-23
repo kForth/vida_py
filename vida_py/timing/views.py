@@ -29,5 +29,5 @@ class RequestTimingView:
     B2: Mapped[int] = mapped_column(SmallInteger)
     B3: Mapped[int] = mapped_column(SmallInteger)
     P1max: Mapped[int] = mapped_column(Integer)
-    P3max: Mapped[int] = mapped_column(Integer)
-    P4max: Mapped[int] = mapped_column(Integer)
+    P3min: Mapped[int] = mapped_column(Integer)
+    P4min: Mapped[int] = mapped_column(Integer)
