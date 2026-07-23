@@ -241,3 +241,80 @@ def so__move_to_history(
 
 def so__remove_everything(session: Session) -> list[Row]:
     return list(run_script(session, "so_RemoveEverything").all())
+
+
+def workshop_session__remove_counters(session: Session) -> list[Row]:
+    return list(run_script(session, "workshopSession_RemoveCounters").all())
+
+
+def workshop_session__set_intermittent_dtc_to_ok(session: Session) -> list[Row]:
+    return list(run_script(session, "workshopSession_SetIntermittentDtcToOK").all())
+
+
+def workshop_session__remove_freeze_frames(session: Session) -> list[Row]:
+    return list(run_script(session, "workshopSession_RemoveFreezeFrames").all())
+
+
+def workshop_session__update_dtc(session: Session) -> list[Row]:
+    return list(run_script(session, "workshopSession_UpdateDtc").all())
+
+
+def workshop_session__add_freeze_frame_parameter(session: Session) -> list[Row]:
+    return list(run_script(session, "workshopSession_AddFreezeFrameParameter").all())
+
+
+def workshop_session__get_freeze_frames(session: Session) -> list[Row]:
+    return list(run_script(session, "workshopSession_GetFreezeFrames").all())
+
+
+def workshop_session__add_fault_counter(session: Session) -> list[Row]:
+    return list(run_script(session, "workshopSession_AddFaultCounter").all())
+
+
+def workshop_session__add_action_item(session: Session) -> list[Row]:
+    return list(run_script(session, "workshopSession_AddActionItem").all())
+
+
+def workshop_session__set_dtc_show_always(session: Session) -> list[Row]:
+    return list(run_script(session, "workshopSession_SetDtcShowAlways").all())
+
+
+def workshop_session__remove_status_identifiers(session: Session) -> list[Row]:
+    return list(run_script(session, "workshopSession_RemoveStatusIdentifiers").all())
+
+
+def workshop_session__get_dtc_readouts(session: Session) -> list[Row]:
+    return list(run_script(session, "workshopSession_GetDtcReadouts").all())
+
+
+def workshop_session__add_dtc(session: Session) -> list[Row]:
+    return list(run_script(session, "workshopSession_AddDtc").all())
+
+
+def workshop_session__add_dtc_readout(session: Session) -> list[Row]:
+    return list(run_script(session, "workshopSession_AddDtcReadout").all())
+
+
+def workshop_session__get_fault_counters(session: Session) -> list[Row]:
+    return list(run_script(session, "workshopSession_GetFaultCounters").all())
+
+
+def workshop_session__get_dtcs(session: Session) -> list[Row]:
+    return list(run_script(session, "workshopSession_GetDtcs").all())
+
+
+def workshop_session__get_action_items(session: Session) -> list[Row]:
+    return list(run_script(session, "workshopSession_GetActionItems").all())
+
+
+def workshop_session__get_status_identifiers(session: Session) -> list[Row]:
+    return list(run_script(session, "workshopSession_GetStatusIdentifiers").all())
+
+
+def workshop_session__add_status_identifier(session: Session) -> list[Row]:
+    return list(run_script(session, "workshopSession_AddStatusIdentifier").all())
+
+
+def workshop_session__update_dtc_readout(session: Session) -> list[Row]:
+    return list(run_script(session, "workshopSession_UpdateDtcReadout ").all())
+
