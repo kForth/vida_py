@@ -14,18 +14,6 @@ def clean_up(session: Session) -> list[Row]:
     return list(run_script(session, "CleanUp").all())
 
 
-def get_request_timeout_and_resend(
-    session: Session, ecu: int, b1: int, b2: int, b3: int
-) -> list[Row]:
-    return list(
-        run_script(session, "GetRequestTimeoutAndResend", ECU=ecu, B1=b1, B2=b2, B3=b3).all()
-    )
-
-
-def get_request_timing(session: Session, ecu: int, b1: int, b2: int, b3: int) -> list[Row]:
-    return list(run_script(session, "GetRequestTiming", ECU=ecu, B1=b1, B2=b2, B3=b3).all())
-
-
 def so__clear_history(session: Session, user_id: str) -> list[Row]:
     return list(run_script(session, "so_ClearHistory", userId=user_id).all())
 
