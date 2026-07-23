@@ -6,12 +6,38 @@ __author__ = "Kestin Goforth"
 __copyright__ = "Copyright 2026"
 __license__ = "BSD-3-Clause"
 
-from sqlalchemy import BINARY, NVARCHAR, Boolean, ForeignKey, Integer, String
+from datetime import datetime
+
+from sqlalchemy import BINARY, NVARCHAR, Boolean, DateTime, ForeignKey, Integer, String
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 
 class _Model(DeclarativeBase):
     __bind_key__ = "service"
+
+
+class DBContent(_Model):
+    __tablename__ = "DBContent"
+
+    Release: Mapped[str] = mapped_column(String(50), primary_key=True)
+    ScriptName: Mapped[str] = mapped_column(String(50), primary_key=True)
+    ObjVersion: Mapped[datetime] = mapped_column(DateTime)
+
+
+class DBSchema(_Model):
+    __tablename__ = "DBSchema"
+
+    Version: Mapped[str] = mapped_column(String(50), primary_key=True)
+    Release: Mapped[str] = mapped_column(String(50))
+    ObjVersion: Mapped[datetime] = mapped_column(DateTime)
+
+
+class DBStageVersion(_Model):
+    __tablename__ = "DBStageVersion"
+
+    ID: Mapped[str] = mapped_column(String(50), primary_key=True)
+    StageTag: Mapped[str] = mapped_column(String(50))
+    StageDate: Mapped[datetime] = mapped_column(DateTime)
 
 
 class Document(_Model):

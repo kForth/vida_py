@@ -50,6 +50,22 @@ class CryptKey(_Model):
     KeyData: Mapped[bytes] = mapped_column(VARBINARY)
 
 
+class DBContent(_Model):
+    __tablename__ = "DBContent"
+
+    Release: Mapped[str] = mapped_column(String(50), primary_key=True)
+    ScriptName: Mapped[str] = mapped_column(String(50), primary_key=True)
+    ObjVersion: Mapped[datetime] = mapped_column(DateTime)
+
+
+class DBSchema(_Model):
+    __tablename__ = "DBSchema"
+
+    Version: Mapped[str] = mapped_column(String(50), primary_key=True)
+    Release: Mapped[str] = mapped_column(String(50))
+    ObjVersion: Mapped[datetime] = mapped_column(DateTime)
+
+
 class DiagnosticScript(_Model):
     __tablename__ = "DiagnosticScript"
 

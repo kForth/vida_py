@@ -4,12 +4,30 @@ __author__ = "Kestin Goforth"
 __copyright__ = "Copyright 2026"
 __license__ = "BSD-3-Clause"
 
-from sqlalchemy import Integer, SmallInteger, String
+from datetime import datetime
+
+from sqlalchemy import DateTime, Integer, SmallInteger, String
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 
 class _Model(DeclarativeBase):
     __bind_key__ = "timing"
+
+
+class DBContent(_Model):
+    __tablename__ = "DBContent"
+
+    Release: Mapped[str] = mapped_column(String(50), primary_key=True)
+    ScriptName: Mapped[str] = mapped_column(String(50), primary_key=True)
+    ObjVersion: Mapped[datetime] = mapped_column(DateTime)
+
+
+class DBSchema(_Model):
+    __tablename__ = "DBSchema"
+
+    Version: Mapped[str] = mapped_column(String(50), primary_key=True)
+    Release: Mapped[str] = mapped_column(String(50))
+    ObjVersion: Mapped[datetime] = mapped_column(DateTime)
 
 
 class MessageTiming(_Model):

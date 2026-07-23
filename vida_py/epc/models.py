@@ -112,6 +112,37 @@ class ComponentDescriptions(_Model):
     VersionUpdate: Mapped[str] = mapped_column(String(10))
 
 
+class DBContent(_Model):
+    __tablename__ = "DBContent"
+
+    Release: Mapped[str] = mapped_column(String(50), primary_key=True)
+    ScriptName: Mapped[str] = mapped_column(String(50), primary_key=True)
+    ObjVersion: Mapped[datetime] = mapped_column(DateTime)
+
+
+class DBSchema(_Model):
+    __tablename__ = "DBSchema"
+
+    Version: Mapped[str] = mapped_column(String(50), primary_key=True)
+    Release: Mapped[str] = mapped_column(String(50))
+    ObjVersion: Mapped[datetime] = mapped_column(DateTime)
+
+
+class DBStageVersion(_Model):
+    __tablename__ = "DBStageVersion"
+
+    ID: Mapped[str] = mapped_column(String(50), primary_key=True)
+    StageTag: Mapped[str] = mapped_column(String(50))
+    StageDate: Mapped[datetime] = mapped_column(DateTime)
+
+
+class DBVersion(_Model):
+    __tablename__ = "DBVersion"
+
+    Version: Mapped[str] = mapped_column(String(50), primary_key=True)
+    VersionDate: Mapped[datetime] = mapped_column(DateTime)
+
+
 class Languages(_Model):
     __tablename__ = "Languages"
 
