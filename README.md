@@ -9,7 +9,7 @@
 ![Pepy Total Downloads](https://img.shields.io/pepy/dt/vida_py)
 ![PyPI Downloads](https://img.shields.io/pypi/dm/vida_py)
 
-Python interface Volvo's VIDA databases.
+Python interface for Volvo's VIDA databases.
 
 ## Installation
 
@@ -69,7 +69,7 @@ The easiest way to access Volvo's VIDA databases is to extract the `.mdf` and `.
 
 ## Contributing
 
-Contributions are welcome! Please submit a pull request or open and issue to discuss changes or report bugs.
+Contributions are welcome! Please submit a pull request or open an issue to discuss changes or report bugs.
 
 ## License
 
