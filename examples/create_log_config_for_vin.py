@@ -1,4 +1,4 @@
-from xml.dom import minidom
+﻿from xml.dom import minidom
 
 import click
 from sqlalchemy import distinct, or_
@@ -42,7 +42,7 @@ LANGUAGES = (
 )
 
 
-def createTextNode(root, parent, name, value):
+def create_text_node(root, parent, name, value):
     el = root.createElement(name)
     el.appendChild(root.createTextNode(str(value)))
     parent.appendChild(el)
@@ -189,7 +189,7 @@ def main(vin, language, outfile):
         xml.setAttribute("xmlns:i", "http://www.w3.org/2001/XMLSchema-instance")
         root.appendChild(xml)
 
-        createTextNode(root, xml, "LogTimestamps", "true")
+        create_text_node(root, xml, "LogTimestamps", "true")
 
         ecu_modules = root.createElement("Modules")
         xml.appendChild(ecu_modules)
@@ -197,10 +197,10 @@ def main(vin, language, outfile):
         for identifier, variant, config, params in modules:
             module = root.createElement("LoggingModuleConfiguration")
             ecu_modules.appendChild(module)
-            createTextNode(root, module, "EcuVariant", identifier)
-            createTextNode(root, module, "Name", variant.ecu.type.description)
-            createTextNode(root, module, "Description", variant.ecu.name)
-            createTextNode(root, module, "ModuleAddress", "0x" + config.commAddress)
+            create_text_node(root, module, "EcuVariant", identifier)
+            create_text_node(root, module, "Name", variant.ecu.type.description)
+            create_text_node(root, module, "Description", variant.ecu.name)
+            create_text_node(root, module, "ModuleAddress", "0x" + config.commAddress)
             parameters = root.createElement("Parameters")
             module.appendChild(parameters)
 
@@ -208,7 +208,7 @@ def main(vin, language, outfile):
                 param = root.createElement("LoggingParameter")
                 parameters.appendChild(param)
 
-                createTextNode(
+                create_text_node(
                     root,
                     param,
                     "Name",
@@ -222,11 +222,11 @@ def main(vin, language, outfile):
                         ][0]
                     ),
                 )
-                createTextNode(root, param, "Description", "")
-                createTextNode(root, param, "Identifier", parent.values[0].CompareValue)
-                createTextNode(root, param, "Offset", block.offset)
-                createTextNode(root, param, "Length", block.length)
-                createTextNode(root, param, "DataType", block.datatype.name)
+                create_text_node(root, param, "Description", "")
+                create_text_node(root, param, "Identifier", parent.values[0].CompareValue)
+                create_text_node(root, param, "Offset", block.offset)
+                create_text_node(root, param, "Length", block.length)
+                create_text_node(root, param, "DataType", block.datatype.name)
 
                 vals = root.createElement("Values")
                 param.appendChild(vals)
@@ -234,7 +234,7 @@ def main(vin, language, outfile):
                 for val in block.values:
                     param_val = root.createElement("LoggingParameterValue")
                     vals.appendChild(param_val)
-                    createTextNode(
+                    create_text_node(
                         root,
                         param_val,
                         "Text",
@@ -248,7 +248,7 @@ def main(vin, language, outfile):
                             if e.language.identifier == language
                         ][0],
                     )
-                    createTextNode(
+                    create_text_node(
                         root,
                         param_val,
                         "Formula",
@@ -256,7 +256,7 @@ def main(vin, language, outfile):
                             val.ppe_scaling if val.fkT155_Scaling == 0 else val.scaling
                         ).definition,
                     )
-                    createTextNode(
+                    create_text_node(
                         root,
                         param_val,
                         "Units",
@@ -270,9 +270,9 @@ def main(vin, language, outfile):
                             if e.language.identifier == language
                         ][0],
                     )
-                    createTextNode(root, param_val, "CompareValue", val.CompareValue)
-                    createTextNode(root, param_val, "Operator", val.Operator)
-                    createTextNode(root, param_val, "Precision", 0)
+                    create_text_node(root, param_val, "CompareValue", val.CompareValue)
+                    create_text_node(root, param_val, "Operator", val.Operator)
+                    create_text_node(root, param_val, "Precision", 0)
 
     if outfile:
         with open(outfile, "wb+") as out:
@@ -283,3 +283,4 @@ def main(vin, language, outfile):
 
 if __name__ == "__main__":
     main()
+
