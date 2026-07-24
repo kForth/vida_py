@@ -45,13 +45,13 @@ def run_script(session: Session, script: str, **kwargs: Any) -> Result:
     )
 
 
-def run_func(session: Session, script: str, *args: Any) -> Result:
+def run_func(session: Session, func: str, *args: Any) -> Result:
     kwargs = {str(i): e for i, e in enumerate(args)}
     return session.execute(
         text(
             "\n".join(
                 [
-                    f"SELECT * FROM [dbo].[{script}] (",
+                    f"SELECT * FROM [dbo].[{func}] (",
                     "\n,".join(f":{k}" for k in kwargs),
                     ")",
                 ]
