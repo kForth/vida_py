@@ -18,8 +18,6 @@ if TYPE_CHECKING:
     from vida_py.session import Session as DiagSessionSession
     from vida_py.timing import Session as DiceTimingSession
 
-__version__ = "0.2.0"
-
 __all__ = [
     "AccessServerSession",
     "BaseDataSession",
