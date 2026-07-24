@@ -35,7 +35,7 @@ def run_script(session: Session, script: str, **kwargs: Any) -> Result:
             "\n".join(
                 [
                     "DECLARE @RC int",
-                    f"EXECUTE @RC = [dbo].[{script}]",
+                    f"EXECUTE @RC = [dbo].[{text(script)}]",
                     "\n,".join(f"@{k} = :{k}" for k in kwargs),
                     "SELECT @RC",
                 ]
@@ -51,7 +51,7 @@ def run_func(session: Session, func: str, *args: Any) -> Result:
         text(
             "\n".join(
                 [
-                    f"SELECT * FROM [dbo].[{func}] (",
+                    f"SELECT * FROM [dbo].[{text(func)}] (",
                     "\n,".join(f":{k}" for k in kwargs),
                     ")",
                 ]
