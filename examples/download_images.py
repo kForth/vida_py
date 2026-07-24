@@ -3,9 +3,8 @@ import os
 import click
 from sqlalchemy.sql import or_
 
-from vida_py import ImageRepoSession
-from vida_py.images import Graphics, LocalizedGraphics
-from vida_py.images.models import GraphicFormats
+from vida_py.images import Session
+from vida_py.images.models import GraphicFormats, Graphics, LocalizedGraphics
 
 
 @click.command()
@@ -18,7 +17,7 @@ from vida_py.images.models import GraphicFormats
     default="*",
 )
 def main(outdir, img_type):
-    with ImageRepoSession() as session:
+    with Session() as session:
         images = [
             dict(zip(("graphicId", "languageId", "title", "type"), e, strict=True))
             for e in session.query(
