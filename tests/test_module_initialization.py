@@ -51,6 +51,8 @@ def test_database_submodules_import_without_touching_env(
     assert callable(module.initialize)
     assert callable(module.get_engine)
     assert callable(module.get_session_factory)
+    assert callable(module.dispose_engine)
+    assert callable(module.reset)
 
 
 def test_top_level_package_exports_sessions_lazily() -> None:

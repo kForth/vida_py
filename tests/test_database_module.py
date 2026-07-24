@@ -232,3 +232,74 @@ def test_database_module_initialize_uses_env_when_no_engine_or_url(
 
     assert module.get_engine() is engine
     assert module.get_session_factory() is session_factory
+
+
+def test_database_module_dispose_engine_calls_engine_dispose_once() -> None:
+    module = DatabaseModule("VIDA_TEST_DB_URI")
+
+    class FakeEngine:
+        def __init__(self) -> None:
+            self.calls = 0
+
+        def dispose(self) -> None:
+            self.calls += 1
+
+    fake_engine = FakeEngine()
+    object.__setattr__(module, "_engine", fake_engine)
+
+    module.dispose_engine()
+
+    assert fake_engine.calls == 1
+
+
+def test_database_module_dispose_engine_is_noop_when_uninitialized() -> None:
+    module = DatabaseModule("VIDA_TEST_DB_URI")
+
+    module.dispose_engine()
+
+    assert module._engine is None
+
+
+def test_database_module_reset_disposes_and_clears_cached_state() -> None:
+    module = DatabaseModule("VIDA_TEST_DB_URI")
+
+    class FakeEngine:
+        def __init__(self) -> None:
+            self.calls = 0
+
+        def dispose(self) -> None:
+            self.calls += 1
+
+    fake_engine = FakeEngine()
+    fake_session_factory = object()
+
+    object.__setattr__(module, "_engine", fake_engine)
+    object.__setattr__(module, "_session_factory", fake_session_factory)
+
+    module.reset()
+
+    assert fake_engine.calls == 1
+    assert module._engine is None
+    assert module._session_factory is None
+
+
+def test_database_module_reset_can_skip_dispose() -> None:
+    module = DatabaseModule("VIDA_TEST_DB_URI")
+
+    class FakeEngine:
+        def __init__(self) -> None:
+            self.calls = 0
+
+        def dispose(self) -> None:
+            self.calls += 1
+
+    fake_engine = FakeEngine()
+
+    object.__setattr__(module, "_engine", fake_engine)
+    object.__setattr__(module, "_session_factory", object())
+
+    module.reset(dispose_engine=False)
+
+    assert fake_engine.calls == 0
+    assert module._engine is None
+    assert module._session_factory is None

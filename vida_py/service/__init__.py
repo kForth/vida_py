@@ -18,6 +18,8 @@ create_session_factory = _DATABASE.create_session_factory
 initialize = _DATABASE.initialize
 get_engine = _DATABASE.get_engine
 get_session_factory = _DATABASE.get_session_factory
+dispose_engine = _DATABASE.dispose_engine
+reset = _DATABASE.reset
 
 
 def create_session(**session_kwargs: Any) -> OrmSession:
@@ -32,7 +34,9 @@ __all__ = [
     "create_engine_from_url",
     "create_session",
     "create_session_factory",
+    "dispose_engine",
     "get_engine",
     "get_session_factory",
     "initialize",
+    "reset",
 ]

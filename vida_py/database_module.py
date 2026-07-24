@@ -75,5 +75,15 @@ class DatabaseModule:
         assert self._session_factory is not None
         return self._session_factory
 
+    def dispose_engine(self) -> None:
+        if self._engine is not None:
+            self._engine.dispose()
+
+    def reset(self, *, dispose_engine: bool = True) -> None:
+        if dispose_engine:
+            self.dispose_engine()
+        self._engine = None
+        self._session_factory = None
+
     def create_session(self, **session_kwargs: Any) -> Session:
         return cast("Session", self.get_session_factory()(**session_kwargs))
