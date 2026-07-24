@@ -14,8 +14,8 @@ def delete_work_list(session: Session) -> list[Row]:
     return list(run_script(session, "deleteWorkList").all())
 
 
-def get_overridden_vin_component(session: Session, vin: str) -> list[Row]:
-    return list(run_script(session, "getOverriddenVINComponent", vin=vin).all())
+def get_overridden_vin_component(session: Session, vin: str, user_id: str) -> list[Row]:
+    return list(run_script(session, "getOverriddenVINComponent", vin=vin, userId=user_id).all())
 
 
 def usp_purge_clientlogs_table(session: Session) -> list[Row]:
