@@ -61,7 +61,8 @@ SYSTEM_TABLES: set[str] = {"dtproperties", "sysdiagrams"}
 
 def _require_db_uri(module_name: str, env_var: str) -> str:
     value = os.getenv(env_var)
-    assert value, f"{env_var} is not configured for live integration tests ({module_name})."
+    if not value:
+        pytest.skip(f"{env_var} is not configured for live integration tests ({module_name}).")
     return value
 
 
