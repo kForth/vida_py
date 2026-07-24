@@ -2,6 +2,7 @@
 
 [![GitHub](https://img.shields.io/badge/github-repo-blue?logo=github)](https://github.com/kForth/vida_py)
 [![GitHub License](https://img.shields.io/github/license/kforth/vida_py)](https://github.com/kForth/vida_py/blob/main/LICENSE)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/kForth/vida_py/ci.yml)
 [![GitHub Forks](https://img.shields.io/github/forks/kforth/vida_py)](https://github.com/kForth/vida_py/forks)
 [![GitHub Stars](https://img.shields.io/github/stars/kforth/vida_py)](https://github.com/kForth/vida_py/stargazers)
 
