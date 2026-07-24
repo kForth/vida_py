@@ -10,48 +10,131 @@ from sqlalchemy.orm import Session
 from vida_py.util import run_script
 
 
-def clean_up(session: Session) -> list[Row]:
-    return list(run_script(session, "CleanUp").all())
+def clean_up(session: Session, dest_db: str) -> list[Row]:
+    return list(run_script(session, "CleanUp", DestDatabase=dest_db).all())
 
 
-def free_text_search(session: Session) -> list[Row]:
-    return list(run_script(session, "FreeTextSearch").all())
+def free_text_search(
+    session: Session,
+    by: str,
+    search_str: str,
+    item_number: str,
+    tokens: int,
+    lang: int,
+    notes: str,
+    notes_tokens: int,
+    filter_: str,
+    all_: bool,
+    partner_group: str,
+) -> list[Row]:
+    return list(
+        run_script(
+            session,
+            "FreeTextSearch",
+            By=by,
+            SearchString=search_str,
+            ItemNumber=item_number,
+            tokens=tokens,
+            lang=lang,
+            notes=notes,
+            notesTokens=notes_tokens,
+            filter=filter_,
+            all=all_,
+            PartnerGroup=partner_group,
+        ).all()
+    )
 
 
-def free_text_search_sp_generator(session: Session) -> list[Row]:
-    return list(run_script(session, "FreeTextSearchSPGenerator").all())
+def free_text_search_sp_generator(
+    session: Session,
+    by: str,
+    search_str: str,
+    item_number: str,
+    tokens: int,
+    lang: int,
+    notes: str,
+    notes_tokens: int,
+    filter_: str,
+    all_: bool,
+    partner_group: str,
+) -> list[Row]:
+    return list(
+        run_script(
+            session,
+            "FreeTextSearchSPGenerator",
+            By=by,
+            SearchString=search_str,
+            ItemNumber=item_number,
+            tokens=tokens,
+            lang=lang,
+            notes=notes,
+            notesTokens=notes_tokens,
+            filter=filter_,
+            all=all_,
+            PartnerGroup=partner_group,
+        ).all()
+    )
 
 
 def generate_all(session: Session) -> list[Row]:
     return list(run_script(session, "GenerateAll").all())
 
 
-def get_parts_descriptions_xml(session: Session) -> list[Row]:
-    return list(run_script(session, "GetPartsDescriptionsXML").all())
+def get_parts_descriptions_xml(session: Session, lang: int) -> list[Row]:
+    return list(run_script(session, "GetPartsDescriptionsXML", lang=lang).all())
 
 
-def insert_search_note_and_word_strings(session: Session) -> list[Row]:
-    return list(run_script(session, "InsertSearchNoteAndWordStrings").all())
+def insert_search_note_and_word_strings(
+    session: Session, bulk_script_path: str, database_table: str
+) -> list[Row]:
+    return list(
+        run_script(
+            session,
+            "InsertSearchNoteAndWordStrings",
+            bulkScriptPath=bulk_script_path,
+            databaseTable=database_table,
+        ).all()
+    )
 
 
-def parse_lexicon_fts(session: Session) -> list[Row]:
-    return list(run_script(session, "ParseLexiconFTS").all())
+def parse_lexicon_fts(
+    session: Session, description_id: int, language: int, description: str
+) -> list[Row]:
+    return list(
+        run_script(
+            session,
+            "ParseLexiconFTS",
+            DescriptionId=description_id,
+            fkLanguage=language,
+            Description=description,
+        ).all()
+    )
 
 
-def parse_lexicon_fts_with_delete(session: Session) -> list[Row]:
-    return list(run_script(session, "ParseLexiconFTSWithDelete").all())
+def parse_lexicon_fts_with_delete(
+    session: Session, description_id: int, language: int, description: str
+) -> list[Row]:
+    return list(
+        run_script(
+            session,
+            "ParseLexiconFTSWithDelete",
+            DescriptionId=description_id,
+            fkLanguage=language,
+            Description=description,
+        ).all()
+    )
 
 
-def restrict_usage(session: Session) -> list[Row]:
-    return list(run_script(session, "RestrictUsage").all())
+def restrict_usage(session: Session, dest_db: str) -> list[Row]:
+    return list(run_script(session, "RestrictUsage", DestDatabase=dest_db).all())
 
 
-def set_normal_usage(session: Session) -> list[Row]:
-    return list(run_script(session, "SetNormalUsage").all())
+def set_normal_usage(session: Session, dest_db: str) -> list[Row]:
+    return list(run_script(session, "SetNormalUsage", DestDatabase=dest_db).all())
 
 
-def update_lexicon(session: Session) -> list[Row]:
-    return list(run_script(session, "UpdateLexicon").all())
+def update_lexicon(session: Session, fallback_language_id: int) -> list[Row]:
+    return list(run_script(session, "UpdateLexicon", fallbacklanguageid=fallback_language_id).all())
 
 
 STORED_PROCEDURES = {
