@@ -7,8 +7,6 @@ from sqlalchemy.orm import Session as sa_orm_Session
 from vida_py.carcom import Session
 from vida_py.carcom.models import (
     T100_EcuVariant,
-    T110_Service_EcuVariant,
-    T111_Service,
     T120_Config_EcuVariant,
     T121_Config,
     T141_Block,
@@ -53,9 +51,7 @@ def get_child_blocks(session: sa_orm_Session, language: int, ecu_var: int, paren
                     "id": v.Id,
                     "value": v.CompareValue,
                     "text": session.query(T191_TextData)
-                    .outerjoin(
-                        T193_Language, T193_Language.id == T191_TextData.fkT193_Language
-                    )
+                    .outerjoin(T193_Language, T193_Language.id == T191_TextData.fkT193_Language)
                     .filter(
                         T191_TextData.fkT190_Text == v.fkT190_Text_Value,
                         T193_Language.identifier == language,
@@ -63,9 +59,7 @@ def get_child_blocks(session: sa_orm_Session, language: int, ecu_var: int, paren
                     .one()
                     .data,
                     "unit": session.query(T191_TextData)
-                    .outerjoin(
-                        T193_Language, T193_Language.id == T191_TextData.fkT193_Language
-                    )
+                    .outerjoin(T193_Language, T193_Language.id == T191_TextData.fkT193_Language)
                     .filter(
                         T191_TextData.fkT190_Text == v.fkT190_Text_Unit,
                         T193_Language.identifier == language,
