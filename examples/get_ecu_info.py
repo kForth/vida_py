@@ -1,9 +1,10 @@
 import json
+import os
 
 import click
 
-from vida_py.carcom import (
-    Session,
+from vida_py.carcom import Session
+from vida_py.carcom.models import (
     T100_EcuVariant,
     T120_Config_EcuVariant,
     T121_Config,
@@ -16,12 +17,11 @@ from vida_py.carcom import (
 @click.argument("identifier", type=click.STRING)
 @click.option("--language", "-l", type=click.STRING, default="en-US")
 @click.option("--outfile", "-o", type=click.Path(dir_okay=False))
-def main(identifier, language, outfile):
+@click.option("--outdir", "-d", type=click.Path(file_okay=False, dir_okay=True))
+def main(identifier, language, outfile, outdir):
     with Session() as session:
         variant = (
-            session.query(T100_EcuVariant)
-            .filter(T100_EcuVariant.identifier == identifier)
-            .one()
+            session.query(T100_EcuVariant).filter(T100_EcuVariant.identifier == identifier).one()
         )
         ecu = {
             "variant": {
@@ -66,14 +66,15 @@ def main(identifier, language, outfile):
                 for s in session.query(T171_SecurityCode)
                 .outerjoin(
                     T170_SecurityCode_EcuVariant,
-                    T170_SecurityCode_EcuVariant.fkT171_SecurityCode
-                    == T171_SecurityCode.id,
+                    T170_SecurityCode_EcuVariant.fkT171_SecurityCode == T171_SecurityCode.id,
                 )
                 .filter(T170_SecurityCode_EcuVariant.fkT100_EcuVariant == variant.id)
                 .all()
             ],
         }
 
+    if outdir:
+        outfile = os.path.join(outdir, f"{identifier} - Info.json")
     if outfile:
         with open(outfile, "w+", encoding="utf-8") as out:
             json.dump(ecu, out, indent=4)
