@@ -3,10 +3,11 @@ import json
 import click
 from sqlalchemy.orm import aliased
 
-from vida_py.carcom import (
-    Session,
+from vida_py.carcom import Session
+from vida_py.carcom.models import (
     T100_EcuVariant,
     T141_Block,
+    T142_BlockType,
     T144_BlockChild,
     T148_BlockMetaPARA,
 )
@@ -41,13 +42,13 @@ LANGUAGES = (
     default="en-US",
 )
 @click.option("--outfile", "-o", type=click.Path(dir_okay=False))
-def main(identifier, language, outfile):
+def main(identifier: str, language: str, outfile: str) -> int:
     with Session() as session:
 
         T141_Block_Parent = aliased(T141_Block)
 
-        params: list[tuple[T141_Block, T148_BlockMetaPARA, T141_Block]] = (
-            session.query(T141_Block, T148_BlockMetaPARA, T141_Block_Parent)
+        params = (
+            session.query(T141_Block, T148_BlockMetaPARA, T141_Block_Parent, T142_BlockType)
             .join(T148_BlockMetaPARA, T148_BlockMetaPARA.fkT141_Block == T141_Block.id)
             .join(
                 T100_EcuVariant,
@@ -58,33 +59,36 @@ def main(identifier, language, outfile):
                 T141_Block_Parent,
                 T141_Block_Parent.id == T144_BlockChild.fkT141_Block_Parent,
             )
+            .join(T142_BlockType, T142_BlockType.id == T141_Block.fkT142_BlockType)
             .filter(T100_EcuVariant.identifier == identifier)
             .all()
         )
 
         _params = []
-        for block, meta, parent in params:
+        for block, meta, parent, block_type in params:
             _params.append(
                 {
                     "id": block.id,
                     "name": (
                         block.name
                         if block.fkT190_Text == 0
-                        else [
-                            e.data
-                            for e in block.text.data
-                            if e.language.identifier == language
-                        ][0]
+                        else [e.data for e in block.text.data if e.language.identifier == language][
+                            0
+                        ]
                     ),
                     "category": (
                         parent.name
                         if parent.fkT190_Text == 0
                         else [
-                            e.data
-                            for e in parent.text.data
-                            if e.language.identifier == language
+                            e.data for e in parent.text.data if e.language.identifier == language
                         ][0]
                     ),
+                    "blockType": {
+                        "id": block_type.id,
+                        "fkT142_BlockType_Parent": block_type.fkT142_BlockType_Parent,
+                        "identifier": block_type.identifier,
+                        "metaTable": block_type.metaTable,
+                    },
                     "identifier": parent.values[0].CompareValue,
                     "offset": block.offset,
                     "length": block.length,
@@ -99,9 +103,7 @@ def main(identifier, language, outfile):
                             "compare": val.CompareValue,
                             "operator": val.Operator,
                             "scaling": (
-                                val.ppe_scaling
-                                if val.fkT155_Scaling == 0
-                                else val.scaling
+                                val.ppe_scaling if val.fkT155_Scaling == 0 else val.scaling
                             ).definition,
                             "text": [
                                 e.data
@@ -132,6 +134,8 @@ def main(identifier, language, outfile):
                 json.dump(_params, out, indent=2)
         else:
             click.echo(json.dumps(_params, indent=2))
+
+        return 1
 
 
 if __name__ == "__main__":
