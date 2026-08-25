@@ -1,4 +1,5 @@
 import json
+import os
 
 import click
 from sqlalchemy.orm import aliased
@@ -41,9 +42,12 @@ LANGUAGES = (
     type=click.Choice(LANGUAGES, case_sensitive=False),
     default="en-US",
 )
-@click.option("--outfile", "-o", type=click.Path(dir_okay=False))
-def main(identifier: str, language: str, outfile: str) -> int:
+@click.option("--outdir", "-o", type=click.Path(file_okay=False, dir_okay=True))
+def main(identifier: str, language: str, outdir: str) -> int:
     with Session() as session:
+        ecu_variant = (
+            session.query(T100_EcuVariant).filter(T100_EcuVariant.identifier == identifier).one()
+        )
 
         T141_Block_Parent = aliased(T141_Block)
 
@@ -129,9 +133,13 @@ def main(identifier: str, language: str, outfile: str) -> int:
                 }
             )
 
-        if outfile:
+        if outdir:
+            os.makedirs(outdir, exist_ok=True)
+            outfile = os.path.join(
+                outdir, f"{ecu_variant.ecu.type.description} - {identifier} - Params.json"
+            )
             with open(outfile, "w+", encoding="utf-8") as out:
-                json.dump(_params, out, indent=2)
+                json.dump(_params, out, indent=4)
         else:
             click.echo(json.dumps(_params, indent=2))
 
