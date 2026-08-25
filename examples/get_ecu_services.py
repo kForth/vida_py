@@ -15,10 +15,13 @@ from vida_py.carcom.models import (
 
 @click.command()
 @click.argument("identifier", type=click.STRING)
-@click.option("--outfile", "-o", type=click.Path(dir_okay=False))
-@click.option("--outdir", "-d", type=click.Path(file_okay=False, dir_okay=True))
-def main(identifier, outfile, outdir):
+@click.option("-o", "--outdir", type=click.Path(file_okay=False, dir_okay=True))
+def main(identifier, outdir):
     with Session() as session:
+        ecu_variant = (
+            session.query(T100_EcuVariant).filter(T100_EcuVariant.identifier == identifier).one()
+        )
+
         services = (
             session.query(T100_EcuVariant, T111_Service, T121_Config)
             .join(
@@ -59,13 +62,15 @@ def main(identifier, outfile, outdir):
                 }
             )
 
-    if outdir:
-        outfile = os.path.join(outdir, f"{identifier} - Services.json")
-    if outfile:
-        with open(outfile, "w+", encoding="utf-8") as out:
-            json.dump(_services, out, indent=2)
-    else:
-        click.echo(json.dumps(_services, indent=2))
+        if outdir:
+            os.makedirs(outdir, exist_ok=True)
+            outfile = os.path.join(
+                outdir, f"{ecu_variant.ecu.type.description} - {identifier} - Services.json"
+            )
+            with open(outfile, "w+", encoding="utf-8") as out:
+                json.dump(_services, out, indent=4)
+        else:
+            click.echo(json.dumps(_services, indent=2))
 
 
 if __name__ == "__main__":
